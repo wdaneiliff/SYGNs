@@ -16,7 +16,7 @@ var userRoutes = require('./config/userRoutes');
 var superSecret = 'iamtherealbatman';
 
 //CONNECT OUR DATABASE
-mongoose.connect('mongodb://localhost/project3');
+mongoose.connect('mongodb://sygns:peyton55@ds033123.mongolab.com:33123/sygns_db');
 
 //USE PUBLIC FOLDER FOR ANY FILE REQUESTS
 app.use(express.static(__dirname + '/public'));
