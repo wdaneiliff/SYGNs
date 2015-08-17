@@ -1,4 +1,5 @@
 //CALL PACKAGES
+require('dotenv').load();
 var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
@@ -16,7 +17,7 @@ var userRoutes = require('./config/userRoutes');
 var superSecret = 'iamtherealbatman';
 
 //CONNECT OUR DATABASE
-mongoose.connect('mongodb://sygns:peyton55@ds033123.mongolab.com:33123/sygns_db');
+mongoose.connect(process.env.MONGO_DB);
 
 //USE PUBLIC FOLDER FOR ANY FILE REQUESTS
 app.use(express.static(__dirname + '/public'));
