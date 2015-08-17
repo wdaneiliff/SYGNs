@@ -102,10 +102,17 @@ apiRouter.use(function(req,res,next){
 
 });
 
+//TEST ROUTE FOR TOKEN
 apiRouter.get('/me', function(req,res){
   res.send(req.decoded);
 });
 
+//PROCESS POST REQUEST TO PROCEED TO SECOND VIEW
+app.post('/second', function(req,res){
+  res.sendfile('./views/map_index.html');
+});
+
+//ROOT
 apiRouter.get('/', function(req,res){
     res.json( {message: "welcome to the api page"} );
 });

@@ -6,7 +6,9 @@
         <link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
         <!-- Bootstrap -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-        <script type="text/javascript" src="javascripts/script.js"></script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     </head>
     <body>
         <section id="login">
@@ -16,7 +18,7 @@
                 	    <div class="form-wrap">
                         <h1>SYGNs</h1>
                         <h2>Log in with your email account</h2>
-                            <form role="form" action="javascript:;" method="post" id="login-form" autocomplete="off">
+                            <form role="form" action="/second" method="post" id="login-form" autocomplete="off">
                                 <div class="form-group">
                                     <label for="email" class="sr-only">Email</label>
                                     <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com">
@@ -33,7 +35,7 @@
                             </form>
                             <a href="javascript:;" class="forget" data-toggle="modal" data-target=".forget-modal">Forgot your password?</a>
                             <hr>
-                            <img src="/images/map.png" class="img-rounded" alt="Cinque Terre" width="284px" height="244px">
+                            <img src="/images/map.png" class="img-rounded" alt="Cinque Terre" style="width:284px; height:244px; margin: 0 auto;">
                 	    </div>
             		</div> <!-- /.col-xs-12 -->
             	</div> <!-- /.row -->
@@ -73,10 +75,6 @@
                 </div>
             </div>
         </footer>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="js/bootstrap.min.js"></script>
-
+        <script type="text/javascript" src="javascripts/script.js"></script>
     </body>
 </html>
