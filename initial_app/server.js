@@ -34,6 +34,10 @@ app.get('/', function(req,res){
     res.send("welcome to the homepage");
 });
 
+app.get('/login', function(req,res){
+    res.sendfile('./views/index.html');
+});
+
 //API ROUTE
 var apiRouter = express.Router();
 
