@@ -15,6 +15,9 @@ var superSecret = 'iamtherealbatman';
 //CONNECT OUR DATABASE
 mongoose.connect('mongodb://localhost/project3');
 
+//USE PUBLIC FOLDER FOR ANY FILE REQUESTS
+app.use(express.static(__dirname + '/public'));
+
 //APP congfiguration
 app.use(bodyParser.urlencoded( {extended : true} ));
 app.use(bodyParser.json());
