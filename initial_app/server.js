@@ -15,6 +15,9 @@ var superSecret = 'iamtherealbatman';
 //CONNECT OUR DATABASE
 mongoose.connect('mongodb://localhost/project3');
 
+//USE PUBLIC FOLDER FOR ANY FILE REQUESTS
+app.use(express.static(__dirname + '/public'));
+
 //APP congfiguration
 app.use(bodyParser.urlencoded( {extended : true} ));
 app.use(bodyParser.json());
@@ -32,6 +35,10 @@ app.use(morgan('dev'));
 //HOMEPAGE ROUTER
 app.get('/', function(req,res){
     res.send("welcome to the homepage");
+});
+
+app.get('/login', function(req,res){
+    res.sendfile('./views/index.html');
 });
 
 //API ROUTE
@@ -95,10 +102,17 @@ apiRouter.use(function(req,res,next){
 
 });
 
+//TEST ROUTE FOR TOKEN
 apiRouter.get('/me', function(req,res){
   res.send(req.decoded);
 });
 
+//PROCESS POST REQUEST TO PROCEED TO SECOND VIEW
+app.post('/second', function(req,res){
+  res.sendfile('./views/map_index.html');
+});
+
+//ROOT
 apiRouter.get('/', function(req,res){
     res.json( {message: "welcome to the api page"} );
 });
