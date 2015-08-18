@@ -1,6 +1,7 @@
 var myMap;
 var myService;
 
+
 function handleSearchResults(results, status) {
     console.log(results);
 
@@ -102,10 +103,16 @@ function initMap(location) {
     myMap.addListener('click', addLatLng);
 };
 
+var count = 0;
+var sign = {};
 // Handles click events on a map, and adds a new point to the Polyline.
 function addLatLng(event) {
     console.log('clicked');
-  var path = poly.getPath();
+
+    if(count==2) return null;
+
+
+    var path = poly.getPath();
 
   // Because path is an MVCArray, we can simply append a new coordinate
   // and it will automatically appear.
@@ -118,6 +125,19 @@ function addLatLng(event) {
     map: myMap
     //icon: 'marker_pin.png'
   });
+
+      count = count+1;
+      console.log(marker.position);
+
+
+      if(count==1){
+      sign.point1 = marker.position
+      }
+
+      if(count==2){
+        sign.point2 = marker.position
+        setTimeout(function(){console.log(sign);},2000);
+      }
 }
 
 
