@@ -1,5 +1,11 @@
-body {
 
+@font-face {
+    font-family: wazeFont;
+    src:url(../fonts/proxima-nova-soft-bold.ttf);
+}
+
+h1 {
+    font-family: wazeFont;
 }
 
 /*    --------------------------------------------------
