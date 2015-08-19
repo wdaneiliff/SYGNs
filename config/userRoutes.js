@@ -15,13 +15,13 @@ userRouter.route('/')
 
 userRouter.route('/:id')
 
-  //GET
+  //GET ONE USER
       .get(usersController.showUser)
 
-  //POST
+  //PATCH USER
       .patch(usersController.updateUser)
 
-  //POST
+  //DELETE USER
       .delete(usersController.deleteUser);
 
 //EXPORTS

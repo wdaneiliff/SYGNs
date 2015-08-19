@@ -19,7 +19,7 @@ function createUser(req,res){
         res.send(err);
       }
     }
-    res.json({message: "User Created"});
+    res.redirect('/second');
   });
 
 }

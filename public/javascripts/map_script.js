@@ -1,6 +1,7 @@
 var myMap;
 var myService;
 
+
 function handleSearchResults(results, status) {
     console.log(results);
 
@@ -52,16 +53,6 @@ function initMap(location) {
     // refresh button click:
     $('#refresh').click(performSearch);
 
-    // traffic button on/off:---------------------------------------------------
-    var trafficLayer = new google.maps.TrafficLayer();
-    $('#toggle_traffic').click(function() {
-        // if map has traffic layer visible, trun off
-        if (trafficLayer.getMap()) {
-            trafficLayer.setMap(null);
-        } else {
-            trafficLayer.setMap(myMap);
-        }
-    });
 
     var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
@@ -94,36 +85,71 @@ function initMap(location) {
     poly = new google.maps.Polyline({
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
-        strokeWeight: 2
+        strokeWeight: 3.5
     });
     poly.setMap(myMap);
 
     // Add a listener for the click event
     myMap.addListener('click', addLatLng);
+    poly.addListener('click', function(event){console.log(event.latLng);});
 };
+
+
+var count = 0;
+var sign = {};
 
 // Handles click events on a map, and adds a new point to the Polyline.
 function addLatLng(event) {
     console.log('clicked');
-  var path = poly.getPath();
 
-  // Because path is an MVCArray, we can simply append a new coordinate
-  // and it will automatically appear.
-  path.push(event.latLng);
+    if(count==2) return null;
 
-  // Add a new marker at the new plotted point on the polyline.
-  var marker = new google.maps.Marker({
-    position: event.latLng,
-    title: '#' + path.getLength(),
-    map: myMap
-    //icon: 'marker_pin.png'
-  });
+
+    var path = poly.getPath();
+
+    path.push(event.latLng);
+    console.log(event.latLng);
+    // Add a new marker at the new plotted point on the polyline.
+    var marker = new google.maps.Marker({
+     position: event.latLng,
+     title: '#' + path.getLength(),
+     map: myMap
+     //icon: 'marker_pin.png'
+    });
+
+      count = count+1;
+      console.log(marker.position);
+
+
+      if(count==1){
+      sign.point1 = marker.position;
+      }
+
+      if(count==2){
+        sign.point2 = marker.position
+        setTimeout(function(){console.log(sign);},2000);
+      }
 }
-
-
 
 $(document).ready(function() {
     navigator.geolocation.getCurrentPosition(initMap);
+
+    function delete_cookie( name ) {
+      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    var ul = $('ul');
+    if(document.cookie.indexOf("token") >= 0) {
+      console.log("cookie here");
+      ul.append('<li> <a href="/login" class="logout"> Logout </a> <li>');
+
+      var cookie = $('.logout');
+      cookie.on('click', function(){
+        delete_cookie('token');
+      });
+    }else{
+      ul.append('<li> <a href="/signup" class="logout"> Sign up </a> <li>');
+    }
 
     // for map modal window----------------
     $('.btn-info').click(function(event) {

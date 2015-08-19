@@ -3,19 +3,21 @@
     font-family: wazeFont;
     src:url(../fonts/proxima-nova-soft-bold.ttf);
 }
+h1, h2 {font-family: wazeFont;}
 
-h1 {
-    font-family: wazeFont;
+.container{
+  text-align: center;
 }
 
 /*    --------------------------------------------------
 	:: Login Section
 	-------------------------------------------------- */
 #login {
-    padding-top: 50px
+    /*padding-top: 50px*/
 }
 #login .form-wrap {
     width: 30%;
+    min-width: 250px;
     margin: 0 auto;
 }
 #login h1 {
@@ -109,4 +111,15 @@ h1 {
 }
 #footer a {
     color: inherit;
+}
+
+/*    --------------------------------------------------
+	:: Sign UP Section
+	-------------------------------------------------- */
+.lefty{
+  text-align: left;
+}
+
+.form-group .lefty{
+  text-align: left;
 }
