@@ -3,11 +3,11 @@
     <head>
         <meta charset="utf-8">
         <title>SYGNs</title>
-        <link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
         <!-- Bootstrap -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
 
     </head>
     <body>
@@ -28,7 +28,7 @@
                               <!-- Name Fields -->
                                 <div class="form-group lefty">
                                     <label for="firstName" class="lefty">First Name</label>
-                                    <input type="name" name="firstName" id="FirstName" class="form-control" placeholder="John">
+                                    <input type="name" name="firstName" id="firstName" class="form-control" placeholder="John">
                                 </div>
 
                                 <div class="form-group lefty">
@@ -53,7 +53,8 @@
                                     <input type="password" name="key" id="pwkey" class="form-control" placeholder="Confirm Password">
                                 </div>
 
-                                <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Update">
+                                <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Update User">
+                                <input type="submit" id="btn-delete" class="btn btn-danger btn-lg btn-block" value="Delete User">
                             </form>
 
                             <hr>
@@ -71,11 +72,10 @@
                     <div class="col-xs-12"><br>
                         <p>Page © SYGNs - 2015</p>
                         <p>Powered by <strong>SYGNs</strong></p>
-
                     </div>
                 </div>
             </div>
         </footer>
-        <script type="text/javascript" src="javascripts/script.js"></script>
+        <script type="text/javascript" src="javascripts/edit_user.js"></script>
     </body>
 </html>

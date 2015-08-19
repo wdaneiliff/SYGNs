@@ -63,9 +63,9 @@ function updateUser(req,res){
 
 //DELETE USER
 function deleteUser(req,res){
-  User.remove({ _id: req.params.user_id}, function(err){
+  User.remove({ email: req.params.email}, function(err){
     if(err) res.send(err);
-    res.json({message: 'successfully deleted'});
+    res.json({message: 'successfully deleted', redirect: '/'});
   });
 }
 

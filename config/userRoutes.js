@@ -14,7 +14,7 @@ userRouter.route('/')
     .post(usersController.createUser);
 
 
-userRouter.route('/:id')
+userRouter.route('/:email')
 
   //GET ONE USER
       .get(usersController.showUser)
