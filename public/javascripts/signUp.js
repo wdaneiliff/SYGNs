@@ -47,11 +47,9 @@ var confirmPass = $('#pwkey');
 $('#btn-login').on('click',function(evt){
 event.preventDefault();
 
-console.log(firstName.val() + lastName.val() + email.val() + password.val());
 
 
 
-  console.log('clicked button');
   $.ajax({
     method: "post",
     url: "/users",
