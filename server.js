@@ -12,6 +12,8 @@ var flash = require('connect-flash');
 
 var mongoose = require('mongoose');
 
+app.set('port', process.env.PORT || 8080);
+
 //BRING IN USER ROUTE
 var userRoutes = require('./config/userRoutes');
 
@@ -19,7 +21,9 @@ var userRoutes = require('./config/userRoutes');
 var superSecret = 'iamtherealbatman';
 
 //CONNECT OUR DATABASE
-mongoose.connect(process.env.MONGO_DB);
+
+var mongodbUri = 'mongodb://addy:password@ds033123.mongolab.com:33123/sygns_db'
+mongoose.connect(mongodbUri);
 
 //USE PUBLIC FOLDER FOR ANY FILE REQUESTS
 app.use(express.static(__dirname + '/public'));
@@ -136,5 +140,6 @@ app.get('/edit', function(req,res){
 });
 
 //APP TO LISTEN ON PORT 8080
-app.listen(port);
-console.log('magic happens on port' + port);
+app.listen(app.get('port'), function(){
+  console.log("server started on", app.get('port'));
+});
