@@ -1,6 +1,7 @@
 var myMap;
 var myService;
 
+
 function handleSearchResults(results, status) {
     console.log(results);
 
@@ -103,6 +104,7 @@ function initMap(location) {
     poly.addListener('click', function(event){console.log(event.latLng);});
 };
 
+<<<<<<< HEAD
 //HANDLE CLICK COUNTS TO LIMIT AT 2 PER SESSION
 var clickCount = 0;
 
@@ -112,6 +114,18 @@ function addLatLng(event) {
   if(clickCount == 2) return null;
 
   var path = poly.getPath();
+=======
+var count = 0;
+var sign = {};
+// Handles click events on a map, and adds a new point to the Polyline.
+function addLatLng(event) {
+    console.log('clicked');
+
+    if(count==2) return null;
+
+
+    var path = poly.getPath();
+>>>>>>> a0020dab4e22a04b0132a52a97a780ce59549659
 
   // Because path is an MVCArray, we can simply append a new coordinate
   // and it will automatically appear.
@@ -124,6 +138,23 @@ function addLatLng(event) {
     map: myMap
     //icon: 'marker_pin.png'
   });
+<<<<<<< HEAD
+=======
+
+      count = count+1;
+      console.log(marker.position);
+
+
+      if(count==1){
+      sign.point1 = marker.position
+      }
+
+      if(count==2){
+        sign.point2 = marker.position
+        setTimeout(function(){console.log(sign);},2000);
+      }
+}
+>>>>>>> a0020dab4e22a04b0132a52a97a780ce59549659
 
   clickCount +=1;
 
@@ -133,6 +164,7 @@ function addLatLng(event) {
 $(document).ready(function() {
     navigator.geolocation.getCurrentPosition(initMap);
 
+<<<<<<< HEAD
     function delete_cookie( name ) {
       document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
@@ -150,4 +182,12 @@ $(document).ready(function() {
 
 
 
+=======
+    // for map modal window----------------
+    $('.btn-info').click(function(event) {
+        console.log("event = " + event);
+        $('#mapModal').modal('show');
+    });
+    //-------------------------------------
+>>>>>>> a0020dab4e22a04b0132a52a97a780ce59549659
 });
