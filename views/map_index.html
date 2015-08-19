@@ -42,15 +42,41 @@
                               <div id="collapseOne"class="accordian-body collapse out">
                                 <div class="accordian-inner">
                                   <div id="signForm">
-                                    <ul class="nav nav-tabs">
-                                      <li><a href="#">M</a></li>
-                                      <li><a href="#">T</a></li>
-                                      <li><a href="#">W</a></li>
-                                      <li><a href="#">TH</a></li>
-                                      <li><a href="#">F</a></li>
-                                      <li><a href="#">Sat</a></li>
-                                      <li><a href="#">Sun</a></li>
-                                    </ul>
+                                    <div class="zoneType">
+                                      <input type="text" name="name" placeholder="Zone Type">
+
+                                      <div class="btn-group" data-toggle="buttons">
+
+                                        <label class="btn btn-primary">
+                                          <input type="checkbox" autocomplete="off" checked> Mon
+                                        </label>
+                                        <label class="btn btn-primary">
+                                          <input type="checkbox" autocomplete="off"> Tues
+                                        </label>
+                                        <label class="btn btn-primary">
+                                          <input type="checkbox" autocomplete="off"> Wed
+                                        </label>
+                                        <label class="btn btn-primary">
+                                          <input type="checkbox" autocomplete="off"> Thur
+                                        </label>
+                                        <label class="btn btn-primary">
+                                          <input type="checkbox" autocomplete="off"> Fri
+                                        </label>
+                                        <label class="btn btn-primary">
+                                          <input type="checkbox" autocomplete="off"> Sat
+                                        </label>
+                                        <label class="btn btn-primary">
+                                          <input type="checkbox" autocomplete="off"> Sun
+                                        </label>
+                                          <script type="text/javascript">
+
+                                            $('.btn').on('click', function(){
+                                              $(this).button('toggle');
+                                            })
+                                          </script>
+                                      </div>
+
+                                    </div>
                                   </div>
                                 </div>
                               </div>
