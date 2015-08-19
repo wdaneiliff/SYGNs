@@ -2,14 +2,19 @@ body {
 
 }
 
+.container{
+  text-align: center;
+}
+
 /*    --------------------------------------------------
 	:: Login Section
 	-------------------------------------------------- */
 #login {
-    padding-top: 50px
+    /*padding-top: 50px*/
 }
 #login .form-wrap {
     width: 30%;
+    min-width: 250px;
     margin: 0 auto;
 }
 #login h1 {
@@ -103,4 +108,15 @@ body {
 }
 #footer a {
     color: inherit;
+}
+
+/*    --------------------------------------------------
+	:: Sign UP Section
+	-------------------------------------------------- */
+.lefty{
+  text-align: left;
+}
+
+.form-group .lefty{
+  text-align: left;
 }

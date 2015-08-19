@@ -94,23 +94,29 @@ function initMap(location) {
     poly = new google.maps.Polyline({
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
-        strokeWeight: 2
+        strokeWeight: 3.5
     });
     poly.setMap(myMap);
 
     // Add a listener for the click event
     myMap.addListener('click', addLatLng);
+    poly.addListener('click', function(event){console.log(event.latLng);});
 };
+
+//HANDLE CLICK COUNTS TO LIMIT AT 2 PER SESSION
+var clickCount = 0;
 
 // Handles click events on a map, and adds a new point to the Polyline.
 function addLatLng(event) {
     console.log('clicked');
+  if(clickCount == 2) return null;
+
   var path = poly.getPath();
 
   // Because path is an MVCArray, we can simply append a new coordinate
   // and it will automatically appear.
   path.push(event.latLng);
-
+  console.log(event.latLng);
   // Add a new marker at the new plotted point on the polyline.
   var marker = new google.maps.Marker({
     position: event.latLng,
@@ -118,10 +124,30 @@ function addLatLng(event) {
     map: myMap
     //icon: 'marker_pin.png'
   });
-}
 
+  clickCount +=1;
+
+}
 
 
 $(document).ready(function() {
     navigator.geolocation.getCurrentPosition(initMap);
+
+    function delete_cookie( name ) {
+      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    var ul = $('ul');
+    if(document.cookie.indexOf("token") >= 0) {
+      console.log("cookie here");
+      ul.append('<li> <a href="/login" class="logout"> Logout </a> <li>');
+
+      var cookie = $('.logout');
+      cookie.on('click', function(){
+        delete_cookie('token');
+      });
+    }
+
+
+
 });
