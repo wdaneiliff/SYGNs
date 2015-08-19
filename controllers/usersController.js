@@ -19,7 +19,7 @@ function createUser(req,res){
         res.send(err);
       }
     }
-    res.redirect('/second');
+    res.json({message:"successful", redirect:"/"});
   });
 
 }
@@ -56,7 +56,7 @@ function updateUser(req,res){
 
     user.save(function(err){
       if(err) res.send(err);
-      res.json({message: 'successfully updated'});
+      res.json({message: 'successfully updated', redirect:"/"});
     });
   });
 }

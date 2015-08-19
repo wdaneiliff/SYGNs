@@ -22,7 +22,7 @@ $('form').on('submit',function(){
   }
 
 //CHECK FOR VALUE IN PASSWORD INPUT
-  if( !$('#password').val()){
+  if( !$('#key').val()){
       event.preventDefault();
       return alert('Please Enter a Password');
   }
@@ -38,9 +38,38 @@ $('form').on('submit',function(){
 
 });
 
+var firstName = $('#firstName');
+var lastName = $('#lastName');
+var email = $('#email');
+var password = $('#key');
+var confirmPass = $('#pwkey');
+
+$('#btn-login').on('click',function(evt){
+event.preventDefault();
+
+console.log(firstName.val() + lastName.val() + email.val() + password.val());
 
 
 
+  console.log('clicked button');
+  $.ajax({
+    method: "post",
+    url: "/users",
+    data: JSON.stringify({firstName:firstName.val(),
+                          lastName:lastName.val(),
+                          email:email.val(),
+                          password:password.val()
+                        }),
+    contentType: 'application/json; charset=UTF-8',
+    dataType : 'json',
+    success: function(data){
+      console.log(data);
+      if(data.redirect){
+        window.location.href = data.redirect;
+      }
+    }
+  });
+});
 
 
 

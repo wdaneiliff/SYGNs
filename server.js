@@ -54,6 +54,8 @@ app.get('/signup', function(req,res){
   res.sendfile('./views/signup.html');
 });
 
+
+
 //ROUTE TO AUTHENTICATE A USER
 app.post('/authenticate',function(req,res){
   User.findOne({email: req.body.email}).select('email firstName password').exec(function(err,user){
@@ -78,17 +80,21 @@ app.post('/authenticate',function(req,res){
         );
         //RETURN RESPONSE WITH TOKEN
         res.cookie("token",token);
-        res.json({success: true, message: 'enjoy your token', access_token: token, redirect: '/second'});
+        res.json({success: true, message: 'enjoy your token', access_token: token, redirect: '/'});
       }
     }
 
   });
 });
 
-//API ROUTE MIDDLEWARE
+//REGISTER THE USERS ROUTE
+app.use('/users', userRoutes);
+
+
+//ROUTE MIDDLEWARE
 app.use(function(req,res,next){
   //LOG A NEW REQ
-  console.log("Someone just came to the API route");
+  console.log("Someone just came to the route");
 
   //CHECK FOR ACTIVE TOKEN IN URL OR POST PARAMS
   var token = req.cookies.token || req.body.token || req.param('token') || req.headers['x-access-token'];
@@ -120,17 +126,9 @@ app.get('/', function(req,res){
 });
 
 
-//PROCESS POST REQUEST TO PROCEED TO SECOND VIEW
-app.get('/second', function(req,res){
-  res.sendfile('./views/map_index.html');
-});
 
-// app.post('/second', function(req,res){
-//   res.sendfile('./views/map_index.html');
-// });
 
-//REGISTER THE USERS ROUTE
-app.use('/users', userRoutes);
+
 
 
 app.get('/edit', function(req,res){
@@ -139,4 +137,4 @@ app.get('/edit', function(req,res){
 
 //APP TO LISTEN ON PORT 8080
 app.listen(port);
-console.log('magic happnes on port' + port);
+console.log('magic happens on port' + port);

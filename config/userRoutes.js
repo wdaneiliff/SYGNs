@@ -13,6 +13,7 @@ userRouter.route('/')
   //POST
     .post(usersController.createUser);
 
+
 userRouter.route('/:id')
 
   //GET ONE USER

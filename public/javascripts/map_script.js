@@ -127,7 +127,10 @@ function addLatLng(event) {
 
       if(count==2){
         sign.point2 = marker.position
-        setTimeout(function(){console.log(sign);},2000);
+        setTimeout(function(){
+          console.log(sign);
+          $('#mapModal').modal('show');
+        },2000);
       }
 }
 
