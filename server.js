@@ -22,7 +22,7 @@ var superSecret = 'iamtherealbatman';
 
 //CONNECT OUR DATABASE
 
-var mongodbUri = 'mongodb://addy:password@ds033123.mongolab.com:33123/sygns_db'
+var mongodbUri = 'mongodb://addy:password@ds033123.mongolab.com:33123/sygns_db';
 mongoose.connect(mongodbUri);
 
 //USE PUBLIC FOLDER FOR ANY FILE REQUESTS
@@ -58,6 +58,8 @@ app.get('/signup', function(req,res){
   res.sendfile('./views/signup.html');
 });
 
+//REGISTER THE USERS ROUTE
+app.use('/users', userRoutes);
 
 
 //ROUTE TO AUTHENTICATE A USER
@@ -90,9 +92,6 @@ app.post('/authenticate',function(req,res){
 
   });
 });
-
-//REGISTER THE USERS ROUTE
-app.use('/users', userRoutes);
 
 
 //ROUTE MIDDLEWARE
@@ -128,11 +127,6 @@ app.use(function(req,res,next){
 app.get('/', function(req,res){
     res.sendfile("./views/map_index.html");
 });
-
-
-
-
-
 
 
 app.get('/edit', function(req,res){

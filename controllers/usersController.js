@@ -36,8 +36,9 @@ function getAll(req,res){
 //GET AND SHOW INDIVIDUAL USER
 function showUser(req,res){
   console.log("individual user requested");
-  User.find(req.params.user_id, function(err, user){
+  User.findOne({email: req.decoded.email}, function(err, user){
     if(err) res.send(err);
+    console.log(user);
     res.json(user);
   });
 }
@@ -45,7 +46,10 @@ function showUser(req,res){
 //UPDATE INDIVIDUAL USER
 function updateUser(req,res){
   console.log("edit individual user requested");
-  User.findById(req.params.user_id, function(err, user){
+  User.findOne({email: req.decoded.email}, function(err, user){
+
+    console.log('found him');
+    console.log(req.decoded.email);
     if(err) res.send(err);
 
     //UPDATE USER PARAMETERS ONLY IF PROVIDED
@@ -56,7 +60,7 @@ function updateUser(req,res){
 
     user.save(function(err){
       if(err) res.send(err);
-      res.json({message: 'successfully updated', redirect:"/"});
+      res.json({message: 'successfully updated', redirect:"/edit"});
     });
   });
 }
