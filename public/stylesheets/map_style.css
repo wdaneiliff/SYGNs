@@ -4,3 +4,25 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.modal-header > h4 {
+  color:#333;
+  text-decoration: underline;
+  list-style: none;
+  display: block;
+
+  width: 100%;
+  text-align: center;
+}
+
+.modal-body > p {
+    width: 100%;
+    text-align: center;
+}
+
+#image-preview {
+    width: 220px;
+    height: 110px;
+    display: block;
+    margin: 0 auto;
+}

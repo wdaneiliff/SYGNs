@@ -124,4 +124,11 @@ function addLatLng(event) {
 
 $(document).ready(function() {
     navigator.geolocation.getCurrentPosition(initMap);
+
+    // for map modal window----------------
+    $('.btn-info').click(function(event) {
+        console.log("event = " + event);
+        $('#mapModal').modal('show');
+    });
+    //-------------------------------------
 });
