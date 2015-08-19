@@ -3,10 +3,7 @@
     font-family: wazeFont;
     src:url(../fonts/proxima-nova-soft-bold.ttf);
 }
-
-h1 {
-    font-family: wazeFont;
-}
+h1, h2 {font-family: wazeFont;}
 
 .container{
   text-align: center;

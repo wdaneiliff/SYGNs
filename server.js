@@ -47,7 +47,7 @@ app.get('/login', function(req,res){
 });
 
 app.get('/help', function(req,res){
-    res.sendfile('./views/help.html');
+    res.sendfile('./views/help_view.html');
 });
 
 app.get('/signup', function(req,res){
