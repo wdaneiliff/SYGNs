@@ -117,6 +117,16 @@ function addLatLng(event) {
 
     var path = poly.getPath();
 
+    path.push(event.latLng);
+    console.log(event.latLng);
+    // Add a new marker at the new plotted point on the polyline.
+    var marker = new google.maps.Marker({
+     position: event.latLng,
+     title: '#' + path.getLength(),
+     map: myMap
+     //icon: 'marker_pin.png'
+    });
+
       count = count+1;
       console.log(marker.position);
 
