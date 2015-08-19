@@ -104,19 +104,10 @@ function initMap(location) {
     poly.addListener('click', function(event){console.log(event.latLng);});
 };
 
-<<<<<<< HEAD
-//HANDLE CLICK COUNTS TO LIMIT AT 2 PER SESSION
-var clickCount = 0;
 
-// Handles click events on a map, and adds a new point to the Polyline.
-function addLatLng(event) {
-    console.log('clicked');
-  if(clickCount == 2) return null;
-
-  var path = poly.getPath();
-=======
 var count = 0;
 var sign = {};
+
 // Handles click events on a map, and adds a new point to the Polyline.
 function addLatLng(event) {
     console.log('clicked');
@@ -125,28 +116,13 @@ function addLatLng(event) {
 
 
     var path = poly.getPath();
->>>>>>> a0020dab4e22a04b0132a52a97a780ce59549659
-
-  // Because path is an MVCArray, we can simply append a new coordinate
-  // and it will automatically appear.
-  path.push(event.latLng);
-  console.log(event.latLng);
-  // Add a new marker at the new plotted point on the polyline.
-  var marker = new google.maps.Marker({
-    position: event.latLng,
-    title: '#' + path.getLength(),
-    map: myMap
-    //icon: 'marker_pin.png'
-  });
-<<<<<<< HEAD
-=======
 
       count = count+1;
       console.log(marker.position);
 
 
       if(count==1){
-      sign.point1 = marker.position
+      sign.point1 = marker.position;
       }
 
       if(count==2){
@@ -154,17 +130,10 @@ function addLatLng(event) {
         setTimeout(function(){console.log(sign);},2000);
       }
 }
->>>>>>> a0020dab4e22a04b0132a52a97a780ce59549659
-
-  clickCount +=1;
-
-}
-
 
 $(document).ready(function() {
     navigator.geolocation.getCurrentPosition(initMap);
 
-<<<<<<< HEAD
     function delete_cookie( name ) {
       document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
@@ -180,14 +149,10 @@ $(document).ready(function() {
       });
     }
 
-
-
-=======
     // for map modal window----------------
     $('.btn-info').click(function(event) {
         console.log("event = " + event);
         $('#mapModal').modal('show');
     });
     //-------------------------------------
->>>>>>> a0020dab4e22a04b0132a52a97a780ce59549659
 });
