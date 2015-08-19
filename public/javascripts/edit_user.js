@@ -1,80 +1,95 @@
-//console.log("edit user script");
 $(document).ready(function() {
 
-    var firstName = $("#firstName");
-    var lastName = $("#lastName");
-    var email = $("#email");
-    var password = $("#key");
+    //CHECK TO MAKE SURE PASSWORD CONFIRM MATCHES
+    $('form').on('submit',function(){
 
-    $('#btn-login').on('click',function(){
-
-        event.preventDefault();
-        console.log(" first name = " + firstName.val());
-        console.log(" last name = " + lastName.val());
-        console.log(" email = " + email.val());
-        console.log(" password = " + password.val());
-
-        /*
-        //CONFIRM PASSWORD CHECK
-       if( $('#key').val() != $('#pwkey').val() ){
-           alert('Password does not match');
+        //CHECK FOR VALUE IN FIRST NAME INPUT
+        if( !$('#firstName').val()){
             event.preventDefault();
-           return false;
-       }
-       */
+            return alert('Please Enter Your First Name');
+        }
 
-        $.ajax({
-            method: "patch",
-            url: "/users/" + email.val(),
-            data: JSON.stringify({  firstName: firstName.val(),
-                                    lastName: lastName.val(),
-                                    email: email.val(),
-                                    password: password.val()
-                                }),
-            contentType: 'application/json; charset=UTF-8',
-            dataType : 'json',
-            success: function(data){
-                console.log(data);
+        //CHECK FOR VALUE IN LAST NAME INPUT
+        if( !$('#lastName').val()){
+            event.preventDefault();
+            return alert('Please Enter Your Last Name');
+        }
 
-                if(data.redirect){
-                    window.location.href = data.redirect;
-                }
-            }
-        });
+        //CHECK FOR VALUE IN EMAIL INPUT
+        if( !$('#email').val()){
+            event.preventDefault();
+            return alert('Please Enter Your Email');
+        }
 
-    });
-
-    $('#btn-delete').on('click',function(){
-        console.log(" delete clicked ");
-        event.preventDefault();
-        console.log(" first name = " + firstName.val());
-        console.log(" last name = " + lastName.val());
-        console.log(" email = " + email.val());
-        console.log(" password = " + password.val());
+        //CHECK FOR VALUE IN PASSWORD INPUT
+        if( !$('#key').val()){
+            event.preventDefault();
+            return alert('Please Enter a Password');
+        }
 
         //CONFIRM PASSWORD CHECK
-       if( $('#key').val() != $('#pwkey').val() ){
-           alert('Password does not match');
+        if( $('#key').val() != $('#pwkey').val() ){
+            alert('Password does not match');
             event.preventDefault();
-           return false;
-       }
+            return false;
+        }
 
-
-        $.ajax({
-            method: "delete",
-            url: "/users/" + email.val(),
-
-            success: function(data){
-                console.log(data);
-                if(data.redirect){
-                    window.location.href = data.redirect;
-                }
-            }
-        });
-
+        return true;
     });
+});
 
+var firstName = $("#firstName");
+var lastName = $("#lastName");
+var email = $("#email");
+var password = $("#key");
+console.log(" first name = " + firstName.val());
+console.log(" last name = " + lastName.val());
+console.log(" email = " + email.val());
+console.log(" password = " + password.val());
 
+$('#btn-login').on('click',function(){
 
+    event.preventDefault();
 
+    $.ajax({
+        method: "patch",
+        url: "/users/" + email.val(),
+        data: JSON.stringify({  firstName: firstName.val(),
+                                lastName: lastName.val(),
+                                email: email.val(),
+                                password: password.val()
+                            }),
+        contentType: 'application/json; charset=UTF-8',
+        dataType : 'json',
+        success: function(data){
+            console.log(data);
+
+            if(data.redirect){
+                window.location.href = data.redirect;
+            }
+        }
+    });
+});
+
+function delete_cookie( name ) {
+  document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
+
+$('#btn-delete').on('click',function(){
+    console.log(" delete clicked ");
+    event.preventDefault();
+
+    $.ajax({
+        method: "delete",
+        url: "/users/" + email.val(),
+
+        success: function(data){
+            delete_cookie('token');
+
+            console.log(data);
+            if(data.redirect){
+                window.location.href = data.redirect;
+            }
+        }
+    });
 });
