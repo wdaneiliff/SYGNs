@@ -22,7 +22,7 @@ $('form').on('submit',function(){
   }
 
 //CHECK FOR VALUE IN PASSWORD INPUT
-  if( !$('#password').val()){
+  if( !$('#key').val()){
       event.preventDefault();
       return alert('Please Enter a Password');
   }
