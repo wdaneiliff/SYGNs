@@ -53,16 +53,6 @@ function initMap(location) {
     // refresh button click:
     $('#refresh').click(performSearch);
 
-    // traffic button on/off:---------------------------------------------------
-    var trafficLayer = new google.maps.TrafficLayer();
-    $('#toggle_traffic').click(function() {
-        // if map has traffic layer visible, trun off
-        if (trafficLayer.getMap()) {
-            trafficLayer.setMap(null);
-        } else {
-            trafficLayer.setMap(myMap);
-        }
-    });
 
     var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
@@ -157,6 +147,8 @@ $(document).ready(function() {
       cookie.on('click', function(){
         delete_cookie('token');
       });
+    }else{
+      ul.append('<li> <a href="/signup" class="logout"> Sign up </a> <li>');
     }
 
     // for map modal window----------------

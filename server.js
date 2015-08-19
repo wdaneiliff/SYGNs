@@ -50,6 +50,10 @@ app.get('/help', function(req,res){
     res.sendfile('./views/help.html');
 });
 
+app.get('/signup', function(req,res){
+  res.sendfile('./views/signup.html');
+});
+
 //ROUTE TO AUTHENTICATE A USER
 app.post('/authenticate',function(req,res){
   User.findOne({email: req.body.email}).select('email firstName password').exec(function(err,user){
@@ -128,9 +132,6 @@ app.get('/second', function(req,res){
 //REGISTER THE USERS ROUTE
 app.use('/users', userRoutes);
 
-app.get('/signup', function(req,res){
-  res.sendfile('./views/signup.html');
-});
 
 app.get('/edit', function(req,res){
   res.sendfile('./views/edit.html');
