@@ -5,6 +5,7 @@ $(document).ready(function() {
     var email = $("#email");
     var password = $("#key");
 
+  //IMMEDIATE AJAX CALL TO FILL USER ACCOUNT INFO
   $.ajax({
     method: "get",
     url: "/users/placeholder",
@@ -78,7 +79,7 @@ $(document).ready(function() {
     });
 
 
-
+    //DELETE BUTTON LISTENER AND AJAX REQUEST TO DELETE USER
     $('#btn-delete').on('click',function(){
         console.log(" delete clicked ");
         event.preventDefault();
@@ -86,10 +87,8 @@ $(document).ready(function() {
         $.ajax({
             method: "delete",
             url: "/users/" + email.val(),
-
             success: function(data){
               delete_cookie('token');
-
               console.log(data);
               if(data.redirect){
                 window.location.href = data.redirect;
