@@ -9,12 +9,39 @@ body {
     background: linear-gradient(#CCFFFF, #E0E0FF); /* Standard syntax (must be last) */
     background-repeat: no-repeat;
 }
+@font-face {
+    font-family: wazeFont;
+    src:url(../fonts/proxima-nova-soft-bold.ttf);
+}
+#map-title h1 {
+    font-family: wazeFont;
+    color: #00008B;
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+.container{
+  text-align: center;
+}
 
 #map-canvas {
     height: 500px;
     width: 300px;
     margin-left: auto;
     margin-right: auto;
+
+    box-shadow: 3px 3px 5px grey,
+            -3px -3px 5px grey;
+}
+
+#restriction-type {
+
+}
+
+.time{
+  text-align: left;
 }
 
 .modal-header > h4 {
@@ -37,4 +64,8 @@ body {
     height: 110px;
     display: block;
     margin: 0 auto;
+}
+
+#no-parking{
+  color: red;
 }

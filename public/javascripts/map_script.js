@@ -57,11 +57,7 @@ function initMap(location) {
     var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-      '<div id="bodyContent">'+
-      '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-      '<p>Attribution: Uluru,<a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-      'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+      '<h1 id="firstHeading" class="firstHeading">User Name</h1>'+
       "Latitude, Longitude: " + currentLocation +
       '</div>'+
       '</div>';
@@ -104,7 +100,6 @@ function addLatLng(event) {
 
     if(count==2) return null;
 
-
     var path = poly.getPath();
 
     path.push(event.latLng);
@@ -119,7 +114,6 @@ function addLatLng(event) {
 
       count = count+1;
       console.log(marker.position);
-
 
       if(count==1){
       sign.point1 = marker.position;
@@ -137,21 +131,43 @@ function addLatLng(event) {
 $(document).ready(function() {
     navigator.geolocation.getCurrentPosition(initMap);
 
+    var submitSign = $('#save-sign');
+    var signType = $('.sign-type');
+    var monday = $('#mon');
+    var tuesday = $('#tues');
+    var wednesday = $('#wed');
+    var thursday =  $('#thurs');
+    var friday = $('#fri');
+    var saturday = $('#sat');
+    var sunday = $('#sun');
+    var startTime = $('#start');
+    var endTime = $('end');
+
+    submitSign.on('click',function(evt){
+      console.log(signType.val());
+      sign.type = signType.val();
+      sign.monday
+      console.log(sign);
+      console.log(monday.val() + tuesday.val());
+      // console.log(startTime);
+      // console.log(endTime);
+    })
+
     function delete_cookie( name ) {
       document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 
-    var ul = $('ul');
+    var head = $('.head');
     if(document.cookie.indexOf("token") >= 0) {
       console.log("cookie here");
-      ul.append('<li> <a href="/login" class="logout"> Logout </a> <li>');
+      head.append('<li> <a href="/login" class="logout"> Logout </a> <li>');
 
       var cookie = $('.logout');
       cookie.on('click', function(){
         delete_cookie('token');
       });
     }else{
-      ul.append('<li> <a href="/signup" class="logout"> Sign up </a> <li>');
+      head.append('<li> <a href="/signup" class="logout"> Sign up </a> <li>');
     }
 
     // for map modal window----------------
