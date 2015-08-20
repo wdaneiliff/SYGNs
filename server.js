@@ -17,6 +17,9 @@ app.set('port', process.env.PORT || 8080);
 //BRING IN USER ROUTE
 var userRoutes = require('./config/userRoutes');
 
+//BRING IN SYGNS ROUTE
+var sygnRoutes = require('./config/sygnRoutes');
+
 //TOKEN CONFIG
 var superSecret = 'iamtherealbatman';
 
@@ -60,6 +63,9 @@ app.get('/signup', function(req,res){
 
 //REGISTER THE USERS ROUTE
 app.use('/users', userRoutes);
+
+//Register the Sygns route
+app.use('/sygns',sygnRoutes);
 
 
 //ROUTE TO AUTHENTICATE A USER

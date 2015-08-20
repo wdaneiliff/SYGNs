@@ -94,7 +94,7 @@ function initMap(location) {
 
 
 var count = 0;
-var sign = {};
+var sygn = {};
 var midPoint;
 var point1;
 var point2;
@@ -156,11 +156,11 @@ function addLatLng(event) {
       count = count+1;
 
       if(count==1){
-      sign.point1 = marker.position;
+      sygn.point1 = marker.position;
       }
 
       if(count==2){
-        sign.point2 = marker.position;
+        sygn.point2 = marker.position;
         midPoint = [(path["j"][0]['G']+path["j"][1]['G'])/2, (path["j"][0]['K']+path["j"][1]['K'])/2 ];
         point1 = [path["j"][0]['G'],path["j"][0]['K']];
         point2 = [path["j"][1]['G'],path["j"][1]['K']];
@@ -170,7 +170,7 @@ function addLatLng(event) {
         // console.log("point2: "+ path["j"][1]);
 
         setTimeout(function(){
-          console.log(sign);
+          console.log(sygn);
 
           $('#mapModal').modal('show');
           setTimeout(smallMap,800);
@@ -182,10 +182,11 @@ function addLatLng(event) {
 $(document).ready(function() {
     navigator.geolocation.getCurrentPosition(initMap);
 
+
     $('#spinner').show(); // show spinner icon
 
-    var submitSign = $('#save-sign');
-    var signType = $('.sign-type');
+    var submitSygn = $('#save-sygn');
+    var sygnType = $('.sygn-type');
     var startTime = $('#myList');
     var endTime = $('#myList2');
 
@@ -194,31 +195,36 @@ $(document).ready(function() {
     var ampm2 = $('.ampm2');
 
     //VARIABLES TO ACTUAL STORE START AND END TIME
-    var signStart;
-    var signEnd;
+    var sygnStart;
+    var sygnEnd;
 
     //GRAB FORM INFORMAITON AND SUBMIT SYGN BUTTON AND FUNCTION
-    submitSign.on('click',function(evt){
-      console.log(signType.val());
-      sign.type = signType.val();
-      console.log(sign);
+    submitSygn.on('click',function(evt){
+      console.log(sygnType.val());
+      sygn.type = sygnType.val();
+      console.log(sygn);
 
-      signStart = parseInt(startTime.val().split(":").join(""));
-      signEnd = parseInt(endTime.val().split(":").join(""));
+      sygnStart = parseInt(startTime.val().split(":").join(""));
+      sygnEnd = parseInt(endTime.val().split(":").join(""));
 
       //CONVERT START TIME TO MILITARY TIME
       if(ampm1.val() === "PM"){
-        if(signStart === 1200) return null;
-        signStart += 1200;
+        if(sygnStart === 1200) return null;
+        sygnStart += 1200;
       }
 
       //CONVERT END TIME TO MILITARY TIME
       if(ampm2.val() === "PM"){
-        if(signEnd === 1200) return null;
-        signEnd += 1200;
+        if(sygnEnd === 1200) return null;
+        sygnEnd += 1200;
       }
 
+<<<<<<< HEAD
       if(monToggle === true){}
+=======
+      console.log(sygnStart);
+      console.log(sygnEnd);
+>>>>>>> b0e9a8921a448f12bae4585ea1f6522a4f7f9b27
     });
 
 
