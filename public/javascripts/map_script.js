@@ -88,7 +88,9 @@ function initMap(location) {
     // Add a listener for the click event
     myMap.addListener('click', addLatLng);
     poly.addListener('click', function(event){console.log(event.latLng);});
-}
+
+    $('#spinner').hide(); // hide spinner icon
+};
 
 
 var count = 0;
@@ -178,6 +180,8 @@ function addLatLng(event) {
 
 $(document).ready(function() {
     navigator.geolocation.getCurrentPosition(initMap);
+
+    $('#spinner').show(); // show spinner icon
 
     var submitSign = $('#save-sign');
     var signType = $('.sign-type');
