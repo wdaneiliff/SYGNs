@@ -93,21 +93,33 @@ function initMap(location) {
 
 var count = 0;
 var sign = {};
-var modalMapPoints=[];
+var midPoint;
 
-function smallMap(point) {
+function smallMap() {
     // current location:
-    var currentLoca = new google.maps.LatLng(point[0], point[1]);
+    var currentLoca = new google.maps.LatLng(midPoint[0], midPoint[1]);
 
     // how to display the map
     var mapOpt = {
         center: currentLoca,
-        zoom: 18,
+        zoom: 19,
         //mapTypeId: google.maps.MapTypeId.SATELLITE
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-  myMap = new google.maps.Map(document.getElementById('map-modal'),mapOpt);
+    myMap = new google.maps.Map(document.getElementById('map-modal'),mapOpt);
+    poly.setMap(myMap);
+
+    poly = new google.maps.Polyline({
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 3.5
+    });
+    var path = poly.getPath();
+
+    path.push(midPoint[0]);
+    path.push(midPoint[1]);
+
 }
 
 
@@ -138,7 +150,7 @@ function addLatLng(event) {
 
       if(count==2){
         sign.point2 = marker.position;
-        var midPoint = [(path["j"][0]['G']+path["j"][1]['G'])/2, (path["j"][0]['K']+path["j"][1]['K'])/2 ];
+        midPoint = [(path["j"][0]['G']+path["j"][1]['G'])/2, (path["j"][0]['K']+path["j"][1]['K'])/2 ];
         console.log(midPoint);
         // console.log("point1: "+ path["j"][0]);
         // console.log("point2: "+ path["j"][1]);
