@@ -219,14 +219,10 @@ $(document).ready(function() {
         sygnEnd += 1200;
       }
 
-<<<<<<< HEAD
       if(monToggle === true){}
-=======
       console.log(sygnStart);
       console.log(sygnEnd);
->>>>>>> b0e9a8921a448f12bae4585ea1f6522a4f7f9b27
     });
-
 
     // for map modal window----------------
     $('.btn-info').click(function(event) {
