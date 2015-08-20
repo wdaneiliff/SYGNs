@@ -1,8 +1,13 @@
+html{
+  height:100%;
+}
 body {
+    background-size: cover;
     background: -webkit-linear-gradient(#CCFFFF, #E0E0FF); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#CCFFFF, #E0E0FF); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#CCFFFF, #E0E0FF); /* For Firefox 3.6 to 15 */
     background: linear-gradient(#CCFFFF, #E0E0FF); /* Standard syntax (must be last) */
+    background-repeat: no-repeat;
 }
 @font-face {
     font-family: wazeFont;
@@ -33,12 +38,72 @@ body {
     border-radius: 14px 14px 14px 14px;
 }
 
+#map-modal{
+  height: 250px;
+  width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #restriction-type {
 
 }
 
 .time{
-  text-align: left;
+  text-align: center;
+  height:28px;
+  margin-top: 5px;
+}
+
+.timeText{
+  width: 100px;
+  padding-right: 10px;
+  display: inline-block;
+  text-align: right;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.daysUL{
+    font-weight: bold;
+    list-style: none;
+    text-align: center;
+    margin-bottom: 15px;
+    padding: 0;
+}
+
+.daysUL > li{
+  display: inline-block;
+  width:12.5%;
+  font-size: 20px;
+  margin: 0;
+  border: 2px solid grey;
+  background-color: rgba(0, 0, 139, 0.38);
+  color:white;
+  border-radius: 3px;
+}
+
+#signForm{
+  text-align: center;
+}
+
+#save-sign{
+  color:white;
+  background: #4CAE4C;
+  height: 30px;
+  width: 20%;
+  padding: 0 10px;
+  border-radius: 5px;
+  margin-top: 8px;
+  font-size: 16px;
+  border-width: 0;
+}
+
+#myList, #myList2, .am-pm{
+  height:25px;
+  font-weight: bold;
+  font-size: 15px;
+  height:28px;
 }
 
 .modal-header > h4 {
