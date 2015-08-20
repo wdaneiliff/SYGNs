@@ -341,7 +341,8 @@ $(document).ready(function() {
     }
 
     $('#cancelBtn').on('click',function(){
-      window.location.reload()
-    })
+      
+      window.location.reload();
+    });
 
 });
