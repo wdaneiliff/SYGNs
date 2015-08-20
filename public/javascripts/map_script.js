@@ -94,6 +94,8 @@ function initMap(location) {
 var count = 0;
 var sign = {};
 var midPoint;
+var point1;
+var point2;
 
 function smallMap() {
     // current location:
@@ -102,8 +104,7 @@ function smallMap() {
     // how to display the map
     var mapOpt = {
         center: currentLoca,
-        zoom: 19,
-        //mapTypeId: google.maps.MapTypeId.SATELLITE
+        // zoom: 19,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
@@ -117,8 +118,16 @@ function smallMap() {
     });
     var path = poly.getPath();
 
-    path.push(midPoint[0]);
-    path.push(midPoint[1]);
+    path.push(point1);
+    path.push(point2);
+
+    var myLatLng = new google.maps.LatLng(point1[0], point1[1]);
+    var myLatLng2 = new google.maps.LatLng(point2[0], point2[1]);
+
+    var bounds = new google.maps.LatLngBounds();
+    bounds.extend(myLatLng);
+    bounds.extend(myLatLng2);
+    myMap.fitBounds(bounds);
 
 }
 
@@ -151,6 +160,9 @@ function addLatLng(event) {
       if(count==2){
         sign.point2 = marker.position;
         midPoint = [(path["j"][0]['G']+path["j"][1]['G'])/2, (path["j"][0]['K']+path["j"][1]['K'])/2 ];
+        point1 = [path["j"][0]['G'],path["j"][0]['K']];
+        point2 = [path["j"][1]['G'],path["j"][1]['K']];
+
         console.log(midPoint);
         // console.log("point1: "+ path["j"][0]);
         // console.log("point2: "+ path["j"][1]);
