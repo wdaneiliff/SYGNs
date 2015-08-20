@@ -340,5 +340,8 @@ $(document).ready(function() {
       ul.append('<li> <a href="/signup" class="logout"> Sign up </a> <li>');
     }
 
+    $('#cancelBtn').on('click',function(){
+      window.location.reload()
+    })
 
 });
