@@ -12,7 +12,7 @@ function handleSearchResults(results, status) {
             //icon: 'marker_pin.png'
         });
     }
-};
+}
 
 function performSearch() {
     var request = {
@@ -88,6 +88,8 @@ function initMap(location) {
     // Add a listener for the click event
     myMap.addListener('click', addLatLng);
     poly.addListener('click', function(event){console.log(event.latLng);});
+
+    $('#spinner').hide(); // hide spinner icon
 }
 
 
@@ -114,7 +116,7 @@ function smallMap() {
     poly = new google.maps.Polyline({
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
-        strokeWeight: 3.5
+        strokeWeight: 25
     });
     var path = poly.getPath();
 
@@ -176,9 +178,11 @@ function addLatLng(event) {
       }
 }
 
+//JQUERY FUNCTIONS
 $(document).ready(function() {
     navigator.geolocation.getCurrentPosition(initMap);
 
+<<<<<<< HEAD
     var submitSygn = $('#save-sygn');
     var sygnType = $('.sygn-type');
     var startTime = $('#start');
@@ -190,23 +194,48 @@ $(document).ready(function() {
       console.log(sygn);
       // console.log(startTime);
     });
+=======
+    $('#spinner').show(); // show spinner icon
 
-    function delete_cookie( name ) {
-      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-    }
+    var submitSign = $('#save-sign');
+    var signType = $('.sign-type');
+    var startTime = $('#myList');
+    var endTime = $('#myList2');
 
-    var head = $('.head');
-    if(document.cookie.indexOf("token") >= 0) {
-      console.log("cookie here");
-      head.append('<li> <a href="/login" class="logout"> Logout </a> <li>');
+    //VARIABLES TO TEST FOR AM OR PM
+    var ampm1 = $('.ampm1');
+    var ampm2 = $('.ampm2');
 
-      var cookie = $('.logout');
-      cookie.on('click', function(){
-        delete_cookie('token');
-      });
-    }else{
-      head.append('<li> <a href="/signup" class="logout"> Sign up </a> <li>');
-    }
+    //VARIABLES TO ACTUAL STORE START AND END TIME
+    var signStart;
+    var signEnd;
+
+    //GRAB FORM INFORMAITON AND SUBMIT SYGN BUTTON AND FUNCTION
+    submitSign.on('click',function(evt){
+      console.log(signType.val());
+      sign.type = signType.val();
+      console.log(sign);
+>>>>>>> b459454392f1de69caa3027e2ca7c3bcc6871682
+
+      signStart = parseInt(startTime.val().split(":").join(""));
+      signEnd = parseInt(endTime.val().split(":").join(""));
+
+      //CONVERT START TIME TO MILITARY TIME
+      if(ampm1.val() === "PM"){
+        if(signStart === 1200) return null;
+        signStart += 1200;
+      }
+
+      //CONVERT END TIME TO MILITARY TIME
+      if(ampm2.val() === "PM"){
+        if(signEnd === 1200) return null;
+        signEnd += 1200;
+      }
+
+      console.log(signStart);
+      console.log(signEnd);
+    });
+
 
     // for map modal window----------------
     $('.btn-info').click(function(event) {
@@ -304,5 +333,25 @@ $(document).ready(function() {
         sunn.css("backgroundColor","rgba(0, 0, 139, 0.38)");
       }
     });
+
+    // DELETE COOKIE FUNCTION UPON LOGGING OUT
+    function delete_cookie( name ) {
+      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+
+    // APPEND LOG IN OR LOG OUT BUTTON TO NAV
+    var ul = $('.nav-tabs');
+    if(document.cookie.indexOf("token") >= 0) {
+      console.log("cookie here");
+      ul.append('<li> <a href="/login" class="logout"> Logout </a> <li>');
+
+      var cookie = $('.logout');
+      cookie.on('click', function(){
+        delete_cookie('token');
+      });
+    }else{
+      ul.append('<li> <a href="/signup" class="logout"> Sign up </a> <li>');
+    }
+
 
 });
