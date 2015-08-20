@@ -242,7 +242,17 @@ $(document).ready(function() {
       }
 
       console.log(sygn);
-      
+
+      $.ajax({
+        url:"/sygns",
+        method: "post",
+        data: JSON.stringify(sygn),
+        contentType: 'application/json; charset=UTF-8',
+        dataType : 'json',
+        success: function(data){
+          console.log(data);
+        }
+      });
     });
 
     // for map modal window----------------
