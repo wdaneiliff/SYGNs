@@ -7,9 +7,9 @@ var usersController = require('../controllers/usersController.js');
 
 userRouter.route('/')
 
-  //GET
-    .get(usersController.getAll)
-
+  // //GET
+  //   .get(usersController.getAll)
+  //
   //POST
     .post(usersController.createUser);
 
