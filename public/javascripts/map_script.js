@@ -141,17 +141,17 @@ $(document).ready(function() {
       document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 
-    var ul = $('ul');
+    var head = $('.head');
     if(document.cookie.indexOf("token") >= 0) {
       console.log("cookie here");
-      ul.append('<li> <a href="/login" class="logout"> Logout </a> <li>');
+      head.append('<li> <a href="/login" class="logout"> Logout </a> <li>');
 
       var cookie = $('.logout');
       cookie.on('click', function(){
         delete_cookie('token');
       });
     }else{
-      ul.append('<li> <a href="/signup" class="logout"> Sign up </a> <li>');
+      head.append('<li> <a href="/signup" class="logout"> Sign up </a> <li>');
     }
 
     // for map modal window----------------

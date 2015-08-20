@@ -33,3 +33,7 @@ body {
     display: block;
     margin: 0 auto;
 }
+
+#no-parking{
+  color: red;
+}
