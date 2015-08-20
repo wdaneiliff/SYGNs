@@ -12,6 +12,14 @@ body {
     margin-right: auto;
 }
 
+#restriction-type {
+
+}
+
+.time{
+  text-align: left;
+}
+
 .modal-header > h4 {
   color:#333;
   text-decoration: underline;

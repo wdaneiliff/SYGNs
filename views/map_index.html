@@ -6,14 +6,22 @@
         <link href="/stylesheets/map_style.css" rel="stylesheet" type="text/css">
         <!-- Bootstrap -->
 
-        <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"> -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script src="/stylesheets/bootstrap-3.3.5-dist/js/bootstrap.js"></script>
-        <link type="text/css" href="css/bootstrap-timepicker.min.css" />
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+        <script src="/stylesheets/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-        <script type="text/javascript" src="js/bootstrap-timepicker.min.js"></script>
+        <script>
+          function startTime(){
+            var mylist=document.getElementById("myList");
+            document.getElementById("start-time").value=mylist.options[mylist.selectedIndex].text;
+          }
+          function endTime(){
+            var mylist=document.getElementById("myList2");
+            document.getElementById("end-time").value=mylist.options[mylist.selectedIndex].text;
+          }
+        </script>
     </head>
 
     <body>
@@ -45,9 +53,9 @@
                                 <div class="accordian-inner">
                                   <div id="signForm">
                                     <div class="zoneType">
-                                      <div class="form-group">
+                                      <div class="form-group" style="text-align:left;">
 
-                                        <label for="sel1">Restriction Type</label>
+                                        <label id="restriction-type" style="text-align:left;"for="sel1">Restriction Type</label>
                                         <select class="form-control" id="sel1">
 
                                           <option id="no-park">No Parking</option>
@@ -87,21 +95,85 @@
                                           })
                                           </script>
                                       </div>
+                                          <div class="time">
+                                            <form>
+                                              Start Time:
+                                              <select id="myList" onchange="startTime()">
+                                                <option>12:00</option>
+                                                <option>12:30</option>
+                                                <option>1:00</option>
+                                                <option>1:30</option>
+                                                <option>2:00</option>
+                                                <option>2:30</option>
+                                                <option>3:00</option>
+                                                <option>3:30</option>
+                                                <option>4:00</option>
+                                                <option>4:30</option>
+                                                <option>5:00</option>
+                                                <option>5:30</option>
+                                                <option>6:00</option>
+                                                <option>6:30</option>
+                                                <option>7:00</option>
+                                                <option>7:30</option>
+                                                <option>8:00</option>
+                                                <option>8:30</option>
+                                                <option>9:00</option>
+                                                <option>9:30</option>
+                                                <option>10:00</option>
+                                                <option>10:30</option>
+                                                <option>11:00</option>
+                                                <option>11:30</option>
+                                              </select>
 
-                                    </div>
-                                      <div class="time-container">
+                                              <select class="am-pm">
+                                                <option>AM</option>
+                                                <option>PM</option>
+                                              </select>
 
-                                        <div class="input-group bootstrap-timepicker timepicker">
-                                            <input id="timepicker1" type="text" class="form-control input-small">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
-                                        </div>
 
-                                        <script type="text/javascript">
-                                            $('#timepicker1').timepicker();
-                                        </script>
 
-                                      </div>
+                                            </form>
+                                          </div>
+
+                                          <div class="time">
+                                            <form>
+                                              End Time:
+                                              <select id="myList2" onchange="endTime()">
+                                                <option>12:00</option>
+                                                <option>12:30</option>
+                                                <option>1:00</option>
+                                                <option>1:30</option>
+                                                <option>2:00</option>
+                                                <option>2:30</option>
+                                                <option>3:00</option>
+                                                <option>3:30</option>
+                                                <option>4:00</option>
+                                                <option>4:30</option>
+                                                <option>5:00</option>
+                                                <option>5:30</option>
+                                                <option>6:00</option>
+                                                <option>6:30</option>
+                                                <option>7:00</option>
+                                                <option>7:30</option>
+                                                <option>8:00</option>
+                                                <option>8:30</option>
+                                                <option>9:00</option>
+                                                <option>9:30</option>
+                                                <option>10:00</option>
+                                                <option>10:30</option>
+                                                <option>11:00</option>
+                                                <option>11:30</option>
+                                              </select>
+                                              
+                                              <select class="am-pm">
+                                                <option>AM</option>
+                                                <option>PM</option>
+                                              </select>
+
+                                            </form>
+                                          </div>
                                   </div>
+                                  <button type="submit" id="save-sign" name="button">Submit Sign</button>
                                 </div>
                               </div>
                           </div>
