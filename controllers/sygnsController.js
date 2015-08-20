@@ -2,6 +2,7 @@ var Sygn = require('../models/sygn.js');
 
 //CREATE SYGN
 function createSygn(req,res){
+  console.log("post sygn lalala***$$$$$$$fuckfuckfucktits");
     var sygn = new Sygn();
 
     //SET SYGN INFO FROM REQUEST
@@ -40,7 +41,7 @@ function getAll(req, res) {
 //GET AND SHOW INDIVIDUAL SYGN
 function showSygn(req, res) {
     console.log("individual sygn requested");
-    Sygn.findOne({id: req.decoded.id}, function(err, sygn){
+    Sygn.findOne({_id: req.params.id}, function(err, sygn){
         if(err) res.send(err);
         console.log(sygn);
         res.json(sygn);
@@ -50,7 +51,7 @@ function showSygn(req, res) {
 //UPDATE INDIVIDUAL SYGN
 function updateSygn(req,res){
     console.log("edit individual sygn requested");
-    Sygn.findOne({id: req.decoded.id}, function(err, sygn){
+    Sygn.findOne({_id: req.params.id}, function(err, sygn){
 
         console.log('found sygn');
         if(err) res.send(err);
@@ -76,10 +77,14 @@ function updateSygn(req,res){
 
 //DELETE SYGN
 function deleteSygn(req, res) {
-    Sygn.remove({id: req.params.id}, function(err){
+  var id = req.params.id;
+    //Sygn.remove({id: req.params.id}, function(err,sygn){
+    Sygn.remove({_id: id}, function(err,sygn){
+
         if(err) res.send(err);
         res.json({message: 'successfully deleted', redirect: '/'});
-    });
+    }
+  );
 }
 
 module.exports = {

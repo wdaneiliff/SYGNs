@@ -1,7 +1,7 @@
 var express         = require('express');
 var bodyParser      = require('body-parser');
 var methodOverride  = require('method-override');
-sygnRouter          = express();
+var sygnRouter      = express();
 
 var sygnsController = require('../controllers/sygnsController.js');
 
@@ -10,16 +10,16 @@ sygnRouter.route('/')
     //GET
     .get(sygnsController.getAll)
     //POST
-    .post(sygnsController.createUser);
+    .post(sygnsController.createSygn);
 
 
-sygnRouter.route('/:email')
+sygnRouter.route('/:id')
   //GET ONE USER
-  .get(sygnsController.showUser)
+  .get(sygnsController.showSygn)
   //PATCH USER
-  .patch(sygnsController.updateUser)
+  .patch(sygnsController.updateSygn)
   //DELETE USER
-  .delete(sygnsController.deleteUser);
+  .delete(sygnsController.deleteSygn);
 
 //EXPORTS
 module.exports = sygnRouter;
