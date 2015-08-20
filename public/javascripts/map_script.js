@@ -230,6 +230,11 @@ $(document).ready(function() {
     });
     //-------------------------------------
 
+    $('#cancelBtn').on('click',function(){
+
+     window.location.reload();
+    });
+
     //MODAL DAY TOGGLE AND CONTROL VARIABLE FOR MONDAY
     var mon = $('.mon');
     var monToggle = false;
