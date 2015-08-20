@@ -92,7 +92,7 @@ function initMap(location) {
 
 
 var count = 0;
-var sign = {};
+var sygn = {};
 var midPoint;
 var point1;
 var point2;
@@ -154,11 +154,11 @@ function addLatLng(event) {
       count = count+1;
 
       if(count==1){
-      sign.point1 = marker.position;
+      sygn.point1 = marker.position;
       }
 
       if(count==2){
-        sign.point2 = marker.position;
+        sygn.point2 = marker.position;
         midPoint = [(path["j"][0]['G']+path["j"][1]['G'])/2, (path["j"][0]['K']+path["j"][1]['K'])/2 ];
         point1 = [path["j"][0]['G'],path["j"][0]['K']];
         point2 = [path["j"][1]['G'],path["j"][1]['K']];
@@ -168,7 +168,7 @@ function addLatLng(event) {
         // console.log("point2: "+ path["j"][1]);
 
         setTimeout(function(){
-          console.log(sign);
+          console.log(sygn);
 
           $('#mapModal').modal('show');
           setTimeout(smallMap,800);
@@ -179,15 +179,15 @@ function addLatLng(event) {
 $(document).ready(function() {
     navigator.geolocation.getCurrentPosition(initMap);
 
-    var submitSign = $('#save-sign');
-    var signType = $('.sign-type');
+    var submitSygn = $('#save-sygn');
+    var sygnType = $('.sygn-type');
     var startTime = $('#start');
     var endTime = $('end');
 
-    submitSign.on('click',function(evt){
-      console.log(signType.val());
-      sign.type = signType.val();
-      console.log(sign);
+    submitSygn.on('click',function(evt){
+      console.log(sygnType.val());
+      sign.type = sygnType.val();
+      console.log(sygn);
       // console.log(startTime);
     });
 

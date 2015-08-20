@@ -76,7 +76,7 @@ function updateSygn(req,res){
 
 //DELETE SYGN
 function deleteSygn(req, res) {
-    //Sygn.remove({ email: req.params.email}, function(err){
+    Sygn.remove({id: req.params.id}, function(err){
         if(err) res.send(err);
         res.json({message: 'successfully deleted', redirect: '/'});
     });
