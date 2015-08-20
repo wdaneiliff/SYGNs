@@ -12,7 +12,7 @@ function handleSearchResults(results, status) {
             //icon: 'marker_pin.png'
         });
     }
-};
+}
 
 function performSearch() {
     var request = {
@@ -90,7 +90,7 @@ function initMap(location) {
     poly.addListener('click', function(event){console.log(event.latLng);});
 
     $('#spinner').hide(); // hide spinner icon
-};
+}
 
 
 var count = 0;
@@ -116,7 +116,7 @@ function smallMap() {
     poly = new google.maps.Polyline({
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
-        strokeWeight: 3.5
+        strokeWeight: 25
     });
     var path = poly.getPath();
 
@@ -178,6 +178,7 @@ function addLatLng(event) {
       }
 }
 
+//JQUERY FUNCTIONS
 $(document).ready(function() {
     navigator.geolocation.getCurrentPosition(initMap);
 
@@ -185,14 +186,40 @@ $(document).ready(function() {
 
     var submitSign = $('#save-sign');
     var signType = $('.sign-type');
-    var startTime = $('#start');
-    var endTime = $('end');
+    var startTime = $('#myList');
+    var endTime = $('#myList2');
 
+    //VARIABLES TO TEST FOR AM OR PM
+    var ampm1 = $('.ampm1');
+    var ampm2 = $('.ampm2');
+
+    //VARIABLES TO ACTUAL STORE START AND END TIME
+    var signStart;
+    var signEnd;
+
+    //GRAB FORM INFORMAITON AND SUBMIT SYGN BUTTON AND FUNCTION
     submitSign.on('click',function(evt){
       console.log(signType.val());
       sign.type = signType.val();
       console.log(sign);
-      // console.log(startTime);
+
+      signStart = parseInt(startTime.val().split(":").join(""));
+      signEnd = parseInt(endTime.val().split(":").join(""));
+
+      //CONVERT START TIME TO MILITARY TIME
+      if(ampm1.val() === "PM"){
+        if(signStart === 1200) return null;
+        signStart += 1200;
+      }
+
+      //CONVERT END TIME TO MILITARY TIME
+      if(ampm2.val() === "PM"){
+        if(signEnd === 1200) return null;
+        signEnd += 1200;
+      }
+
+      console.log(signStart);
+      console.log(signEnd);
     });
 
 
@@ -293,7 +320,7 @@ $(document).ready(function() {
       }
     });
 
-    // DELETE COOKIE FUNCTION UPON LOGGING OUT    
+    // DELETE COOKIE FUNCTION UPON LOGGING OUT
     function delete_cookie( name ) {
       document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }

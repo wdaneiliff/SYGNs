@@ -71,23 +71,42 @@ function showUser(req,res){
 function updateUser(req,res){
   console.log("edit individual user requested");
 
-  User.findOne({email: req.decoded.email}, function(err, user){
+  var token = req.cookies.token || req.body.token || req.param('token') || req.headers['x-access-token'];
+  var decodedInfo;
 
-    console.log('found him');
-    console.log(req.decoded.email);
-    if(err) res.send(err);
+  if(token){
 
-    //UPDATE USER PARAMETERS ONLY IF PROVIDED
-    if(req.body.firstName) user.firstName = req.body.firstName;
-    if(req.body.lastName) user.lastName = req.body.lastName;
-    if(req.body.email) user.email = req.body.email;
-    if(req.body.password) user.password = req.body.password;
+    //VERIFY SECRET AND CHECK TOKEN EXPIR
+    jwt.verify(token, superSecret, function(err, decoded){
+      if(err){
+        res.status(403).send({success: false, message: 'failed to authen token'});
+      } else {
+        //IF TOKEN IS VALID AND ACTIVE, SAVE FOR OTHER ROUTES TO users
+        req.decoded = decoded;
+        decodedInfo = decoded;
+        console.log(decodedInfo.email + "$$$$$");
+      }
 
-    user.save(function(err){
-      if(err) res.send(err);
-      res.json({message: 'successfully updated', redirect:"/edit"});
+      User.findOne({email: decodedInfo.email}, function(err, user){
+
+        console.log('found him');
+        console.log(req.decoded.email);
+        if(err) res.send(err);
+
+        //UPDATE USER PARAMETERS ONLY IF PROVIDED
+        if(req.body.firstName) user.firstName = req.body.firstName;
+        if(req.body.lastName) user.lastName = req.body.lastName;
+        if(req.body.email) user.email = req.body.email;
+        if(req.body.password) user.password = req.body.password;
+
+        user.save(function(err){
+          if(err) res.send(err);
+          res.json({message: 'successfully updated', redirect:"/edit"});
+        });
+      });
+
     });
-  });
+  }
 }
 
 //DELETE USER
