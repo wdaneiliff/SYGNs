@@ -2,6 +2,7 @@ var Sygn = require('../models/sygn.js');
 
 //CREATE SYGN
 function createSygn(req,res){
+  console.log("post sygn lalala***$$$$$$$fuckfuckfucktits");
     var sygn = new Sygn();
 
     //SET SYGN INFO FROM REQUEST
@@ -9,12 +10,12 @@ function createSygn(req,res){
     sygn.point2 = req.body.point2;
     sygn.type = req.body.type;
     sygn.monday = req.body.monday;
-    sygn.tuesday = req.body.tuesday;
-    sygn.wednesday = req.body.wednesday;
-    sygn.thursday = req.body.thursday;
-    sygn.friday = req.body.friday;
-    sygn.saturday = req.body.saturday;
-    sygn.sunday = req.body.sunday;
+    // sygn.tuesday = req.body.tuesday;
+    // sygn.wednesday = req.body.wednesday;
+    // sygn.thursday = req.body.thursday;
+    // sygn.friday = req.body.friday;
+    // sygn.saturday = req.body.saturday;
+    // sygn.sunday = req.body.sunday;
 
     //SAVE SYGN AND CHECK FOR ERRORS
     sygn.save(function(err){
@@ -79,7 +80,8 @@ function deleteSygn(req, res) {
     Sygn.remove({id: req.params.id}, function(err){
         if(err) res.send(err);
         res.json({message: 'successfully deleted', redirect: '/'});
-    });
+    }
+  );
 }
 
 module.exports = {
