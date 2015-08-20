@@ -1,4 +1,9 @@
 var User = require('../models/user.js');
+var jwt = require('jsonwebtoken');
+var cookieParser = require('cookie-parser');
+
+//TOKEN CONFIG
+var superSecret = 'iamtherealbatman';
 
 //CREATE USER
 function createUser(req,res){
@@ -36,16 +41,36 @@ function getAll(req,res){
 //GET AND SHOW INDIVIDUAL USER
 function showUser(req,res){
   console.log("individual user requested");
-  User.findOne({email: req.decoded.email}, function(err, user){
-    if(err) res.send(err);
-    console.log(user);
-    res.json(user);
-  });
+
+  var token = req.cookies.token || req.body.token || req.param('token') || req.headers['x-access-token'];
+  var decode;
+
+  if(token){
+
+    //VERIFY SECRET AND CHECK TOKEN EXPIR
+    jwt.verify(token, superSecret, function(err, decoded){
+      if(err){
+        res.status(403).send({success: false, message: 'failed to authen token'});
+      } else {
+        //IF TOKEN IS VALID AND ACTIVE, SAVE FOR OTHER ROUTES TO users
+        req.decoded = decoded;
+        decode = decoded;
+        console.log(decode.email + "$$$$$");
+      }
+
+      User.findOne({email: decode.email}, function(err, user){
+        if(err) res.send(err);
+        console.log(user);
+        res.json(user);
+      });
+    });
+  }
 }
 
 //UPDATE INDIVIDUAL USER
 function updateUser(req,res){
   console.log("edit individual user requested");
+
   User.findOne({email: req.decoded.email}, function(err, user){
 
     console.log('found him');
