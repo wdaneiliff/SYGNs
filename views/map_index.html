@@ -4,33 +4,19 @@
         <meta charset="utf-8">
         <title>Google Maps API</title>
         <!-- Bootstrap -->
-<<<<<<< HEAD
 
-
-=======
-        <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"> -->
->>>>>>> c01167527db9ccd2017bec8a722c77ee6452b660
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
-<<<<<<< HEAD
+
         <script src="/stylesheets/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
 
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-        <script>
-          function startTime(){
-            var mylist=document.getElementById("myList");
-            document.getElementById("start-time").value=mylist.options[mylist.selectedIndex].text;
-          }
-          function endTime(){
-            var mylist=document.getElementById("myList2");
-            document.getElementById("end-time").value=mylist.options[mylist.selectedIndex].text;
-          }
-        </script>
-=======
+
+
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-        <script type="text/javascript" src="js/bootstrap-timepicker.min.js"></script>
+
         <link href="/stylesheets/map_style.css" rel="stylesheet" type="text/css"/>
->>>>>>> c01167527db9ccd2017bec8a722c77ee6452b660
+
     </head>
 
     <body>
@@ -77,7 +63,7 @@
                                       <div class="form-group" style="text-align:left;">
 
                                         <label id="restriction-type" style="text-align:left;"for="sel1">Restriction Type</label>
-                                        <select class="form-control" id="sel1">
+                                        <select class="form-control sign-type" id="sel1">
 
                                           <option id="no-park">No Parking</option>
                                           <option id="permit">Permit Zone</option>
@@ -90,25 +76,25 @@
                                       <div class="btn-group" data-toggle="buttons">
 
                                         <label class="btn btn-primary">
-                                          <input type="checkbox" autocomplete="off"> Mon
+                                          <input type="checkbox" id="mon" autocomplete="off"> Mon
                                         </label>
                                         <label class="btn btn-primary">
-                                          <input type="checkbox" autocomplete="off"> Tues
+                                          <input type="checkbox" id="tues" autocomplete="off"> Tues
                                         </label>
                                         <label class="btn btn-primary">
-                                          <input type="checkbox" autocomplete="off"> Wed
+                                          <input type="checkbox" id="wed" autocomplete="off"> Wed
                                         </label>
                                         <label class="btn btn-primary">
-                                          <input type="checkbox" autocomplete="off"> Thur
+                                          <input type="checkbox" id="thurs" autocomplete="off"> Thur
                                         </label>
                                         <label class="btn btn-primary">
-                                          <input type="checkbox" autocomplete="off"> Fri
+                                          <input type="checkbox" id="fri" autocomplete="off"> Fri
                                         </label>
                                         <label class="btn btn-primary">
-                                          <input type="checkbox" autocomplete="off"> Sat
+                                          <input type="checkbox" val="Sat" id="sat" autocomplete="off"> Sat
                                         </label>
                                         <label class="btn btn-primary">
-                                          <input type="checkbox" autocomplete="off"> Sun
+                                          <input type="checkbox" id="sun" autocomplete="off"> Sun
                                         </label>
                                           <script type="text/javascript">
                                           $('.btn').on('click', function(){
@@ -119,7 +105,7 @@
                                           <div class="time">
                                             <form>
                                               Start Time:
-                                              <select id="myList" onchange="startTime()">
+                                              <select id="myList" class="start" onchange="startTime()">
                                                 <option>12:00</option>
                                                 <option>12:30</option>
                                                 <option>1:00</option>
@@ -159,7 +145,7 @@
                                           <div class="time">
                                             <form>
                                               End Time:
-                                              <select id="myList2" onchange="endTime()">
+                                              <select id="myList2" class="end" onchange="endTime()">
                                                 <option>12:00</option>
                                                 <option>12:30</option>
                                                 <option>1:00</option>
@@ -185,7 +171,7 @@
                                                 <option>11:00</option>
                                                 <option>11:30</option>
                                               </select>
-                                              
+
                                               <select class="am-pm">
                                                 <option>AM</option>
                                                 <option>PM</option>
