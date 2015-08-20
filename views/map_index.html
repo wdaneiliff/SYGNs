@@ -12,9 +12,6 @@
 
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
 
-
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
-
         <link href="/stylesheets/map_style.css" rel="stylesheet" type="text/css"/>
 
     </head>
@@ -47,11 +44,11 @@
                       <div class="modal-content">
                           <div class="modal-header">
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                              <h4 class="modal-title">Create Sign</h4>
+                              <h4 class="modal-title">Create SYGN</h4>
                           </div>
                           <div class="modal-body">
-                              <img src="/stylesheets/map.png" id="image-preview"><br>
-
+                              <!-- <img src="/stylesheets/map.png" id="image-preview"><br> -->
+                    <div id="map-modal"></div>
                           </div>
                           <div class="modal-footer">
                               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -72,40 +69,19 @@
 
                                         </select>
                                       </div>
-
-                                      <div class="btn-group" data-toggle="buttons">
-
-                                        <label class="btn btn-primary">
-                                          <input type="checkbox" id="mon" autocomplete="off"> Mon
-                                        </label>
-                                        <label class="btn btn-primary">
-                                          <input type="checkbox" id="tues" autocomplete="off"> Tues
-                                        </label>
-                                        <label class="btn btn-primary">
-                                          <input type="checkbox" id="wed" autocomplete="off"> Wed
-                                        </label>
-                                        <label class="btn btn-primary">
-                                          <input type="checkbox" id="thurs" autocomplete="off"> Thur
-                                        </label>
-                                        <label class="btn btn-primary">
-                                          <input type="checkbox" id="fri" autocomplete="off"> Fri
-                                        </label>
-                                        <label class="btn btn-primary">
-                                          <input type="checkbox" val="Sat" id="sat" autocomplete="off"> Sat
-                                        </label>
-                                        <label class="btn btn-primary">
-                                          <input type="checkbox" id="sun" autocomplete="off"> Sun
-                                        </label>
-                                          <script type="text/javascript">
-                                          $('.btn').on('click', function(){
-                                            $(this).button('toggle');
-                                          })
-                                          </script>
-                                      </div>
+                                      <ul class="daysUL">
+                                        <li class="mon">M</li>
+                                        <li class="tue">T</li>
+                                        <li class="wed">W</li>
+                                        <li class="thu">TH</li>
+                                        <li class="fri">F</li>
+                                        <li class="sat">SA</li>
+                                        <li class="sun">SU</li>
+                                      </ul>
                                           <div class="time">
                                             <form>
-                                              Start Time:
-                                              <select id="myList" class="start" onchange="startTime()">
+                                              <span class="timeText">Start Time:</span>
+                                              <select id="myList" class="start">
                                                 <option>12:00</option>
                                                 <option>12:30</option>
                                                 <option>1:00</option>
@@ -144,8 +120,8 @@
 
                                           <div class="time">
                                             <form>
-                                              End Time:
-                                              <select id="myList2" class="end" onchange="endTime()">
+                                              <span class="timeText">End Time:</span>
+                                              <select id="myList2" class="end">
                                                 <option>12:00</option>
                                                 <option>12:30</option>
                                                 <option>1:00</option>
@@ -180,7 +156,7 @@
                                             </form>
                                           </div>
                                   </div>
-                                  <button type="submit" id="save-sign" name="button">Submit Sign</button>
+                                  <button type="submit" id="save-sign" name="button">Submit</button>
                                 </div>
                               </div>
                           </div>
