@@ -218,13 +218,31 @@ $(document).ready(function() {
         if(sygnEnd === 1200) return null;
         sygnEnd += 1200;
       }
-
+      //PUSH START AND END TIMES INTO THE DAYS THAT HAVE BEEN SELECTED
       if(monToggle === true){
         sygn.monday = [{sygnStart,sygnEnd}];
       }
+      if(tueToggle === true){
+        sygn.tuesday = [{sygnStart,sygnEnd}];
+      }
+      if(wedToggle === true){
+        sygn.wednesday = [{sygnStart,sygnEnd}];
+      }
+      if(thuToggle === true){
+        sygn.thursday = [{sygnStart,sygnEnd}];
+      }
+      if(friToggle === true){
+        sygn.friday = [{sygnStart,sygnEnd}];
+      }
+      if(satToggle === true){
+        sygn.saturday = [{sygnStart,sygnEnd}];
+      }
+      if(sunnToggle === true){
+        sygn.sunday = [{sygnStart,sygnEnd}];
+      }
 
       console.log(sygn);
-
+      
     });
 
     // for map modal window----------------
@@ -234,7 +252,6 @@ $(document).ready(function() {
     //-------------------------------------
 
     $('#cancelBtn').on('click',function(){
-
      window.location.reload();
     });
 
