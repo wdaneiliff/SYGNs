@@ -219,9 +219,12 @@ $(document).ready(function() {
         sygnEnd += 1200;
       }
 
-      if(monToggle === true){}
-      console.log(sygnStart);
-      console.log(sygnEnd);
+      if(monToggle === true){
+        sygn.monday = [{sygnStart,sygnEnd}];
+      }
+
+      console.log(sygn);
+
     });
 
     // for map modal window----------------
@@ -346,7 +349,7 @@ $(document).ready(function() {
     }
 
     $('#cancelBtn').on('click',function(){
-      
+
       window.location.reload();
     });
 
