@@ -19,7 +19,7 @@ body {
     font-size: 40px;
     text-align: center;
     font-weight: bold;
-    padding-bottom: 20px;
+    padding-bottom: 1px;
 }
 
 .container{
@@ -31,9 +31,9 @@ body {
     width: 300px;
     margin-left: auto;
     margin-right: auto;
-
-    box-shadow: 3px 3px 5px grey,
-            -3px -3px 5px grey;
+    /* h-shadow v-shadow blur spread color */
+    box-shadow: 3px 3px 10px 2px grey,
+                -3px -3px 10px 2px grey;
 
     border-radius: 14px 14px 14px 14px;
 }
@@ -108,7 +108,10 @@ body {
 
 .modal-header > h4 {
   color:#333;
-  text-decoration: underline;
+  font-family: wazeFont;
+  font-weight: bold;
+  font-size: 25px;
+  text-decoration: none;
   list-style: none;
   display: block;
 
@@ -131,7 +134,7 @@ body {
 #no-parking{
   color: red;
 }
-/* ------------laoding icon animation------------------ */
+/* ------------loading icon animation------------------ */
 .spinner {
     position: fixed;
     top: 50%;
@@ -144,4 +147,4 @@ body {
     width: 100px; /* width of the spinner gif */
     height: 102px; /*hight of the spinner gif +2px to fix IE8 issue */
 }
-/* ------------laoding icon animation------------------ */
+/* ------------loading icon animation------------------ */
