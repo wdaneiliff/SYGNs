@@ -182,23 +182,11 @@ function addLatLng(event) {
 $(document).ready(function() {
     navigator.geolocation.getCurrentPosition(initMap);
 
-<<<<<<< HEAD
-    var submitSygn = $('#save-sygn');
-    var sygnType = $('.sygn-type');
-    var startTime = $('#start');
-    var endTime = $('end');
 
-    submitSygn.on('click',function(evt){
-      console.log(sygnType.val());
-      sign.type = sygnType.val();
-      console.log(sygn);
-      // console.log(startTime);
-    });
-=======
     $('#spinner').show(); // show spinner icon
 
-    var submitSign = $('#save-sign');
-    var signType = $('.sign-type');
+    var submitSygn = $('#save-sygn');
+    var sygnType = $('.sygn-type');
     var startTime = $('#myList');
     var endTime = $('#myList2');
 
@@ -207,33 +195,32 @@ $(document).ready(function() {
     var ampm2 = $('.ampm2');
 
     //VARIABLES TO ACTUAL STORE START AND END TIME
-    var signStart;
-    var signEnd;
+    var sygnStart;
+    var sygnEnd;
 
     //GRAB FORM INFORMAITON AND SUBMIT SYGN BUTTON AND FUNCTION
-    submitSign.on('click',function(evt){
-      console.log(signType.val());
-      sign.type = signType.val();
-      console.log(sign);
->>>>>>> b459454392f1de69caa3027e2ca7c3bcc6871682
+    submitSygn.on('click',function(evt){
+      console.log(sygnType.val());
+      sygn.type = sygnType.val();
+      console.log(sygn);
 
-      signStart = parseInt(startTime.val().split(":").join(""));
-      signEnd = parseInt(endTime.val().split(":").join(""));
+      sygnStart = parseInt(startTime.val().split(":").join(""));
+      sygnEnd = parseInt(endTime.val().split(":").join(""));
 
       //CONVERT START TIME TO MILITARY TIME
       if(ampm1.val() === "PM"){
-        if(signStart === 1200) return null;
-        signStart += 1200;
+        if(sygnStart === 1200) return null;
+        sygnStart += 1200;
       }
 
       //CONVERT END TIME TO MILITARY TIME
       if(ampm2.val() === "PM"){
-        if(signEnd === 1200) return null;
-        signEnd += 1200;
+        if(sygnEnd === 1200) return null;
+        sygnEnd += 1200;
       }
 
-      console.log(signStart);
-      console.log(signEnd);
+      console.log(sygnStart);
+      console.log(sygnEnd);
     });
 
 
