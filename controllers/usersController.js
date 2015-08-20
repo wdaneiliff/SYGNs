@@ -43,7 +43,7 @@ function showUser(req,res){
   console.log("individual user requested");
 
   var token = req.cookies.token || req.body.token || req.param('token') || req.headers['x-access-token'];
-  var decode;
+  var decodedInfo;
 
   if(token){
 
@@ -54,11 +54,11 @@ function showUser(req,res){
       } else {
         //IF TOKEN IS VALID AND ACTIVE, SAVE FOR OTHER ROUTES TO users
         req.decoded = decoded;
-        decode = decoded;
-        console.log(decode.email + "$$$$$");
+        decodedInfo = decoded;
+        console.log(decodedInfo.email + "$$$$$");
       }
 
-      User.findOne({email: decode.email}, function(err, user){
+      User.findOne({email: decodedInfo.email}, function(err, user){
         if(err) res.send(err);
         console.log(user);
         res.json(user);
