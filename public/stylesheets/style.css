@@ -129,3 +129,17 @@ h1, h2 {font-family: wazeFont;}
 .form-group .lefty{
   text-align: left;
 }
+
+/*    --------------------------------------------------
+	:: Help Section
+	-------------------------------------------------- */
+.helpSteps{
+  font-size: 17px;
+  max-width: 300px;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.helpDiv{
+  margin: 20px auto;
+}

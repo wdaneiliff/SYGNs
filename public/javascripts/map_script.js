@@ -104,7 +104,7 @@ function smallMap() {
     // how to display the map
     var mapOpt = {
         center: currentLoca,
-        // zoom: 19,
+        zoom: 20,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
