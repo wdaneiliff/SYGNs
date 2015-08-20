@@ -218,8 +218,7 @@ $(document).ready(function() {
         signEnd += 1200;
       }
 
-      console.log(signStart);
-      console.log(signEnd);
+      if(monToggle === true){}
     });
 
 
