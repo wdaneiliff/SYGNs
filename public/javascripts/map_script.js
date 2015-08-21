@@ -79,16 +79,24 @@ function initMap(location) {
         arr = [data[0].point1[0]['G'],data[0].point1[0]['K']];
         arr1 = [data[0].point2[0]['G'],data[0].point2[0]['K']];
 
+        var color;
+        console.log(data[0]["type"]);
+        if(data[0]["type"] === "No Parking") color = "red";
+        if(data[0]["type"] === "Permit Zone") color = "orange";
+        if(data[0]["type"] === "Loading Zone") color = "yellow";
+        if(data[0]["type"] === "Handicap Zone") color = "blue";
+
         console.log(arr);
         console.log(arr1);
 
         //PREPARE NEW POLYLINE FOR DRAWING ON THE MAP
         aPoly = new google.maps.Polyline({
-            strokeColor: 'blue',
+            strokeColor: color,
             strokeOpacity: 1.0,
             strokeWeight: 5
         });
 
+        //SET THE MAP FOR THE POLY AND DRAW THE PATHING
         aPoly.setMap(myMap);
         aPath = aPoly.getPath();
 
@@ -96,6 +104,8 @@ function initMap(location) {
         var xyz = new google.maps.LatLng(parseFloat(arr1[0]).toFixed(14), parseFloat(arr1[1]).toFixed(14));
          console.log(abc);
          console.log(xyz);
+
+        //PATH THE POLYLINE
         aPath.push(abc);
         aPath.push(xyz);
 
