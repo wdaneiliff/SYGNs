@@ -114,8 +114,12 @@ function initMap(location) {
           console.log("----end of function----");
 
 
+          //CLICK EVENT LISTENER ON A POLYLINE BRINGS UP THE SIGN SHOW MODOL
           google.maps.event.addListener(aPoly,"click",function(){
             alert("you clicked a sign!");
+
+
+
           });
         }
       }
