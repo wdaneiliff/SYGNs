@@ -1,4 +1,3 @@
-
 body {
     background-size: cover;
     background: -webkit-linear-gradient(#CCFFFF, #E0E0FF); /* For Safari 5.1 to 6.0 */
@@ -16,6 +15,37 @@ h1, h2 {font-family: wazeFont;}
 
 .container{
   text-align: center;
+}
+
+#white {
+    text-align: center;
+    background: #E6E6E6;
+    border-radius: 10px;
+    border: 4px solid white;
+}
+#red {
+    text-align: center;
+    background: #FFE6E6; /* light red*/
+    border-radius: 10px;
+    border: 4px solid red;
+}
+#blue {
+    text-align: center;
+    background: #CCCCFF; /* light blue*/
+    border-radius: 10px;
+    border: 4px solid blue;
+}
+#yellow {
+    text-align: center;
+    background: #FFFFB2; /* light yellow*/
+    border-radius: 10px;
+    border: 4px solid yellow;
+}
+#green {
+    text-align: center;
+    background: #A3FFA3; /* light green*/
+    border-radius: 10px;
+    border: 4px solid green;
 }
 
 /*    --------------------------------------------------
