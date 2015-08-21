@@ -3,8 +3,6 @@ var myService;
 
 
 function handleSearchResults(results, status) {
-    console.log(results);
-
     for (var i = 0; i < results.length; i++) {
         var marker = new google.maps.Marker({
             map: myMap,
@@ -37,15 +35,7 @@ function initMap(location) {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    myMap = new google.maps.Map(document.getElementById('map-canvas'),
-                                mapOptions);
-
-    // add a marker to current location:
-    // var marker = new google.maps.Marker({
-    //     position: currentLocation,
-    //     map: myMap,
-    //     visible:false
-    // });
+    myMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
     myService = new google.maps.places.PlacesService(myMap);
 
@@ -53,7 +43,6 @@ function initMap(location) {
 
     // refresh button click:
     $('#refresh').click(performSearch);
-
 
     var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
@@ -66,18 +55,6 @@ function initMap(location) {
       var infowindow = new google.maps.InfoWindow({
         content: contentString
       });
-
-
-      // var markerYou = new google.maps.Marker({
-      //   position: currentLocation,
-      //   map: myMap,
-      //   title: '...Your Current location placeholder...'
-      // });
-      // marker.addListener('click', function() {
-      //   infowindow.open(myMap, marker);
-      // });
-
-      //--------------------------------------
 
     poly = new google.maps.Polyline({
         strokeColor: '#FF0000',
@@ -96,24 +73,46 @@ function initMap(location) {
       url:"/sygns",
       method: "get",
       success: function(data){
-        // console.log(data);
-        console.log(data[0].point1[0]['G']);
-        console.log(data[0].point2[0]['K']);
+        console.log(data);
 
-        // poly = new google.maps.Polyline({
-        //     strokeColor: '#FF0000',
-        //     strokeOpacity: 1.0,
-        //     strokeWeight: 15
-        // });
-        //
-        // path = poly.getPath();
-        //
-        // path.push([data[0].point1[0]['G'],data[0].point1[0]['K']]);
-        // path.push([data[1].point1[0]['G'],data[1].point1[0]['K']]);
+        for(var i=0; i < data.length;i+=1){
+          console.log("i = " + i);
 
+          arr = [data[i].point1[0]['G'],data[i].point1[0]['K']];
+          arr1 = [data[i].point2[0]['G'],data[i].point2[0]['K']];
+          var color;
+          console.log(data[i]["type"]);
+          if(data[i]["type"] === "No Parking") color = "red";
+          if(data[i]["type"] === "Permit Zone") color = "orange";
+          if(data[i]["type"] === "Loading Zone") color = "yellow";
+          if(data[i]["type"] === "Handicap Zone") color = "blue";
+        //
+        // console.log(arr);
+        // console.log(arr1);
+
+        // PREPARE NEW POLYLINE FOR DRAWING ON THE MAP
+          aPoly = new google.maps.Polyline({
+              strokeColor: color,
+              strokeOpacity: 1.0,
+              strokeWeight: 5
+          });
+
+          //SET THE MAP FOR THE POLY AND DRAW THE PATHING
+          aPoly.setMap(myMap);
+          aPath = aPoly.getPath();
+
+          var abc = new google.maps.LatLng(parseFloat(arr[0]).toFixed(14), parseFloat(arr[1]).toFixed(14));
+          var xyz = new google.maps.LatLng(parseFloat(arr1[0]).toFixed(14), parseFloat(arr1[1]).toFixed(14));
+           console.log(abc);
+           console.log(xyz);
+
+          // PATH THE POLYLINE
+          aPath.push(abc);
+          aPath.push(xyz);
+          console.log("----end of funtion----");
+        }
       }
     });
-
 }
 
 
@@ -148,7 +147,6 @@ function smallMap() {
     path.push(point1);
     path.push(point2);
 
-    console.log(point1);
 
     var myLatLng = new google.maps.LatLng(point1[0], point1[1]);
     var myLatLng2 = new google.maps.LatLng(point2[0], point2[1]);
