@@ -41,9 +41,8 @@ body {
 
 #map-modal{
   height: 80%;
-  min-height: 180px;
+  min-height: 80px;
   width: 85%;
-  min-width: 250px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -152,3 +151,13 @@ body {
     height: 102px; /*hight of the spinner gif +2px to fix IE8 issue */
 }
 /* ------------loading icon animation------------------ */
+
+/* ------------INCREASE MAP SIZE FOR WEB BROWSERS------------------ */
+@media (min-width: 650px) and (max-width: 2000px) {
+
+  #map-canvas {
+      height: 500px;
+      width: 600px;
+  }
+
+}

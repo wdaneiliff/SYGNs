@@ -2,7 +2,6 @@ var myMap;
 var myService;
 var aPoly;
 
-
 function handleSearchResults(results, status) {
     for (var i = 0; i < results.length; i++) {
         var marker = new google.maps.Marker({
@@ -25,6 +24,7 @@ function performSearch() {
 
 
 function initMap(location) {
+  console.log('inside of initmap');
     console.log(location);
     // current location:
     var currentLocation = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
@@ -75,8 +75,13 @@ function initMap(location) {
       method: "get",
       success: function(data){
 
+<<<<<<< HEAD
         console.log(data);
         var signObject;
+=======
+        console.log(data, 'from line 77');
+
+>>>>>>> 14116b24663199d290552fa3a70842a6c633c350
         for(var i=0; i < data.length;i+=1){
           signObject = data[i];
           console.log("i = " + i);
@@ -212,7 +217,6 @@ function addLatLng(event) {
 
         setTimeout(function(){
           console.log(sygn);
-
           $('#mapModal').modal('show');
           setTimeout(smallMap,800);
         },2000);
@@ -221,6 +225,7 @@ function addLatLng(event) {
 
 //JQUERY FUNCTIONS
 $(document).ready(function() {
+
     navigator.geolocation.getCurrentPosition(initMap);
 
 
@@ -261,28 +266,28 @@ $(document).ready(function() {
       }
       //PUSH START AND END TIMES INTO THE DAYS THAT HAVE BEEN SELECTED
       if(monToggle === true){
-        sygn.monday = [{sygnStart,sygnEnd}];
+        sygn.monday = [sygnStart,sygnEnd];
       }
       if(tueToggle === true){
-        sygn.tuesday = [{sygnStart,sygnEnd}];
+        sygn.tuesday = [sygnStart,sygnEnd];
       }
       if(wedToggle === true){
-        sygn.wednesday = [{sygnStart,sygnEnd}];
+        sygn.wednesday = [sygnStart,sygnEnd];
       }
       if(thuToggle === true){
-        sygn.thursday = [{sygnStart,sygnEnd}];
+        sygn.thursday = [sygnStart,sygnEnd];
       }
       if(friToggle === true){
-        sygn.friday = [{sygnStart,sygnEnd}];
+        sygn.friday = [sygnStart,sygnEnd];
       }
       if(satToggle === true){
-        sygn.saturday = [{sygnStart,sygnEnd}];
+        sygn.saturday = [sygnStart,sygnEnd];
       }
       if(sunnToggle === true){
-        sygn.sunday = [{sygnStart,sygnEnd}];
+        sygn.sunday = [sygnStart,sygnEnd];
       }
 
-      console.log(sygn);
+      console.log(sygn, 'line 269');
 
       $.ajax({
         url:"/sygns",
@@ -303,6 +308,7 @@ $(document).ready(function() {
     });
     //-------------------------------------
 
+    //RELOAD PAGE IF YOU CANCEL LINE SUBMIT ON MODAL
     $('#cancelBtn').on('click',function(){
      window.location.reload();
     });
@@ -417,6 +423,7 @@ $(document).ready(function() {
       ul.append('<li> <a href="/signup" class="logout"> Sign up </a> <li>');
     }
 
+<<<<<<< HEAD
     $('#cancelBtn').on('click',function(){
 
       window.location.reload();
@@ -425,3 +432,6 @@ $(document).ready(function() {
 
 
   });
+=======
+});
+>>>>>>> 14116b24663199d290552fa3a70842a6c633c350

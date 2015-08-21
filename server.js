@@ -61,6 +61,10 @@ app.get('/signup', function(req,res){
   res.sendfile('./views/signUp.html');
 });
 
+app.get('/info', function(req,res){
+  res.sendfile('./views/sygn_data.html');
+});
+
 //REGISTER THE USERS ROUTE
 app.use('/users', userRoutes);
 
