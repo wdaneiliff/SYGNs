@@ -115,12 +115,16 @@ function initMap(location) {
           console.log("----end of function----");
 
 
+
+
+
           //CLICK EVENT LISTENER ON A POLYLINE BRINGS UP THE SIGN SHOW MODOL
           google.maps.event.addListener(aPoly,"click",function(){
               $('#sign-modal').modal('show');
               console.log(signObject.point1[0]['G']);
-              $('.modal-body').append('<p>'+signObject.point1[0]['G']+'</p>');
-              $('.modal-body').append('something');
+              // $('.mb2').append('<p>'+signObject.point1[0]['G']+'</p>');
+              $('.mb2').append('<p>'+signObject.type+'</p>');
+
           });
         }
       }
