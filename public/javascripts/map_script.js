@@ -36,7 +36,14 @@ function initMap(location) {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
+
     myMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+    var userMarker = new google.maps.Marker({
+            position: currentLocation,
+            map: myMap,
+            icon: '/images/sygn_34px.png'
+        });
 
     myService = new google.maps.places.PlacesService(myMap);
 
