@@ -3,8 +3,6 @@ var myService;
 
 
 function handleSearchResults(results, status) {
-    console.log(results);
-
     for (var i = 0; i < results.length; i++) {
         var marker = new google.maps.Marker({
             map: myMap,
@@ -75,40 +73,44 @@ function initMap(location) {
       url:"/sygns",
       method: "get",
       success: function(data){
-        // console.log(data);
-        arr = [data[0].point1[0]['G'],data[0].point1[0]['K']];
-        arr1 = [data[0].point2[0]['G'],data[0].point2[0]['K']];
+        console.log(data);
 
-        var color;
-        console.log(data[0]["type"]);
-        if(data[0]["type"] === "No Parking") color = "red";
-        if(data[0]["type"] === "Permit Zone") color = "orange";
-        if(data[0]["type"] === "Loading Zone") color = "yellow";
-        if(data[0]["type"] === "Handicap Zone") color = "blue";
+        for(var i=0; i < data.length;i+=1){
+          console.log("i = " + i);
 
-        console.log(arr);
-        console.log(arr1);
+          arr = [data[i].point1[0]['G'],data[i].point1[0]['K']];
+          arr1 = [data[i].point2[0]['G'],data[i].point2[0]['K']];
+          var color;
+          console.log(data[i]["type"]);
+          if(data[i]["type"] === "No Parking") color = "red";
+          if(data[i]["type"] === "Permit Zone") color = "orange";
+          if(data[i]["type"] === "Loading Zone") color = "yellow";
+          if(data[i]["type"] === "Handicap Zone") color = "blue";
+        //
+        // console.log(arr);
+        // console.log(arr1);
 
-        //PREPARE NEW POLYLINE FOR DRAWING ON THE MAP
-        aPoly = new google.maps.Polyline({
-            strokeColor: color,
-            strokeOpacity: 1.0,
-            strokeWeight: 5
-        });
+        // PREPARE NEW POLYLINE FOR DRAWING ON THE MAP
+          aPoly = new google.maps.Polyline({
+              strokeColor: color,
+              strokeOpacity: 1.0,
+              strokeWeight: 5
+          });
 
-        //SET THE MAP FOR THE POLY AND DRAW THE PATHING
-        aPoly.setMap(myMap);
-        aPath = aPoly.getPath();
+          //SET THE MAP FOR THE POLY AND DRAW THE PATHING
+          aPoly.setMap(myMap);
+          aPath = aPoly.getPath();
 
-        var abc = new google.maps.LatLng(parseFloat(arr[0]).toFixed(14), parseFloat(arr[1]).toFixed(14));
-        var xyz = new google.maps.LatLng(parseFloat(arr1[0]).toFixed(14), parseFloat(arr1[1]).toFixed(14));
-         console.log(abc);
-         console.log(xyz);
+          var abc = new google.maps.LatLng(parseFloat(arr[0]).toFixed(14), parseFloat(arr[1]).toFixed(14));
+          var xyz = new google.maps.LatLng(parseFloat(arr1[0]).toFixed(14), parseFloat(arr1[1]).toFixed(14));
+           console.log(abc);
+           console.log(xyz);
 
-        //PATH THE POLYLINE
-        aPath.push(abc);
-        aPath.push(xyz);
-
+          // PATH THE POLYLINE
+          aPath.push(abc);
+          aPath.push(xyz);
+          console.log("----end of funtion----");
+        }
       }
     });
 }
