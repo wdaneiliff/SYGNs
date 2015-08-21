@@ -43,7 +43,7 @@ function initMap(location) {
     // add a marker to current location:
     var marker = new google.maps.Marker({
         position: currentLocation,
-        map: myMap
+        map: myMap,
     });
 
     myService = new google.maps.places.PlacesService(myMap);
