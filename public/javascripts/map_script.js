@@ -75,13 +75,9 @@ function initMap(location) {
       method: "get",
       success: function(data){
 
-<<<<<<< HEAD
-        console.log(data);
-        var signObject;
-=======
-        console.log(data, 'from line 77');
 
->>>>>>> 14116b24663199d290552fa3a70842a6c633c350
+        var signObject;
+
         for(var i=0; i < data.length;i+=1){
           signObject = data[i];
           console.log("i = " + i);
@@ -423,15 +419,9 @@ $(document).ready(function() {
       ul.append('<li> <a href="/signup" class="logout"> Sign up </a> <li>');
     }
 
-<<<<<<< HEAD
-    $('#cancelBtn').on('click',function(){
 
-      window.location.reload();
-    });
 
 
 
   });
-=======
-});
->>>>>>> 14116b24663199d290552fa3a70842a6c633c350
+  
