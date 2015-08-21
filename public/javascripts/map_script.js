@@ -309,6 +309,11 @@ $(document).ready(function() {
      window.location.reload();
     });
 
+    //RELOAD PAGE WHEN YOU EXIT EXISTING SIGN MODAL SHOW FORM
+    $('#close').on('click',function(){
+     window.location.reload();
+    });
+
     //MODAL DAY TOGGLE AND CONTROL VARIABLE FOR MONDAY
     var mon = $('.mon');
     var monToggle = false;
@@ -424,4 +429,3 @@ $(document).ready(function() {
 
 
   });
-  
