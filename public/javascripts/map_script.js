@@ -100,16 +100,16 @@ function initMap(location) {
         console.log(data[0].point1[0]['G']);
         console.log(data[0].point2[0]['K']);
 
-        // poly = new google.maps.Polyline({
-        //     strokeColor: '#FF0000',
-        //     strokeOpacity: 1.0,
-        //     strokeWeight: 15
-        // });
+        poly = new google.maps.Polyline({
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 15
+        });
         //
-        // path = poly.getPath();
+        path = poly.getPath();
         //
-        // path.push([data[0].point1[0]['G'],data[0].point1[0]['K']]);
-        // path.push([data[1].point1[0]['G'],data[1].point1[0]['K']]);
+        path.push(point1);
+        path.push(point2);
 
       }
     });
