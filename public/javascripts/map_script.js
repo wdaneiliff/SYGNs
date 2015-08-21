@@ -73,6 +73,7 @@ function initMap(location) {
       url:"/sygns",
       method: "get",
       success: function(data){
+
         console.log(data);
 
         for(var i=0; i < data.length;i+=1){
@@ -109,7 +110,7 @@ function initMap(location) {
           // PATH THE POLYLINE
           aPath.push(abc);
           aPath.push(xyz);
-          console.log("----end of funtion----");
+          console.log("----end of function----");
         }
       }
     });
@@ -276,6 +277,7 @@ $(document).ready(function() {
         dataType : 'json',
         success: function(data){
           console.log(data);
+          window.location.reload();
         }
       });
     });
