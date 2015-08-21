@@ -1,5 +1,6 @@
 var myMap;
 var myService;
+var aPoly;
 
 
 function handleSearchResults(results, status) {
@@ -75,8 +76,9 @@ function initMap(location) {
       success: function(data){
 
         console.log(data);
-
+        var signObject;
         for(var i=0; i < data.length;i+=1){
+          signObject = data[i];
           console.log("i = " + i);
 
           arr = [data[i].point1[0]['G'],data[i].point1[0]['K']];
@@ -111,6 +113,19 @@ function initMap(location) {
           aPath.push(abc);
           aPath.push(xyz);
           console.log("----end of function----");
+
+
+
+
+
+          //CLICK EVENT LISTENER ON A POLYLINE BRINGS UP THE SIGN SHOW MODOL
+          google.maps.event.addListener(aPoly,"click",function(){
+              $('#sign-modal').modal('show');
+              console.log(signObject.point1[0]['G']);
+              // $('.mb2').append('<p>'+signObject.point1[0]['G']+'</p>');
+              $('.mb2').append('<p>'+signObject.type+'</p>');
+
+          });
         }
       }
     });
@@ -407,4 +422,6 @@ $(document).ready(function() {
       window.location.reload();
     });
 
-});
+
+
+  });
