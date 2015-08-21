@@ -1,6 +1,7 @@
 var myMap;
 var myService;
 var aPoly;
+<<<<<<< HEAD
 var weekday = new Array(7);
 weekday[0]=  "sunday";
 weekday[1] = "monday";
@@ -11,6 +12,9 @@ weekday[5] = "friday";
 weekday[6] = "saturday";
 var timeChecker = new Date;
 var currentDay = weekday[timeChecker.getDay()];
+=======
+var dataCounter = 1;
+>>>>>>> 81f264e35800ec3cd46d1d3504f188e9ab6c9a8c
 
 function handleSearchResults(results, status) {
     for (var i = 0; i < results.length; i++) {
@@ -144,7 +148,18 @@ function initMap(location) {
               $('#sign-modal').modal('show');
               console.log(signObject.point1[0]['G']);
               // $('.mb2').append('<p>'+signObject.point1[0]['G']+'</p>');
-              $('.mb2').append('<p>'+signObject.type+'</p>');
+              // $('.mb2').append('<p>'+signObject.type+'</p>');
+
+               // TEMP DATA--------------------------------------------------------
+               if (dataCounter === 1) {
+                   $('.mb2').append('<div class="row"><div class="col-lg-12"><div class="well" style="text-align: center; background: #CCCCFF; border-radius: 10px; border: 4px solid blue;"><img src="/images/Handicap-4.gif" style="height: 60px; width: 40px;"><p>Handicap Paking Monday-Sunday ALL DAY</p></div></div></div>');
+               } else if(dataCounter === 2) {
+                   $('.mb2').append('<div class="row"><div class="col-lg-12"><div class="well" style="text-align: center; background: #FFE6E6; border-radius: 10px; border: 4px solid red;"><img src="/images/noParking.png" style="height: 60px; width: 60px;"><p>NO PARKING - Tuesday 2-3pm</p></div></div></div>');
+               } else if(dataCounter === 3) {
+                   $('.mb2').append('<div class="row"><div class="col-lg-12"><div class="well" style="text-align: center; background: #FFFFB2; border-radius: 10px; border: 4px solid yellow";><img src="/images/valetParking.png" style="height: 60px; width: 40px;"><p>VALET ONLY Monday-Friday 8pm - 12am</p></div></div></div>');
+               }
+               dataCounter++; // just for temp data
+               //----------------------------------------------------------------------------
 
           });
         }
