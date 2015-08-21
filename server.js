@@ -58,7 +58,7 @@ app.get('/help', function(req,res){
 });
 
 app.get('/signup', function(req,res){
-  res.sendfile('./views/signup.html');
+  res.sendfile('./views/signUp.html');
 });
 
 //REGISTER THE USERS ROUTE
