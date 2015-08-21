@@ -16,6 +16,7 @@
     </head>
 
     <body>
+
       <ul class="nav nav-tabs head" style="background-color:white;font-weight:bold;">
         <li role="presentation" class="active" ><a href="#">Home</a></li>
         <li role="presentation"><a href="/edit">Account</a></li>
@@ -32,7 +33,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
 
         <div id="map-canvas"></div>
         <!-- loading icon -->
@@ -175,11 +176,33 @@
         <!-- <div>
             <button type="button" class="btn btn-info btn-sm" data-toggle="modal">Open Modal</button>
         </div> -->
+</section>
+  <!-- SIGN MODAL -->
+  <!-- Modal -->
+  <div class="modal fade" id="sign-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
     </body>
     <script type="text/javascript" src="/javascripts/map_script.js"></script>
 
     <!-- Bootstrap -->
     <script src="/stylesheets/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+
+
 
 </html>

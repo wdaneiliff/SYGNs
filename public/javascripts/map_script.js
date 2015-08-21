@@ -116,9 +116,10 @@ function initMap(location) {
 
           //CLICK EVENT LISTENER ON A POLYLINE BRINGS UP THE SIGN SHOW MODOL
           google.maps.event.addListener(aPoly,"click",function(){
-            alert("you clicked a sign!");
+            console.log("YOU CLICKED A POLY SIGN!!!!");
 
-
+              $('#sign-modal').modal('show');
+              // $('.bs-example-modal-sm').modal('show');
 
           });
         }
