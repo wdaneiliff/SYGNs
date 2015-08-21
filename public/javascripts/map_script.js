@@ -1,5 +1,6 @@
 var myMap;
 var myService;
+var aPoly;
 
 
 function handleSearchResults(results, status) {
@@ -111,6 +112,11 @@ function initMap(location) {
           aPath.push(abc);
           aPath.push(xyz);
           console.log("----end of function----");
+
+
+          google.maps.event.addListener(aPoly,"click",function(){
+            alert("you clicked a sign!");
+          });
         }
       }
     });
@@ -407,4 +413,6 @@ $(document).ready(function() {
       window.location.reload();
     });
 
-});
+
+
+  });
