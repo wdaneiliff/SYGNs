@@ -73,23 +73,7 @@ function initMap(location) {
       url:"/sygns",
       method: "get",
       success: function(data){
-<<<<<<< HEAD
-        // console.log(data);
-        console.log(data[0].point1[0]['G']);
-        console.log(data[0].point2[0]['K']);
 
-        poly = new google.maps.Polyline({
-            strokeColor: '#FF0000',
-            strokeOpacity: 1.0,
-            strokeWeight: 15
-        });
-        //
-        path = poly.getPath();
-        //
-        path.push(point1);
-        path.push(point2);
-
-=======
         console.log(data);
 
         for(var i=0; i < data.length;i+=1){
@@ -126,9 +110,8 @@ function initMap(location) {
           // PATH THE POLYLINE
           aPath.push(abc);
           aPath.push(xyz);
-          console.log("----end of funtion----");
+          console.log("----end of function----");
         }
->>>>>>> a58a98469d52bf46f9cb1c2150e3ffc7d2241be1
       }
     });
 }
@@ -294,6 +277,7 @@ $(document).ready(function() {
         dataType : 'json',
         success: function(data){
           console.log(data);
+          window.location.reload();
         }
       });
     });
