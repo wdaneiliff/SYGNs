@@ -41,6 +41,7 @@ body {
 
 #map-modal{
   height: 80%;
+  min-height: 80px;
   width: 85%;
   margin-left: auto;
   margin-right: auto;
