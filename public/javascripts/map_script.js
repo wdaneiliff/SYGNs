@@ -76,8 +76,9 @@ function initMap(location) {
       success: function(data){
 
         console.log(data);
-
+        var signObject;
         for(var i=0; i < data.length;i+=1){
+          signObject = data[i];
           console.log("i = " + i);
 
           arr = [data[i].point1[0]['G'],data[i].point1[0]['K']];
@@ -116,11 +117,10 @@ function initMap(location) {
 
           //CLICK EVENT LISTENER ON A POLYLINE BRINGS UP THE SIGN SHOW MODOL
           google.maps.event.addListener(aPoly,"click",function(){
-            console.log("YOU CLICKED A POLY SIGN!!!!");
-
               $('#sign-modal').modal('show');
-              // $('.bs-example-modal-sm').modal('show');
-
+              console.log(signObject.point1[0]['G']);
+              $('.modal-body').append('<p>'+signObject.point1[0]['G']+'</p>');
+              $('.modal-body').append('something');
           });
         }
       }
