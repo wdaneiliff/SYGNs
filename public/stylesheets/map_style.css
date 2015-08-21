@@ -170,4 +170,10 @@ body {
     font-size: 13px;
   }
 
+  #myList, #myList2, .am-pm{
+    font-weight: bold;
+    font-size: 12px;
+    height:23px;
+  }
+
 }
