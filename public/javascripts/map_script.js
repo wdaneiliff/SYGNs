@@ -41,10 +41,11 @@ function initMap(location) {
                                 mapOptions);
 
     // add a marker to current location:
-    var marker = new google.maps.Marker({
-        position: currentLocation,
-        map: myMap
-    });
+    // var marker = new google.maps.Marker({
+    //     position: currentLocation,
+    //     map: myMap,
+    //     visible:false
+    // });
 
     myService = new google.maps.places.PlacesService(myMap);
 
@@ -67,21 +68,21 @@ function initMap(location) {
       });
 
 
-      var markerYou = new google.maps.Marker({
-        position: currentLocation,
-        map: myMap,
-        title: '...Your Current location placeholder...'
-      });
-      marker.addListener('click', function() {
-        infowindow.open(myMap, marker);
-      });
+      // var markerYou = new google.maps.Marker({
+      //   position: currentLocation,
+      //   map: myMap,
+      //   title: '...Your Current location placeholder...'
+      // });
+      // marker.addListener('click', function() {
+      //   infowindow.open(myMap, marker);
+      // });
 
       //--------------------------------------
 
     poly = new google.maps.Polyline({
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
-        strokeWeight: 3.5
+        strokeWeight: 5
     });
     poly.setMap(myMap);
 
@@ -90,6 +91,29 @@ function initMap(location) {
     poly.addListener('click', function(event){console.log(event.latLng);});
 
     $('#spinner').hide(); // hide spinner icon
+
+    $.ajax({
+      url:"/sygns",
+      method: "get",
+      success: function(data){
+        // console.log(data);
+        console.log(data[0].point1[0]['G']);
+        console.log(data[0].point2[0]['K']);
+
+        // poly = new google.maps.Polyline({
+        //     strokeColor: '#FF0000',
+        //     strokeOpacity: 1.0,
+        //     strokeWeight: 15
+        // });
+        //
+        // path = poly.getPath();
+        //
+        // path.push([data[0].point1[0]['G'],data[0].point1[0]['K']]);
+        // path.push([data[1].point1[0]['G'],data[1].point1[0]['K']]);
+
+      }
+    });
+
 }
 
 
@@ -116,12 +140,15 @@ function smallMap() {
     poly = new google.maps.Polyline({
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
-        strokeWeight: 25
+        strokeWeight: 12
     });
     var path = poly.getPath();
 
+    console.log(point1);
     path.push(point1);
     path.push(point2);
+
+    console.log(point1);
 
     var myLatLng = new google.maps.LatLng(point1[0], point1[1]);
     var myLatLng2 = new google.maps.LatLng(point2[0], point2[1]);
