@@ -162,3 +162,12 @@ body {
   }
 
 }
+
+@media (max-width: 650px) {
+
+  .timeText{
+    width:70px;
+    font-size: 13px;
+  }
+
+}
