@@ -171,9 +171,17 @@ body {
   }
 
   #myList, #myList2, .am-pm{
+<<<<<<< HEAD
     font-weight: bold;
     font-size: 12px;
     height:23px;
   }
 
+=======
+     font-weight: bold;
+     font-size: 12px;
+     height:23px;
+   }
+   
+>>>>>>> 59298f1de45b0db09b2668a98cfee24ff61f1834
 }
