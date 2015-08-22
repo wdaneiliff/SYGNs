@@ -10,7 +10,7 @@ weekday[3] = "wednesday";
 weekday[4] = "thursday";
 weekday[5] = "friday";
 weekday[6] = "saturday";
-var timeChecker = new Date;
+var timeChecker = new Date();
 var currentDay = weekday[timeChecker.getDay()];
 
 var dataCounter = 1;
@@ -52,6 +52,13 @@ function initMap(location) {
 
 
     myMap = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+    var meMarker = new google.maps.Marker({
+    position: currentLocation,
+    map: myMap,
+    icon: 'http://www.stoe.com/wp-content/themes/sto002/img/tooltip_pulse.gif',
+    optimized: false
+    });
 
     var userMarker = new google.maps.Marker({
             position: currentLocation,
