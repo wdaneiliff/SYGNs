@@ -1,7 +1,7 @@
-//CALL NPM PACKAGES AND MODELS FOR FUNCTIONS:
+//****** CALL NPM PACKAGES AND MODELS FOR FUNCTIONS *******
 var Sygn = require('../models/sygn.js');
 
-//CREATE SYGN:
+//*********** CREATE SYGN ************
 function createSygn(req,res){
     var sygn = new Sygn();
 
@@ -30,7 +30,7 @@ function createSygn(req,res){
     });
 } //CLOSE CREATE SYGN FUNCTION
 
-// SHOW All SYGNs:
+//******* SHOW All SYGNs ***********
 function getAll(req, res) {
     Sygn.find({}, function(err, sygns){
         if(err) res.send(err);
@@ -38,7 +38,7 @@ function getAll(req, res) {
     });
 } //CLOSE GET ALL SYGNS FUNCTION
 
-//GET AND SHOW INDIVIDUAL SYGN:
+//********* GET AND SHOW INDIVIDUAL SYGN *******
 function showSygn(req, res) {
     console.log("individual sygn requested");
     Sygn.findOne({_id: req.params.id}, function(err, sygn){
@@ -48,7 +48,7 @@ function showSygn(req, res) {
     });
 } //CLOSE SHOW INDIVIDUAL SYGN FUNCTION
 
-//UPDATE INDIVIDUAL SYGN:
+//********  UPDATE INDIVIDUAL SYGN  ***********
 function updateSygn(req,res){
     console.log("edit individual sygn requested");
     Sygn.findOne({_id: req.params.id}, function(err, sygn){
@@ -75,7 +75,7 @@ function updateSygn(req,res){
     });
 } //CLOSE UPDATE INDIVIDUAL USER SYGN
 
-//DELETE SYGN:
+//******** DELETE SYGN ***********
 function deleteSygn(req, res) {
   var id = req.params.id;
     //Sygn.remove({id: req.params.id}, function(err,sygn){
@@ -87,7 +87,7 @@ function deleteSygn(req, res) {
   );
 } //CLOSE DELETE SYGN FUNCTION
 
-//EXPORT FUNCTIONS FOR USE ON SERVER:
+//******* EXPORT FUNCTIONS FOR USE ON SERVER ********
 module.exports = {
     getAll: getAll,
     createSygn: createSygn,

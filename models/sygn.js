@@ -1,8 +1,8 @@
-//BRING IN ALL REQUIRE PACKAGES
+//******* BRING IN ALL REQUIRED PACKAGES ********
 var mongoose    = require('mongoose');
 var Schema      = mongoose.Schema;
 
-
+//****** CREATE SYGN SCHEMA ***********
 var SygnSchema = new Schema({
     point1 : [],
     point2 : [],
@@ -17,7 +17,5 @@ var SygnSchema = new Schema({
     user_email: String
 });
 
-
-
-//EXPORT THE MODEL
+//******** EXPORT THE SYGN MODEL *********
 module.exports = mongoose.model("Sygn", SygnSchema);

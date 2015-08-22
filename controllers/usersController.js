@@ -1,12 +1,12 @@
-//CALL NPM PACKAGES AND MODELS FOR FUNCTIONS:
+//**** CALL NPM PACKAGES AND MODELS FOR FUNCTIONS ***
 var User = require('../models/user.js');
 var jwt = require('jsonwebtoken');
 var cookieParser = require('cookie-parser');
 
-//TOKEN CONFIG:
+//**** TOKEN CONFIG ***********
 var superSecret = 'iamtherealbatman';
 
-//CREATE USER:
+//**** CREATE USER ***********
 function createUser(req,res){
   var user = new User();
 
@@ -30,7 +30,7 @@ function createUser(req,res){
 
 } //CLOSE CREATE NEW USER FUNCTION
 
-//SHOW All USERS:
+//****** SHOW All USERS ***********
 function getAll(req,res){
   User.find({}, function(err, users){
     if(err) res.send(err);
@@ -39,7 +39,7 @@ function getAll(req,res){
 } //CLOSE GET ALL USERS FUNCTION
 
 
-//GET AND SHOW INDIVIDUAL USER:
+//****** GET AND SHOW INDIVIDUAL USER ***********
 function showUser(req,res){
   console.log("individual user requested");
 
@@ -68,7 +68,7 @@ function showUser(req,res){
   } //CLOSE TOKEN CHECK
 } //CLOSE SHOW USER FUNCTION
 
-//UPDATE INDIVIDUAL USER:
+//******** UPDATE INDIVIDUAL USER ********
 function updateUser(req,res){
   console.log("edit individual user requested");
 
@@ -111,7 +111,7 @@ function updateUser(req,res){
   } //CLOSE TOKEN CHECK
 } //CLOSE UPDATE USER FUNCTION
 
-//DELETE USER:
+//*********  DELETE USER  ***********
 function deleteUser(req,res){
   User.remove({ email: req.params.email}, function(err){
     if(err) res.send(err);
@@ -120,6 +120,7 @@ function deleteUser(req,res){
 } //CLOSE DELETE USER FUNCTION
 
 
+//********* EXPORT USER FUNCTIONS *********
 module.exports = {
   getAll: getAll,
   createUser: createUser,
