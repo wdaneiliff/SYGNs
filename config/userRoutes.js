@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-userRouter = express();
+var userRouter = express();
 
 var usersController = require('../controllers/usersController.js');
 
@@ -17,13 +17,13 @@ userRouter.route('/')
 userRouter.route('/:email')
 
   //GET ONE USER
-      .get(usersController.showUser)
+    .get(usersController.showUser)
 
   //PATCH USER
-      .patch(usersController.updateUser)
+    .patch(usersController.updateUser)
 
   //DELETE USER
-      .delete(usersController.deleteUser);
+    .delete(usersController.deleteUser);
 
 //EXPORTS
 module.exports = userRouter;

@@ -1,7 +1,6 @@
 var myMap;
 var myService;
 
-
 //****** VARIABLES TO CALCULATE CURRENT DAY FOR SYGNs *********
 var weekday = new Array(7);
 weekday[0]=  "sunday";
@@ -136,7 +135,7 @@ function initMap(location) {
           dataPoly.setMap(myMap);
           dataPath = dataPoly.getPath();
 
-          //PARSE DATA[i] POINT INTO GOOGLE LAT/LNG OBJECTS:
+          //PARSE DATA[i] POINTS INTO GOOGLE LAT/LNG OBJECTS:
           var googleStartPoint = new google.maps.LatLng(parseFloat(startPoint[0]).toFixed(14), parseFloat(startPoint[1]).toFixed(14));
 
           var googleEndPoint = new google.maps.LatLng(parseFloat(endPoint[0]).toFixed(14), parseFloat(endPoint[1]).toFixed(14));
@@ -453,18 +452,19 @@ $(document).ready(function() {
       }
     });
 
-    //****  DELETE COOKIE FUNCTION UPON LOGGING OUT **********
+    //DELETE COOKIE FUNCTION UPON LOGGING :
     function delete_cookie( name ) {
       document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 
-    //*** APPEND LOG IN OR LOG OUT BUTTON TO NAV DEPENDING IF COOKIES PRESENT:
+    //*** APPEND SIGNUP OR LOG OUT BUTTON TO NAV DEPENDING IF COOKIES PRESENT:
     var ul = $('.nav-tabs'); //HEADER / NAVIGATION BAR
 
     if(document.cookie.indexOf("token") >= 0) {
       console.log("cookie here");
       ul.append('<li> <a href="/login" class="logout"> Logout </a> <li>');
 
+      //CREATE LOG OUT LISTENER FOR APPENDED LOGOUT TAB IN NAVBAR:
       $('.logout').on('click', function(){
         delete_cookie('token');
       });
@@ -473,4 +473,4 @@ $(document).ready(function() {
     }
 
 
-  });
+}); //CLOSE JQUERY ON PAGE LOAD FUNCTION

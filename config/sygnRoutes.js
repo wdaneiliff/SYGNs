@@ -7,19 +7,19 @@ var sygnsController = require('../controllers/sygnsController.js');
 
 
 sygnRouter.route('/')
-    //GET
+  //GET
     .get(sygnsController.getAll)
-    //POST
+  //POST
     .post(sygnsController.createSygn);
 
 
 sygnRouter.route('/:id')
   //GET ONE USER
-  .get(sygnsController.showSygn)
+    .get(sygnsController.showSygn)
   //PATCH USER
-  .patch(sygnsController.updateSygn)
+    .patch(sygnsController.updateSygn)
   //DELETE USER
-  .delete(sygnsController.deleteSygn);
+    .delete(sygnsController.deleteSygn);
 
 //EXPORTS
 module.exports = sygnRouter;
