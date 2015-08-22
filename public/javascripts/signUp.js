@@ -48,8 +48,6 @@ $('#btn-login').on('click',function(evt){
 event.preventDefault();
 
 
-
-
   $.ajax({
     method: "post",
     url: "/users",

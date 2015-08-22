@@ -41,7 +41,7 @@ body {
 
 #map-modal{
   height: 80%;
-  min-height: 100px;
+  min-height: 170px;
   width: 85%;
   min-width: 180px;
   margin-left: auto;
@@ -161,12 +161,20 @@ body {
       width: 600px;
   }
 
+  #map-modal{
+    height: 80%;
+    min-height: 200px;
+    width: 85%;
+    min-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 @media (max-width: 650px) {
 
   .timeText{
-    width:70px;
+    width:90px;
     font-size: 13px;
   }
 
@@ -175,4 +183,10 @@ body {
     font-size: 12px;
     height:23px;
      }
+
+  #map-modal{
+     height: 80%;
+     min-height: 120px;
+     width: 85%;
+  }
 }
