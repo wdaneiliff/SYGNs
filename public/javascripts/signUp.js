@@ -45,8 +45,8 @@ $( document ).ready(function() {
      event.preventDefault();
 
     //AJAX REQUEST TO POST NEW USER TO DATABASE:
-       $.ajax({
-         method: "post",
+      $.ajax({
+          method: "post",
          url: "/users",
          data: JSON.stringify({firstName:firstName.val(),
                                lastName:lastName.val(),
@@ -61,7 +61,7 @@ $( document ).ready(function() {
              window.location.href = data.redirect;
            }
          }
-       });
+       }); //CLOSE AJAX REQUEST AND FUNCTION
 
   }); //CLOSE SUBMIT FORM LISTENER AND FUNCTION
 
