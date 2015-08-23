@@ -154,11 +154,13 @@ body {
 /* ------------loading icon animation------------------ */
 
 /* ------------INCREASE MAP SIZE FOR WEB BROWSERS------------------ */
-@media (min-width: 650px) and (max-width: 2000px) {
+@media (min-width: 450px) and (max-width: 2000px) {
 
   #map-canvas {
-      height: 500px;
-      width: 600px;
+      height: 60%;
+      min-height: 500px;
+      width: 80%;
+      min-width: 450px;
   }
 
   #map-modal{
@@ -171,7 +173,7 @@ body {
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: 450px) {
 
   .timeText{
     width:90px;

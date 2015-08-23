@@ -42,7 +42,7 @@ function initMap(location) {
 
     //SET CURRENT LOCATION AS GLOBAL VARIABLE (GEOLOACATION OBJECT):
     var currentLocation = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
-
+  
     //SET MAP CONFIGURATIONS:
     var mapOptions = {
         center: currentLocation,
@@ -57,7 +57,7 @@ function initMap(location) {
     var userMarker = new google.maps.Marker({
             position: currentLocation,
             map: myMap,
-            icon: 'http://www.stoe.com/wp-content/themes/sto002/img/tooltip_pulse.gif',
+            icon: '/images/ping2.gif',
             optimized: false
     });
 
@@ -145,23 +145,25 @@ function initMap(location) {
           dataPath.push(googleEndPoint);
 
           //PUSH NEW POLY LINE INTO ARRAY OF ALL POLY LINES AND ADD ID FOR MODAL INFO
-          polyArray.push(dataPoly);
-          polyArray[i].modalID = i;
+          polyArray.push(dataPoly); //STORE AN ARRAY OF ALL POLYLINE OBJECTS
+          polyArray[i].modalID = i; //APPEND AN ID TO POLYLINE TO REFER TO IN ALL SYGNS
 
-          var counter = i;
           console.log("----end of polyline draw function for data[i]----");
 
-          //CLICK EVENT LISTENER ON A POLYLINE BRINGS UP THE SIGN SHOW MODAL
+          //CLICK EVENT LISTENER ON A POLYLINE BRINGS UP THE SIGN SHOW MODAL:
           google.maps.event.addListener(polyArray[i],"click",function(evt){
+
               $('#sign-modal').modal('show');
-              currentPoly = this;
-              $('.mb2').children('p').remove();
-              $('.mb2').append('<p>'+ dataArray[currentPoly.modalID].type+'</p>');
+              currentPoly = this; //"THIS" REFERS TO THE POLYLINE CLICKED:
+
+              $('.mb2').children('p').remove(); //CLEAR SYGN MODAL
+              $('.mb2').append('<p><strong>'+ dataArray[currentPoly.modalID].type+'</strong></p>');
               console.log(dataArray[currentPoly.modalID]);
 
+              //LOOP THROUGH EACH DAY IN SYGN TO DISPLAY RESTRICTION:
               for(j = 0; j < weekday.length; j += 1){
                 if(dataArray[currentPoly.modalID][weekday[j]] != false){
-                $('.mb2').append('<p>' + [weekday[j]] + ': ' + dataArray[currentPoly.modalID][weekday[j]][0].sygnStart + ' - '+ dataArray[currentPoly.modalID][weekday[j]][0].sygnEnd + '</p>');
+                $('.mb2').append('<p>' + [weekday[j]] + ': ' + dataArray[currentPoly.modalID][weekday[j]][0] + ' - '+ dataArray[currentPoly.modalID][weekday[j]][1] + '</p>');
                 }
               }
           }); //END MAP LISTENER FOR EACH POLYLINE
