@@ -42,7 +42,7 @@ function initMap(location) {
 
     //SET CURRENT LOCATION AS GLOBAL VARIABLE (GEOLOACATION OBJECT):
     var currentLocation = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
-  
+
     //SET MAP CONFIGURATIONS:
     var mapOptions = {
         center: currentLocation,
@@ -150,7 +150,7 @@ function initMap(location) {
 
           console.log("----end of polyline draw function for data[i]----");
 
-          //CLICK EVENT LISTENER ON A POLYLINE BRINGS UP THE SIGN SHOW MODAL:
+          //ADD EVENT LISTENER ON POLYLINE TO BRING UP THE SYGN SHOW MODAL:
           google.maps.event.addListener(polyArray[i],"click",function(evt){
 
               $('#sign-modal').modal('show');
@@ -354,6 +354,11 @@ $(document).ready(function() {
         $('#mapModal').modal('show');
     });
     //-------------------------------------
+
+    //REMOVE DRAWN POLYLINE:
+    function removeLine() {
+      poly.setMap(null);
+    }
 
     //RELOAD PAGE IF YOU CANCEL LINE SUBMIT ON MODAL:
     $('#cancelBtn').on('click',function(){
