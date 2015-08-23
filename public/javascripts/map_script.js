@@ -102,8 +102,8 @@ function initMap(location) {
       url:"/sygns",
       method: "get",
       success: function(data){
-        var signObject;
-        console.log(data);
+        var dataArray = data;
+        var polyArray = [];
 
         //UPON SUCCESSFUL "GET", LOOP THROUGH ALL SYGNS AND DRAW THEM:
         for(var i = 0; i < data.length; i+=1){
@@ -114,7 +114,6 @@ function initMap(location) {
           var color; //VARIABLE TO PASS TO OUR POLYLINE CONFIG LATER
 
           //SET COLOR OF OUR POLYLINE (GREEN IF NO RESTRICTION TODAY):
-          console.log(data[i][currentDay]);
           if(data[i][currentDay] != false){
             if(data[i]["type"] === "No Parking") color = "red";
             if(data[i]["type"] === "Permit Zone") color = "orange";
@@ -144,29 +143,32 @@ function initMap(location) {
           //PUSH START AND END POINTS FOR CURRENT POLYLINE PATH:
           dataPath.push(googleStartPoint);
           dataPath.push(googleEndPoint);
+
+          //PUSH NEW POLY LINE INTO ARRAY OF ALL POLY LINES AND ADD ID FOR MODAL INFO
+          polyArray.push(dataPoly);
+          polyArray[i].modalID = i;
+
+          var counter = i;
           console.log("----end of polyline draw function for data[i]----");
 
           //CLICK EVENT LISTENER ON A POLYLINE BRINGS UP THE SIGN SHOW MODAL
-          google.maps.event.addListener(dataPoly,"click",function(){
+          google.maps.event.addListener(polyArray[i],"click",function(evt){
               $('#sign-modal').modal('show');
-              console.log(signObject.point1[0]['G']);
-              // $('.mb2').append('<p>'+signObject.type+'</p>');
+              currentPoly = this;
+              $('.mb2').children('p').remove();
+              $('.mb2').append('<p>'+ dataArray[currentPoly.modalID].type+'</p>');
+              console.log(dataArray[currentPoly.modalID]);
 
-               //TEMP DATA--------------------------------------------------------
-               if (dataCounter === 1) {
-                   $('.mb2').append('<div class="row"><div class="col-lg-12"><div class="well" style="text-align: center; background: #CCCCFF; border-radius: 10px; border: 4px solid blue;"><img src="/images/Handicap-4.gif" style="height: 60px; width: 40px;"><p>Handicap Paking Monday-Sunday ALL DAY</p></div></div></div>');
-               } else if(dataCounter === 2) {
-                   $('.mb2').append('<div class="row"><div class="col-lg-12"><div class="well" style="text-align: center; background: #FFE6E6; border-radius: 10px; border: 4px solid red;"><img src="/images/noParking.png" style="height: 60px; width: 60px;"><p>NO PARKING - Tuesday 2-3pm</p></div></div></div>');
-               } else if(dataCounter === 3) {
-                   $('.mb2').append('<div class="row"><div class="col-lg-12"><div class="well" style="text-align: center; background: #FFFFB2; border-radius: 10px; border: 4px solid yellow";><img src="/images/valetParking.png" style="height: 60px; width: 40px;"><p>VALET ONLY Monday-Friday 8pm - 12am</p></div></div></div>');
-               }
-               dataCounter++; //TEMP DATA
-               //------------------------------------------------------------------
-          });
-        }
-      }
-    });
-}
+              for(j = 0; j < weekday.length; j += 1){
+                if(dataArray[currentPoly.modalID][weekday[j]] != false){
+                $('.mb2').append('<p>' + [weekday[j]] + ': ' + dataArray[currentPoly.modalID][weekday[j]][0].sygnStart + ' - '+ dataArray[currentPoly.modalID][weekday[j]][0].sygnEnd + '</p>');
+                }
+              }
+          }); //END MAP LISTENER FOR EACH POLYLINE
+        } //END FOR LOOP FOR EACH SYGN POLYLINE
+      } //END AJAX SUCCESSION FUNCTION
+    }); //END AJAX CALL
+} //END INITIALIZE MAP
 
 //CONTROL VARIABLES TO STORE NEW SYGN:
 var count = 0;
