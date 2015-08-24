@@ -1,5 +1,6 @@
 var myMap;
 var myService;
+var user;
 
 //****** VARIABLES TO CALCULATE CURRENT DAY FOR SYGNs *********
 var weekday = new Array(7);
@@ -11,10 +12,19 @@ weekday[4] = "thursday";
 weekday[5] = "friday";
 weekday[6] = "saturday";
 var timeChecker = new Date();
+
 var currentDay = weekday[timeChecker.getDay()];
 
 var dataCounter = 1;
 
+//IMMEDIATE AJAX CALL TO GET USER INFO FOR USER MAP MARKER:
+$.ajax({
+  method: "get",
+  url: "/users/placeholder", //WILL BE USING TOKEN TO FIND USER IN CONTROLLER
+  success: function(data){
+    user = data;
+  }
+});
 
 //****** SEARCH FUNCTIONS TO POPULATE SEARCH MARKERS **********
 function handleSearchResults(results, status) {
@@ -35,6 +45,51 @@ function performSearch() {
     };
     myService.nearbySearch(request, handleSearchResults);
 }
+
+//CONVERT MILITARY TIME BACK TO STANDARD AM-PM NOTATION:
+function convertTime(military){
+  var meridian = "AM";
+  if(military > 1300){
+    military = military - 1200;
+    meridian = "PM";
+  }
+
+  militarySplit = military.toString().split("");
+  if(military >= 1000){
+    var twoDigitHour = militarySplit[0] + militarySplit[1];
+    var twoDigitMinutes = militarySplit[2] + militarySplit[3];
+    return twoDigitHour + ":" + twoDigitMinutes + meridian;
+  } else {
+    var oneDigitHour = militarySplit[0];
+    var oneDigitMinutes = militarySplit[1] + militarySplit[2];
+    return(oneDigitHour + ":" + oneDigitMinutes + meridian);
+  }
+}
+
+//CAPITALIIZE PROTOTYPE FOR STRINGS (USED TO CAPITALIZE DAYS):
+String.prototype.capitalize = function(){
+  var wordNoFirstLetter = [];
+  var firstLetter = this[0].toUpperCase();
+  for(i = 1; i < this.length; i+=1){
+    wordNoFirstLetter.push(this[i]);
+  }
+
+  return(firstLetter + wordNoFirstLetter.join(""));
+};
+
+//DISPLAY CURRENT TIME IN AM-PM NOTATION ON USER MARKER INFO:
+// function currentTime(){
+//   var currentUserTime= new Date();
+//   var currentHour = currentUserTime.getHours();
+//   var currentMinutes = currentUserTime.getMinutes();
+//   var currentMeridian = "AM";
+//   if(currentHour > 13){
+//     currentMeridian = "PM";
+//     currentHour = currentHour - 12;
+//   }
+//   return(currentHour + ":" + currentMinutes + currentMeridian);
+// }
+
 
 //****** INITIALIZE GOOGLE MAPS (INVOKED ON PAGE LOAD) **********
 function initMap(location) {
@@ -70,14 +125,21 @@ function initMap(location) {
     var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
-      '<h1 id="firstHeading" class="firstHeading">User Name</h1>'+
-      "Latitude, Longitude: " + currentLocation +
+      '<h5 id="firstHeading" class="firstHeading">Sygn User</h5>'+
+      "Name: " + user.firstName + " " + user.lastName + "<br>" +
+      "Email: " + user.email + "<br>" +
+      "Location: " + currentLocation +
       '</div>'+
       '</div>';
 
     //POP UP WINDOW TO DISPLAY CURRENT USER INFO:
     var infowindow = new google.maps.InfoWindow({
       content: contentString
+    });
+
+    //EVENT LISTENER FOR CURRENT USER:
+    userMarker.addListener('click', function() {
+      infowindow.open(myMap, userMarker);
     });
 
     //NEW POLYLINE OBJECT AND CONFIGURATIONS:
@@ -106,7 +168,7 @@ function initMap(location) {
         var polyArray = [];
 
         //UPON SUCCESSFUL "GET", LOOP THROUGH ALL SYGNS AND DRAW THEM:
-        for(var i = 0; i < data.length; i+=1){
+        for(i = 0; i < data.length; i+=1){
 
           startPoint = [data[i].point1[0]['G'],data[i].point1[0]['K']];
           endPoint = [data[i].point2[0]['G'],data[i].point2[0]['K']];
@@ -139,12 +201,11 @@ function initMap(location) {
 
           var googleEndPoint = new google.maps.LatLng(parseFloat(endPoint[0]).toFixed(14), parseFloat(endPoint[1]).toFixed(14));
 
-
           //PUSH START AND END POINTS FOR CURRENT POLYLINE PATH:
           dataPath.push(googleStartPoint);
           dataPath.push(googleEndPoint);
 
-          //PUSH NEW POLY LINE INTO ARRAY OF ALL POLY LINES AND ADD ID FOR MODAL INFO
+          //PUSH NEW POLY LINE INTO ARRAY OF ALL POLY LINES AND ADD ID FOR MODAL INFO:
           polyArray.push(dataPoly); //STORE AN ARRAY OF ALL POLYLINE OBJECTS
           polyArray[i].modalID = i; //APPEND AN ID TO POLYLINE TO REFER TO IN ALL SYGNS
 
@@ -163,7 +224,8 @@ function initMap(location) {
               //LOOP THROUGH EACH DAY IN SYGN TO DISPLAY RESTRICTION:
               for(j = 0; j < weekday.length; j += 1){
                 if(dataArray[currentPoly.modalID][weekday[j]] != false){
-                $('.mb2').append('<p>' + [weekday[j]] + ': ' + dataArray[currentPoly.modalID][weekday[j]][0] + ' - '+ dataArray[currentPoly.modalID][weekday[j]][1] + '</p>');
+
+                $('.mb2').append('<p>' + [weekday[j]].toString().capitalize() + ': ' + convertTime(dataArray[currentPoly.modalID][weekday[j]][0]) + ' - '+ convertTime(dataArray[currentPoly.modalID][weekday[j]][1]) + '</p>');
                 }
               }
           }); //END MAP LISTENER FOR EACH POLYLINE
@@ -355,20 +417,15 @@ $(document).ready(function() {
     });
     //-------------------------------------
 
-    //REMOVE DRAWN POLYLINE:
-    function removeLine() {
-      poly.setMap(null);
-    }
-
     //RELOAD PAGE IF YOU CANCEL LINE SUBMIT ON MODAL:
     $('#cancelBtn').on('click',function(){
      window.location.reload();
     });
 
-    //RELOAD PAGE WHEN YOU EXIT EXISTING SIGN MODAL SHOW FORM:
-    $('#close').on('click',function(){
-     window.location.reload();
-    });
+    // //RELOAD PAGE WHEN YOU EXIT EXISTING SIGN MODAL SHOW FORM:
+    // $('#closeZoom').on('click',function(){
+    //  window.location.reload();
+    // });
 
     //MODAL DAY TOGGLE AND CONTROL VARIABLE FOR MONDAY:
     var mon = $('.mon');
