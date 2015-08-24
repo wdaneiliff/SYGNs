@@ -1,4 +1,4 @@
-
+//BOOTSTRAP TOGGLE HIDE/SHOW PASSWORD FIELD FUNCTION:
 function showPassword() {
     var key_attr = $('#key').attr('type');
 
@@ -11,25 +11,26 @@ function showPassword() {
     }
 }
 
-$( document ).ready(function() {
+//******* JQUERY ON PAGE LOAD FUNCTION ********
+$(document).ready(function() {
+
+  //FLASH MESSAGE TO USER "LOG IN TO CONTINUE":
   var flash = $('.flash');
   flash.slideDown("slow", function(){
     setTimeout(function(){flash.slideUp('slow');},2500);
   });
 
-  console.log("jquery loaded");
-
+  //DOM VARIABLES FOR LOG IN FORM:
   var loginButton = $('#btn-login');
   var email = $('#email');
   var password = $('#key');
 
-
+  //SUBMIT FORM LISTENER AND FUNCTION:
   $('form').on('submit',function(evt){
-    console.log("log in" + email.val() + password.val());
-
-  //CHECK FOR VALUE IN FIRST NAME INPUT
+    //NOTES: BOOTSTRAP WILL MAKE SURE FORM IS FILLED*
     event.preventDefault();
 
+    //AJAX REQUEST TO AUTHENTICATE USER AND BE RE-ROUTED:
     $.ajax({
       method: "post",
       url: "/authenticate",
@@ -38,10 +39,15 @@ $( document ).ready(function() {
       dataType : 'json',
       success: function(data){
         console.log(data);
-        localStorage.setItem('userToken', data.access_token);
-        $.ajaxSetup({
-            headers: { 'x-access-token': localStorage['userToken'] }
-        });
+        //NOTES: TOKEN WILL COME BACK IN FORM OF COOKIE -SEE SERVER.JS
+
+        //OTHER TOKEN HANDLERS NOT BEING USED IN THIS APP:
+        // localStorage.setItem('userToken', data.access_token);
+        // $.ajaxSetup({
+        //     headers: { 'x-access-token': localStorage['userToken'] }
+        // });
+
+        //REDIRECT IF SERVER RESPONSE HAS REDIRECT KEY IN JSON:
         if(data.redirect){
           window.location.href = data.redirect;
         }
@@ -49,22 +55,23 @@ $( document ).ready(function() {
     });
   });
 
-  // DELETE COOKIE FUNCTION UPON LOGGING OUT
+  // DELETE COOKIE FUNCTION UPON LOGGING OUT:
   function delete_cookie( name ) {
     document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
   }
 
+  //*** APPEND LOG IN OR LOG OUT BUTTON TO NAV DEPENDING IF COOKIES PRESENT:
   var ul = $('.nav-tabs');
   if(document.cookie.indexOf("token") >= 0) {
     console.log("cookie here");
     ul.append('<li> <a href="/login" class="logout"> Logout </a> <li>');
 
-    var cookie = $('.logout');
-    cookie.on('click', function(){
+    //CREATE LOG OUT LISTENER FOR APPENDED LOGOUT TAB IN NAVBAR:
+    $('.logout').on('click', function(){
       delete_cookie('token');
     });
-  }else{
+  } else{
     ul.append('<li> <a href="/signup" class="logout"> Sign up </a> <li>');
   }
 
-});
+}); //CLOSE JQUERY ON PAGE LOAD FUNCTION

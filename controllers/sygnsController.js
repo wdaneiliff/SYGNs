@@ -1,11 +1,11 @@
+//****** CALL NPM PACKAGES AND MODELS FOR FUNCTIONS *******
 var Sygn = require('../models/sygn.js');
 
-//CREATE SYGN
+//*********** CREATE SYGN ************
 function createSygn(req,res){
-  console.log("post sygn lalala***$$$$$$$fuckfuckfucktits");
     var sygn = new Sygn();
 
-    //SET SYGN INFO FROM REQUEST
+    //SET SYGN INFO FROM REQUEST:
     sygn.point1 = req.body.point1;
     sygn.point2 = req.body.point2;
     sygn.type = req.body.type;
@@ -17,7 +17,7 @@ function createSygn(req,res){
     sygn.saturday = req.body.saturday;
     sygn.sunday = req.body.sunday;
 
-    //SAVE SYGN AND CHECK FOR ERRORS
+    //SAVE SYGN AND CHECK FOR ERRORS:
     sygn.save(function(err){
         if(err){
             if(err.code == 11000){
@@ -28,17 +28,17 @@ function createSygn(req,res){
         }
         res.json({message:"successful", redirect:"/"});
     });
-}
+} //CLOSE CREATE SYGN FUNCTION
 
-// SHOW All SYGNs
+//******* SHOW All SYGNs ***********
 function getAll(req, res) {
     Sygn.find({}, function(err, sygns){
         if(err) res.send(err);
         res.json(sygns);
     });
-};
+} //CLOSE GET ALL SYGNS FUNCTION
 
-//GET AND SHOW INDIVIDUAL SYGN
+//********* GET AND SHOW INDIVIDUAL SYGN *******
 function showSygn(req, res) {
     console.log("individual sygn requested");
     Sygn.findOne({_id: req.params.id}, function(err, sygn){
@@ -46,9 +46,9 @@ function showSygn(req, res) {
         console.log(sygn);
         res.json(sygn);
     });
-};
+} //CLOSE SHOW INDIVIDUAL SYGN FUNCTION
 
-//UPDATE INDIVIDUAL SYGN
+//********  UPDATE INDIVIDUAL SYGN  ***********
 function updateSygn(req,res){
     console.log("edit individual sygn requested");
     Sygn.findOne({_id: req.params.id}, function(err, sygn){
@@ -56,7 +56,7 @@ function updateSygn(req,res){
         console.log('found sygn');
         if(err) res.send(err);
 
-        //UPDATE USER PARAMETERS ONLY IF PROVIDED
+        //UPDATE USER PARAMETERS ONLY IF PROVIDED:
         if(req.body.point1) sygn.point1 = req.body.point1;
         if(req.body.point2) sygn.point2 = req.body.point2;
         if(req.body.type) sygn.type = req.body.type;
@@ -73,9 +73,9 @@ function updateSygn(req,res){
             res.json({message: 'successfully updated', redirect:"/edit"});
         });
     });
-}
+} //CLOSE UPDATE INDIVIDUAL USER SYGN
 
-//DELETE SYGN
+//******** DELETE SYGN ***********
 function deleteSygn(req, res) {
   var id = req.params.id;
     //Sygn.remove({id: req.params.id}, function(err,sygn){
@@ -85,8 +85,9 @@ function deleteSygn(req, res) {
         res.json({message: 'successfully deleted', redirect: '/'});
     }
   );
-}
+} //CLOSE DELETE SYGN FUNCTION
 
+//******* EXPORT FUNCTIONS FOR USE ON SERVER ********
 module.exports = {
     getAll: getAll,
     createSygn: createSygn,
