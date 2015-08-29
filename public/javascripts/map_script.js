@@ -116,6 +116,22 @@ function initMap(location) {
             optimized: false
     });
 
+    //MAP SEARCH BOX AND AUTO COMPLETE:
+    myMap.controls[google.maps.ControlPosition.RIGHT_TOP].push(
+    document.getElementById('SearchContainer'));
+    var autocomplete = new google.maps.places.Autocomplete(
+        document.getElementById('searchBox'));
+    autocomplete.bindTo('bounds', myMap);
+    autocomplete.addListener('place_changed', function() {
+      var place = autocomplete.getPlace();
+      if (place.geometry.viewport) {
+        myMap.fitBounds(place.geometry.viewport);
+      } else {
+        myMap.setCenter(place.geometry.location);
+        myMap.setZoom(18);
+      }
+    });
+
     myService = new google.maps.places.PlacesService(myMap);
 
     //REFRESH SEARCH WHEN MAP BOUNDS CHANGE / ZOOM:

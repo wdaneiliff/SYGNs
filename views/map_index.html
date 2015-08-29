@@ -33,10 +33,16 @@
                 </div>
             </div>
 
-
+        <!-- MAIN MAP CANVAS -->
         <div id="map-canvas"></div>
+
+        <!-- MAP SEARCH BOX -->
+        <div class="searchContainer" style="z-index:2; background-color:rgba(255, 255, 255, 0.75); width: 200px; border-radius:4px; margin:8px; padding:8px; text-align:center; position: absolute; margin-left: -100px; left: 50%; top:130px;">
+          <input type="text" id="searchBox" placeholder="search location" style="width: 100%; box-sizing: border-box;">
+        </div>
+
         <!-- loading icon -->
-        <div id="spinner" class="spinner" style="display:none;">
+        <div id="spinner" style="display:none;" class="spinner">
             <img id="img-spinner" src="/images/ajax-loader_blueCircle.gif" alt="Loading"/>
         </div>
 
