@@ -7,13 +7,8 @@ body{
   text-align: center;
 }
 
-@font-face {
-    font-family: wazeFont;
-    src:url(../fonts/proxima-nova-soft-bold.ttf);
-}
-
-#map-title h1 {
-    font-family: wazeFont;
+h1 {
+    font-family: 'Abel', sans-serif;
     color: #00008B;
     font-size: 40px;
     text-align: center;
