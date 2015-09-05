@@ -2,6 +2,7 @@ body{
   text-align: center;
   font-family: 'Abel', sans-serif;
 }
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -187,7 +188,7 @@ h1{
 }
 
 .form-control{
-  height: 30px;
+  height: 40px;
   width: 200px;
   position: absolute;
   right: 10%;

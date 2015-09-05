@@ -4,22 +4,37 @@
         <meta charset="utf-8">
         <title>Google Maps API</title>
         <!-- Bootstrap -->
+
+
+        <link rel="stylesheet" href="stylesheets/reset.css">
+        <link rel="stylesheet" href="stylesheets/normalize.css">
+
+        <!-- <link href="/stylesheets/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet"> -->
+        <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Inconsolata:700' rel='stylesheet' type='text/css'>
+
+        <link href="/stylesheets/map_style.css" rel="stylesheet" type="text/css"/>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="/stylesheets/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
-        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
-        <link href="/stylesheets/bootstrap-3.3.5-dist/css/bootstrap.min.css" rel="stylesheet">
 
-        <link href="/stylesheets/map_style.css" rel="stylesheet" type="text/css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
     <body>
 
-      <ul class="nav nav-tabs head" style="background-color:white;font-weight:bold;">
-        <li role="presentation" class="active" ><a href="#">Home</a></li>
-        <li role="presentation"><a href="/edit">Account</a></li>
-        <li role="presentation"><a href="/help">Help</a></li>
+      <!-- NAVBAR -->
+      <ul class="navBar">
+        <li> <a href="/">Sygns </a> </li>
+        <li> <a href="/map">Map </a> </li>
+        <li> <a href="/edit">Account </a> </li>
+        <li> <a href="/help"> Help </a> </li>
+        <span class="login"> <!-- LOG IN INPUTS -->
+          <input type="text" class="userEmail" placeholder="user@email.com">
+          <input type="text" class="userPassword" placeholder="password">
+          <button type="button" class="loginButton">login</button>
+        </span>
       </ul>
 
       <section id="map-title">
@@ -175,14 +190,8 @@
                   </div>
               </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-        <!-- End Map Modal Window -->
 
-        <!-- <button id="refresh">Refresh</button> -->
 
-        <!-- Temp Map Modal button -->
-        <!-- <div>
-            <button type="button" class="btn btn-info btn-sm" data-toggle="modal">Open Modal</button>
-        </div> -->
 </section>
   <!-- SIGN MODAL -->
   <!-- Modal -->
@@ -204,12 +213,16 @@
     </div>
   </div>
 
+
+      <!-- FOOTER -->
+      <div class="footerBar"></div>
+      <div class="footer">
+        <span class="footerContact"> Sygns&reg; 2437 Corinth Avenue, Los Angeles, CA 90064, United States, info@sygns.com </span>
+      </div>
+
+      <script type="text/javascript" src="/javascripts/map_script.js"></script>
+      <!-- <script src="/stylesheets/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script> -->
+
     </body>
-    <script type="text/javascript" src="/javascripts/map_script.js"></script>
-
-    <!-- Bootstrap -->
-    <script src="/stylesheets/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-
-
 
 </html>
