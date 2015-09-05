@@ -47,9 +47,9 @@ app.use(function(req,res,next){
 //LOGGER FOR SERVER REQUESTS:
 app.use(morgan('dev'));
 
-//RESPONSE TO LOG IN PAGE REQUEST:
-app.get('/login', function(req,res){
-    res.sendfile('./views/index.html');
+//HOMEPAGE / MAIN MAP PAGE ROUTER:
+app.get('/', function(req,res){
+    res.sendfile("./views/index.html");
 });
 
 //RESPONSE TO LOG IN HELP REQUEST:
@@ -62,10 +62,10 @@ app.get('/signup', function(req,res){
   res.sendfile('./views/signUp.html');
 });
 
-//RESPONSE TO LOG IN INFO PAGE REQUEST:
-app.get('/info', function(req,res){
-  res.sendfile('./views/sygn_data.html');
-});
+// //RESPONSE TO LOG IN PAGE REQUEST:
+// app.get('/login', function(req,res){
+//     res.sendfile('./views/index.html');
+// });
 
 //REGISTER THE USERS ROUTE:
 app.use('/users', userRoutes);
@@ -97,7 +97,7 @@ app.post('/authenticate',function(req,res){
         );
         //RETURN RESPONSE WITH TOKEN COOKIE AND REDIRECT:
         res.cookie("token",token);
-        res.json({success: true, message: 'enjoy your token', access_token: token, redirect: '/'});
+        res.json({success: true, message: 'enjoy your token', access_token: token, redirect: '/map'});
       }
     }
 
@@ -128,15 +128,15 @@ app.use(function(req,res,next){
     });
   } else {
     //IF THERE IS NO TOKEN, RETURN ACCESS FORBIDDEN RESPONSE:
-    return res.redirect('/login');
+    return res.redirect('/');
     // return res.status(403).send({success: false, message: 'no token provided'});
   }
 
 });
 
-//HOMEPAGE / MAIN MAP PAGE ROUTER:
-app.get('/', function(req,res){
-    res.sendfile("./views/map_index.html");
+//ROUTE TO MAP AFTER SUCCESSFUL LOGIN:
+app.get('/map', function(req,res){
+  res.sendfile('./views/map_index.html');
 });
 
 //EDIT ACCOUNT PAGE ROUTER:

@@ -3,79 +3,83 @@
     <head>
         <meta charset="utf-8">
         <title>SYGNs</title>
-        <!-- Bootstrap -->
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+
+        <!-- LINK STYLESHETS -->
+        <link rel="stylesheet" href="stylesheets/reset.css">
+        <link rel="stylesheet" href="stylesheets/normalize.css">
+        <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Inconsolata:700' rel='stylesheet' type='text/css'>
+
+        <link href="/stylesheets/signUp.css" rel="stylesheet" type="text/css"/>
+
+        <!-- LINK jQUERY -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <link href="/stylesheets/style.css" rel="stylesheet" type="text/css"/>
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
     </head>
     <body>
-      <ul class="nav nav-tabs" style="background-color:white;font-weight:bold;">
-        <li role="presentation"><a href="/">Home</a></li>
-        <li role="presentation"><a href="/edit">Account</a></li>
-        <li role="presentation"><a href="/help">Help</a></li>
+      <!-- NAVBAR -->
+      <ul class="navBar">
+        <li> <a href="/">Sygns </a> </li>
+        <li> <a href="/map">Map </a> </li>
+        <li> <a href="/edit">Account </a> </li>
+        <li> <a href="/help"> Help </a> </li>
+        <span class="login"> <!-- LOG IN INPUTS -->
+          <input type="text" class="userEmail" placeholder="user@email.com">
+          <input type="text" class="userPassword" placeholder="password">
+          <button type="button" class="loginButton">login</button>
+        </span>
       </ul>
-        <section id="login">
-            <div class="container">
-            	<div class="row">
-            	    <div class="col-xs-12">
-                	    <div class="form-wrap">
-                        <h1><img src="/images/sygn_34px.png" alt="mascot" style="padding-bottom: 25px;">SYGNs</h1>
-                        <h2>Create New Account</h2>
-                            <form role="form" action="/users" method="post" id="login-form" autocomplete="off">
 
-                              <!-- Name Fields -->
-                                <div class="form-group lefty">
-                                    <label for="firstName" class="lefty">First Name</label>
-                                    <input type="name" name="firstName" id="firstName" class="form-control" placeholder="John">
-                                </div>
+      <!-- LOGO -->
+      <h1><img src="/images/sygn_34px.png" alt="mascot" style="padding-bottom: 25px;">SYGNs</h1>
 
-                                <div class="form-group lefty">
-                                    <label for="lastName" class="lefty">Last Name</label>
-                                    <input type="name" name="lastName" id="lastName" class="form-control" placeholder="Doe">
-                                </div>
+      <h2>Create New Account</h2>
 
-                              <!-- Email Fields -->
-                                <div class="form-group lefty">
-                                    <label for="email" class="lefty">Email</label>
-                                    <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com">
-                                </div>
+        <!-- NEW USER FORM -->
+        <form role="form" action="/users" method="post" autocomplete="off">
 
-                              <!-- Password Fields -->
-                                <div class="form-group lefty">
-                                    <label for="key" class="lefty">Password</label>
-                                    <input type="password" name="key" id="key" class="form-control" placeholder="Password">
-                                </div>
-
-                                <div class="form-group lefty">
-                                    <label for="key" class="lefty">Confirm Password</label>
-                                    <input type="password" name="key" id="pwkey" class="form-control" placeholder="Confirm Password">
-                                </div>
-
-                                <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Sign Up">
-                            </form>
-
-                            <hr>
-                	    </div>
-            		</div> <!-- /.col-xs-12 -->
-            	</div> <!-- /.row -->
-              <img src="/images/map.png" class="img-rounded" alt="map" style="width:284px; height:244px; margin: 0 auto;">
-
-            </div> <!-- /.container -->
-        </section>
-
-        <footer id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12"><br>
-                        <p>Page © SYGNs - 2015</p>
-                        <p>Powered by <strong>SYGNs</strong></p>
-                    </div>
-                </div>
+            <!-- NAME FIELDS -->
+            <div class="form-group">
+              <label for="firstName" class="form-label">First Name</label>
+              <input type="name" name="firstName" id="firstName" class="form-control" placeholder="John">
             </div>
-        </footer>
-        <script type="text/javascript" src="javascripts/signUp.js"></script>
+
+            <div class="form-group">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="name" name="lastName" id="lastName" class="form-control" placeholder="Doe">
+            </div>
+
+            <!-- EMAIL FIELD -->
+            <div class="form-group">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com">
+            </div>
+
+            <!-- PASSWORD FIELDS -->
+            <div class="form-group">
+              <label for="key" class="form-label">Password</label>
+              <input type="password" name="key" id="key" class="form-control" placeholder="Password">
+            </div>
+
+            <div class="form-group">
+              <label for="key" class="form-label">Confirm Password</label>
+              <input type="password" name="key" id="pwkey" class="form-control" placeholder="Confirm Password">
+            </div>
+
+            <!-- SUBMIT BUTTON -->
+            <input type="submit" id="signUpButton" value="Sign Up">
+
+        </form>
+
+
+      <!-- FOOTER -->
+      <div class="footerBar"></div>
+      <div class="footer">
+        <span class="footerContact"> Sygns&reg; 2437 Corinth Avenue, Los Angeles, CA 90064, United States, info@sygns.com </span>
+      </div>
+
+      <script type="text/javascript" src="javascripts/signUp.js"></script>
     </body>
 </html>

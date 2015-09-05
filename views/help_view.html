@@ -3,20 +3,31 @@
     <head>
         <meta charset="utf-8">
         <title>SYGNs</title>
-        <!-- Bootstrap -->
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
+
+        <link rel="stylesheet" href="stylesheets/reset.css">
+        <link rel="stylesheet" href="stylesheets/normalize.css">
+        <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Inconsolata:700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="stylesheets/help.css">
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
 
-        <ul class="nav nav-tabs" style="background-color:white;font-weight:bold;">
-            <li role="presentation"><a href="/">Home</a></li>
-            <li role="presentation"><a href="/edit">Account</a></li>
-            <li role="presentation"><a href="#">Help</a></li>
-        </ul>
+      <!-- NAVBAR -->
+      <ul>
+        <li> <a href="/">Sygns </a> </li>
+        <li> <a href="/map">Map </a> </li>
+        <li> <a href="/edit">Account </a> </li>
+        <li> <a href="#"> Help </a> </li>
+        <span class="login"> <!-- LOG IN INPUTS -->
+          <input type="text" class="userEmail" placeholder="user@email.com">
+          <input type="text" class="userPassword" placeholder="password">
+          <button type="button" class="loginButton" class="loginButton">login</button>
+        </span>
+      </ul>
 
         <section id="login">
             <div class="container" style='text-align: center;'>
@@ -51,23 +62,18 @@
             </div>
         </section>
 
-        <footer id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12"><br>
-                        <p>Page © SYGNs - 2015</p>
-                        <p>Powered by <strong>SYGNs</strong></p>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <!-- FOOTER -->
+        <div class="footerBar"></div>
+        <div class="footer">
+          <span class="footerContact"> Sygns&reg; 2437 Corinth Avenue, Los Angeles, CA 90064, United States, info@sygns.com </span>
+        </div>
 
 
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script type="text/javascript" src="javascripts/help_script.js"></script>        
+        <script type="text/javascript" src="javascripts/help_script.js"></script>
         <script src="stylesheets/bootstrap-3.3.5-dist/js/bootstrap.js"></script>
     </body>
 </html>

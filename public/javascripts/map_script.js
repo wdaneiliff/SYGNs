@@ -162,7 +162,7 @@ function initMap(location) {
     poly = new google.maps.Polyline({
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
-        strokeWeight: 5
+        strokeWeight: 0.1
     });
 
     poly.setMap(myMap); //APPLY NEW POLYLINE TO CURRENT MAP:
@@ -334,6 +334,8 @@ function addLatLng(event) {
     //IF COUNT == 2, SET POINT PARAMS FOR MODAL MAP AND SHOW MODAL MAP:
     if(count==2){
         sygn.point2 = marker.position;
+
+        //MIDPOINT WILL BE USED TO CENTER MODAL MAP LATER:
         midPoint = [(path["j"][0]['G']+path["j"][1]['G'])/2, (path["j"][0]['K']+path["j"][1]['K'])/2 ];
         point1 = [path["j"][0]['G'],path["j"][0]['K']];
         point2 = [path["j"][1]['G'],path["j"][1]['K']];
