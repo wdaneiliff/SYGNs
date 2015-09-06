@@ -3,19 +3,9 @@ var myService;
 var user;
 
 //****** VARIABLES TO CALCULATE CURRENT DAY FOR SYGNs *********
-var weekday = new Array(7);
-weekday[0]=  "sunday";
-weekday[1] = "monday";
-weekday[2] = "tuesday";
-weekday[3] = "wednesday";
-weekday[4] = "thursday";
-weekday[5] = "friday";
-weekday[6] = "saturday";
+var weekday = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 var timeChecker = new Date();
-
 var currentDay = weekday[timeChecker.getDay()];
-
-var dataCounter = 1;
 
 //IMMEDIATE AJAX CALL TO GET USER INFO FOR USER MAP MARKER:
 $.ajax({
@@ -162,7 +152,7 @@ function initMap(location) {
     poly = new google.maps.Polyline({
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
-        strokeWeight: 0.1
+        strokeWeight: 3.5
     });
 
     poly.setMap(myMap); //APPLY NEW POLYLINE TO CURRENT MAP:
@@ -270,9 +260,9 @@ function smallMap() {
     };
 
     //SET SMALL GOOGLE MAP AND RENDER IN MODAL WINDOW:
-    modalMap = new google.maps.Map(document.getElementById('map-modal'),smallMapOptions);
+    modalMap = new google.maps.Map(document.getElementById('modalMap'),smallMapOptions);
 
-    //POLYLINE OBJECT FOR SMALL MAP:
+    // POLYLINE OBJECT FOR SMALL MAP:
     var smallPoly = new google.maps.Polyline({
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
@@ -284,25 +274,30 @@ function smallMap() {
     //SET PATHING FOR SMALL MAP POLYLINE AND PUSH START + END POINTS:
     var smallPath = smallPoly.getPath();
 
-    //PARSE SMALL LINE START AND END POINTS INTO GOOGLE LAT/LNG OBJECTS:
-    smallStartPoint = new google.maps.LatLng(parseFloat(point1[0]).toFixed(14), parseFloat(point1[1]).toFixed(14));
+    function drawSmallLine(){
+        //PARSE SMALL LINE START AND END POINTS INTO GOOGLE LAT/LNG OBJECTS:
+        smallStartPoint = new google.maps.LatLng(parseFloat(point1[0]).toFixed(14), parseFloat(point1[1]).toFixed(14));
 
-    smallEndPoint = new google.maps.LatLng(parseFloat(point2[0]).toFixed(14), parseFloat(point2[1]).toFixed(14));
+        smallEndPoint = new google.maps.LatLng(parseFloat(point2[0]).toFixed(14), parseFloat(point2[1]).toFixed(14));
 
-    //PUSH START AND END POINTS INTO POLYLINE PATH:
-    smallPath.push(smallStartPoint);
-    smallPath.push(smallEndPoint);
+        // PUSH START AND END POINTS INTO POLYLINE PATH:
+        smallPath.push(smallStartPoint);
+        smallPath.push(smallEndPoint);
 
-    //PARSE START AND END POINTS INTO GOOGLE LAT/LNG OBJECTS:
-    var startBound = new google.maps.LatLng(point1[0], point1[1]);
-    var endBound = new google.maps.LatLng(point2[0], point2[1]);
+        //PARSE START AND END POINTS INTO GOOGLE LAT/LNG OBJECTS:
+        var startBound = new google.maps.LatLng(point1[0], point1[1]);
+        var endBound = new google.maps.LatLng(point2[0], point2[1]);
 
-    //ZOOM MAP INTO START AND END POINTS BY EXPANDING SMALL MAP BOUNDS:
-    var bounds = new google.maps.LatLngBounds();
-    bounds.extend(startBound);
-    bounds.extend(endBound);
-    modalMap.fitBounds(bounds);
-}
+        //ZOOM MAP INTO START AND END POINTS BY EXPANDING SMALL MAP BOUNDS:
+        var bounds = new google.maps.LatLngBounds();
+        bounds.extend(startBound);
+        bounds.extend(endBound);
+        modalMap.fitBounds(bounds);
+      }
+
+  //DELAY SMALL POLYLINE DRAW TO RENDER THE MAP FIRST
+  setTimeout(drawSmallLine,300);
+} //CLOSE SMALL MAP FUNCTION
 
 //****** HANDLE CLICK ON MAIN MAP AND ADD NEW POINT TO POLYLINE ************
 function addLatLng(event) {
@@ -341,15 +336,11 @@ function addLatLng(event) {
         point2 = [path["j"][1]['G'],path["j"][1]['K']];
 
         //DELAY SHOW MODAL MAP TO DISPLAY NEW POLYLINE TO USER:
-        setTimeout(function(){
-          console.log(sygn);
-          $('#mapModal').modal('show');
+        smallMap();
 
-          //DELAY SMALL MAP INITIALIZE TO ALL MODAL WINDOW TO LOAD FIRST:
-          setTimeout(smallMap,300);
-        },1500);
-    }
-}
+    }//END 2ND MAP CLICK CONDITIONAL (IF)
+
+}//END LATLNG FUNCTION
 
 //****** JQUERY FUNCTIONS AND FUNCTION CALL AT PAGE LOAD ********
 $(document).ready(function() {
@@ -429,21 +420,6 @@ $(document).ready(function() {
       });
     });
 
-    // for map modal window----------------
-    $('.btn-info').click(function(event) {
-        $('#mapModal').modal('show');
-    });
-    //-------------------------------------
-
-    //RELOAD PAGE IF YOU CANCEL LINE SUBMIT ON MODAL:
-    $('#cancelBtn').on('click',function(){
-     window.location.reload();
-    });
-
-    // //RELOAD PAGE WHEN YOU EXIT EXISTING SIGN MODAL SHOW FORM:
-    // $('#closeZoom').on('click',function(){
-    //  window.location.reload();
-    // });
 
     //MODAL DAY TOGGLE AND CONTROL VARIABLE FOR MONDAY:
     var mon = $('.mon');
@@ -536,25 +512,37 @@ $(document).ready(function() {
       }
     });
 
-    //DELETE COOKIE FUNCTION UPON LOGGING :
+    //NAVBAR HIGHLIGHTER:
+    $(".navItem").mouseover(function(){
+      $(this).css('backgroundColor',"grey");
+    }).mouseout(function(){
+      $(this).css('backgroundColor',"#2D3E50");
+    });
+
+    //DELETE COOKIE FUNCTION UPON LOGGING OUT:
     function delete_cookie( name ) {
       document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 
-    //*** APPEND SIGNUP OR LOG OUT BUTTON TO NAV DEPENDING IF COOKIES PRESENT:
-    var ul = $('.nav-tabs'); //HEADER / NAVIGATION BAR
+    //*** APPEND LOGIN OR LOG OUT BUTTON TO NAV DEPENDING IF COOKIES PRESENT:
+    var ul = $('.navBar');
+    var loginSpan = $('.login');
 
     if(document.cookie.indexOf("token") >= 0) {
       console.log("cookie here");
-      ul.append('<li> <a href="/login" class="logout"> Logout </a> <li>');
+
+      //REMOVE LOGIN ELEMENTS IF USER IS ALREADY LOOGED IN:
+      loginSpan.children(".userEmail").remove();
+      loginSpan.children(".userPassword").remove();
+      loginSpan.children(".loginButton").remove();
+
+      //ADD LOGOUT BUTTON FOR LOGGED IN USERS:
+      loginSpan.append('<li> <a href="/login" class="logout"> Logout </a> <li>');
 
       //CREATE LOG OUT LISTENER FOR APPENDED LOGOUT TAB IN NAVBAR:
       $('.logout').on('click', function(){
         delete_cookie('token');
       });
-    } else{
-      ul.append('<li> <a href="/signup" class="logout"> Sign up </a> <li>');
     }
-
 
 }); //CLOSE JQUERY ON PAGE LOAD FUNCTION

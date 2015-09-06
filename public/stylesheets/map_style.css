@@ -14,6 +14,7 @@ h1 {
     text-align: center;
     font-weight: bold;
     padding-bottom: 1px;
+    margin-top: 10px;
 }
 
 .navBar {
@@ -107,13 +108,26 @@ a{
   font-size: 20px;
 }
 
-#map-modal{
-  height: 80%;
-  min-height: 170px;
-  width: 85%;
-  min-width: 180px;
-  margin-left: auto;
-  margin-right: auto;
+/*************** MAP SPECIFIC CSS ***************/
+.newModal{
+  position: absolute;
+  height: 460px;
+  width: 35%;
+  min-width:500px;
+  border: 1px solid grey;
+  margin: 0 auto;
+  background: white;
+  top:170px;
+  left:50%;
+  margin-left: -17.5%;
+}
+
+#modalMap{
+  height: 30%;
+  min-height: 160px;
+  width: 80%;
+  border: 1px solid grey;
+  margin: 10px auto;
 }
 
 .time{
@@ -150,9 +164,10 @@ a{
   color:white;
   border-radius: 3px;
 }
-
-#sygnForm{
-  text-align: center;
+#myList, #myList2, .am-pm{
+  font-weight: bold;
+  font-size: 15px;
+  height:28px;
 }
 
 #save-sygn{
@@ -160,6 +175,7 @@ a{
   background: #4CAE4C;
   height: 30px;
   width: 20%;
+  max-width: 150px;
   min-width: 80px;
   padding: 0 10px;
   border-radius: 5px;
@@ -168,40 +184,6 @@ a{
   border-width: 0;
 }
 
-#myList, #myList2, .am-pm{
-  font-weight: bold;
-  font-size: 15px;
-  height:28px;
-}
-
-.modal-header > h4 {
-  color:#333;
-  font-family: wazeFont;
-  font-weight: bold;
-  font-size: 25px;
-  text-decoration: none;
-  list-style: none;
-  display: block;
-
-  width: 100%;
-  text-align: center;
-}
-
-.modal-body > p {
-    width: 100%;
-    text-align: center;
-}
-
-#image-preview {
-    width: 220px;
-    height: 110px;
-    display: block;
-    margin: 0 auto;
-}
-
-#no-parking{
-  color: red;
-}
 /* ------------loading icon animation------------------ */
 .spinner {
     position: fixed;
@@ -227,15 +209,6 @@ a{
       min-width: 450px;
   }
 
-  #map-modal{
-    height: 80%;
-    min-height: 200px;
-    width: 85%;
-    min-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
   #myList, #myList2, .am-pm{
     font-weight: bold;
     font-size: 15px;
@@ -243,13 +216,10 @@ a{
 
   }
 
-  #save-sygn{
-    margin-top: 20px;
-  }
-
-  .firstTime{
+  .time{
     margin-left: -10px;
-    margin-right: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
   }
 
   .timeText{
@@ -265,6 +235,12 @@ a{
 
 @media (max-width: 450px) {
 
+  #map-canvas {
+      height: 680%;
+      min-height: 500px;
+      width: 100%;
+  }
+
   .timeText{
     width:90px;
     font-size: 11px;
@@ -274,12 +250,6 @@ a{
     font-weight: bold;
     font-size: 12px;
     height:23px;
-  }
-
-  #map-modal{
-     height: 80%;
-     min-height: 120px;
-     width: 85%;
   }
 
   .daysUL > li{
