@@ -1,13 +1,6 @@
 //****** JQUERY FUNCTIONS AND FUNCTION CALLS AT PAGE LOAD ********
 $(document).ready(function() {
 
-  //NAVBAR HIGHLIGHTER:
-  $("li").mouseover(function(){
-    $(this).css('backgroundColor',"grey");
-  }).mouseout(function(){
-    $(this).css('backgroundColor',"#2D3E50");
-  });
-
   //DELETE COOKIE FUNCTION UPON LOGGING OUT:
   function delete_cookie( name ) {
     document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -33,7 +26,14 @@ $(document).ready(function() {
       delete_cookie('token');
     });
   }
-  
+
+  //NAVBAR HIGHLIGHTER:
+  $("li").mouseover(function(){
+    $(this).css('backgroundColor',"grey");
+  }).mouseout(function(){
+    $(this).css('backgroundColor',"#2D3E50");
+  });
+
   //DOM VARIABLES TO UPDATE USER INFO:
     var firstName = $("#firstName");
     var lastName = $("#lastName");

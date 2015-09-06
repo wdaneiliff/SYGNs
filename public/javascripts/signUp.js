@@ -27,6 +27,13 @@ $( document ).ready(function() {
     });
   }
 
+  //NAVBAR HIGHLIGHTER:
+  $("li").mouseover(function(){
+    $(this).css('backgroundColor',"grey");
+  }).mouseout(function(){
+    $(this).css('backgroundColor',"#2D3E50");
+  });
+
   //SUBMIT LOGIN LISTENER AND FUNCTION:
   $('.loginButton').on('click',function(evt){
     event.preventDefault();

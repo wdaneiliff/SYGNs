@@ -124,13 +124,18 @@ a{
   height: 490px;
   width:500px;
   border: 1px solid grey;
+  border-radius: 6px;
   margin: 0 auto;
   background: white;
-  top:170px;
+  top:120px;
   left:50%;
   margin-left: -250px;
   z-index: 3;
   display: none;
+}
+
+.newModal h6 {
+    cursor: pointer;
 }
 
 #modalMap{

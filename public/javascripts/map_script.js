@@ -514,13 +514,6 @@ $(document).ready(function() {
       }
     });
 
-    //NAVBAR HIGHLIGHTER:
-    $(".navItem").mouseover(function(){
-      $(this).css('backgroundColor',"grey");
-    }).mouseout(function(){
-      $(this).css('backgroundColor',"#2D3E50");
-    });
-
     //DELETE COOKIE FUNCTION UPON LOGGING OUT:
     function delete_cookie( name ) {
       document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
@@ -539,12 +532,32 @@ $(document).ready(function() {
       loginSpan.children(".loginButton").remove();
 
       //ADD LOGOUT BUTTON FOR LOGGED IN USERS:
-      loginSpan.append('<li> <a href="/login" class="logout"> Logout </a> <li>');
+      loginSpan.append('<li class="navItem"> <a href="/login" class="logout"> Logout </a> <li>');
 
       //CREATE LOG OUT LISTENER FOR APPENDED LOGOUT TAB IN NAVBAR:
       $('.logout').on('click', function(){
         delete_cookie('token');
       });
     }
+
+    //NAVBAR HIGHLIGHTER:
+    $(".navItem").mouseover(function(){
+      $(this).css('backgroundColor',"grey");
+    }).mouseout(function(){
+      $(this).css('backgroundColor',"#2D3E50");
+    });
+
+    //REFRESH MAIN MAP IF USER CLOSES MODAL WINDOW:
+    var exitModal = $('.exitModal');
+
+    exitModal.on('click', function(){
+      $('.background').fadeOut('fast');
+      $('.newModal').fadeOut('fast');
+      count = 0;
+
+      //FIND CURRENT USER LOCATION AND INVOKE INITMAP:
+      navigator.geolocation.getCurrentPosition(initMap);
+
+    });
 
 }); //CLOSE JQUERY ON PAGE LOAD FUNCTION
