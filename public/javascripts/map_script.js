@@ -336,6 +336,8 @@ function addLatLng(event) {
         point2 = [path["j"][1]['G'],path["j"][1]['K']];
 
         //DELAY SHOW MODAL MAP TO DISPLAY NEW POLYLINE TO USER:
+        $('.background').fadeIn('slow');
+        $('.newModal').fadeIn('slow');
         smallMap();
 
     }//END 2ND MAP CLICK CONDITIONAL (IF)
