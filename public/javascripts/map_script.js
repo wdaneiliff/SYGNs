@@ -2,6 +2,15 @@ var myMap;
 var myService;
 var user;
 
+var apiKey = 'AIzaSyAJFqq3o3RPygH2YJewi9ros3IIbev4Fe0';
+var snappedCoordinates = [];
+var originalLat;
+var originalLong;
+var originalLatDiff;
+var originalLongDiff;
+var latOffset;
+var longOffset;
+
 //****** VARIABLES TO CALCULATE CURRENT DAY FOR SYGNs *********
 var weekday = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 var timeChecker = new Date();
@@ -60,7 +69,7 @@ function convertTime(military){
 String.prototype.capitalize = function(){
   var wordNoFirstLetter = [];
   var firstLetter = this[0].toUpperCase();
-  for(i = 1; i < this.length; i+=1){
+  for(var i = 1; i < this.length; i+=1){
     wordNoFirstLetter.push(this[i]);
   }
 
@@ -128,15 +137,12 @@ function initMap(location) {
     google.maps.event.addListenerOnce(myMap, 'bounds_changed', performSearch);
 
     //VARIABLE TO APPEND CURRENT USER INFO WHEN USER MARKER IS CLICKED:
-    var contentString = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h5 id="firstHeading" class="firstHeading">Sygn User</h5>'+
-      "Name: " + user.firstName + " " + user.lastName + "<br>" +
-      "Email: " + user.email + "<br>" +
-      "Location: " + currentLocation +
-      '</div>'+
-      '</div>';
+    var contentString = '<div id="currentUser">'+
+      '<h5> Sygn User </h5>'+
+      "<p> Name: " + user.firstName + " " + user.lastName + "</p>" +
+      "<p> Email: " + user.email + "</p>" +
+      "<p>Location: " + currentLocation +
+      '</p></div>';
 
     //POP UP WINDOW TO DISPLAY CURRENT USER INFO:
     var infowindow = new google.maps.InfoWindow({
@@ -174,7 +180,7 @@ function initMap(location) {
         var polyArray = [];
 
         //UPON SUCCESSFUL "GET", LOOP THROUGH ALL SYGNS AND DRAW THEM:
-        for(i = 0; i < data.length; i+=1){
+        for(var i = 0; i < data.length; i+=1){
 
           startPoint = [data[i].point1[0]['G'],data[i].point1[0]['K']];
           endPoint = [data[i].point2[0]['G'],data[i].point2[0]['K']];
@@ -183,10 +189,10 @@ function initMap(location) {
 
           //SET COLOR OF OUR POLYLINE (GREEN IF NO RESTRICTION TODAY):
           if(data[i][currentDay] != false){
-            if(data[i]["type"] === "No Parking") color = "red";
-            if(data[i]["type"] === "Permit Zone") color = "orange";
-            if(data[i]["type"] === "Loading Zone") color = "yellow";
-            if(data[i]["type"] === "Handicap Zone") color = "blue";
+            if(data[i].type === "No Parking") color = "red";
+            if(data[i].type === "Permit Zone") color = "orange";
+            if(data[i].type === "Loading Zone") color = "yellow";
+            if(data[i].type === "Handicap Zone") color = "blue";
           } else {
             color = "green";
           }
@@ -219,19 +225,19 @@ function initMap(location) {
 
           //ADD EVENT LISTENER ON POLYLINE TO BRING UP THE SYGN SHOW MODAL:
           google.maps.event.addListener(polyArray[i],"click",function(evt){
-
-              $('#sign-modal').modal('show');
+              $(".background").fadeIn('slow');
+              $('.sygnModal').fadeIn('slow');
               currentPoly = this; //"THIS" REFERS TO THE POLYLINE CLICKED:
 
-              $('.mb2').children('p').remove(); //CLEAR SYGN MODAL
-              $('.mb2').append('<p><strong>'+ dataArray[currentPoly.modalID].type+'</strong></p>');
+              $('.sygnModal').children('p').remove(); //CLEAR SYGN MODAL
+              $('.sygnModal').append('<p><strong>'+ dataArray[currentPoly.modalID].type+'</strong></p>');
               console.log(dataArray[currentPoly.modalID]);
 
               //LOOP THROUGH EACH DAY IN SYGN TO DISPLAY RESTRICTION:
               for(j = 0; j < weekday.length; j += 1){
                 if(dataArray[currentPoly.modalID][weekday[j]] != false){
 
-                $('.mb2').append('<p>' + [weekday[j]].toString().capitalize() + ': ' + convertTime(dataArray[currentPoly.modalID][weekday[j]][0]) + ' - '+ convertTime(dataArray[currentPoly.modalID][weekday[j]][1]) + '</p>');
+                $('.sygnModal').append('<p>' + [weekday[j]].toString().capitalize() + ': ' + convertTime(dataArray[currentPoly.modalID][weekday[j]][0]) + ' - '+ convertTime(dataArray[currentPoly.modalID][weekday[j]][1]) + '</p>');
                 }
               }
           }); //END MAP LISTENER FOR EACH POLYLINE
@@ -243,19 +249,18 @@ function initMap(location) {
 //CONTROL VARIABLES TO STORE NEW SYGN:
 var count = 0;
 var sygn = {};
-var midPoint;
-var point1;
-var point2;
 
 //****** MAP FUNCTION FOR SMALLER MAP IN MODAL WINDOW ************
 function smallMap() {
     //SET CURRENT LOCATION AS MIDPOINT OF NEWLY CREATED SYGN:
-    var sygnMidPoint = new google.maps.LatLng(midPoint[0], midPoint[1]);
+    console.log(snappedCoordinates);
+    var sygnMidPoint = new google.maps.LatLng((snappedCoordinates[0].G + snappedCoordinates[snappedCoordinates.length-1].G)/2, (snappedCoordinates[0].K + snappedCoordinates[snappedCoordinates.length-1].K)/2);
 
     //SMALL MAP CONFIGURATIONS
     var smallMapOptions = {
         center: sygnMidPoint,
-        zoom: 23,
+        zoom: 18,
+        maxZoom: 18,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
@@ -266,37 +271,18 @@ function smallMap() {
     var smallPoly = new google.maps.Polyline({
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
-        strokeWeight: 6.3
+        path: snappedCoordinates,
+        strokeWeight: 3.9
     });
 
     smallPoly.setMap(modalMap); //PLACE SMALL POLYLINE ON MODAL MAP
 
-    //SET PATHING FOR SMALL MAP POLYLINE AND PUSH START + END POINTS:
-    var smallPath = smallPoly.getPath();
+    //EXTEND MAP BOUNDS TO FIT FULL NEW POLYLINE
+    var bounds = new google.maps.LatLngBounds();
+    bounds.extend(snappedCoordinates[0]);
+    bounds.extend(snappedCoordinates[snappedCoordinates.length-1]);
+    modalMap.fitBounds(bounds);
 
-    function drawSmallLine(){
-        //PARSE SMALL LINE START AND END POINTS INTO GOOGLE LAT/LNG OBJECTS:
-        smallStartPoint = new google.maps.LatLng(parseFloat(point1[0]).toFixed(14), parseFloat(point1[1]).toFixed(14));
-
-        smallEndPoint = new google.maps.LatLng(parseFloat(point2[0]).toFixed(14), parseFloat(point2[1]).toFixed(14));
-
-        // PUSH START AND END POINTS INTO POLYLINE PATH:
-        smallPath.push(smallStartPoint);
-        smallPath.push(smallEndPoint);
-
-        //PARSE START AND END POINTS INTO GOOGLE LAT/LNG OBJECTS:
-        var startBound = new google.maps.LatLng(point1[0], point1[1]);
-        var endBound = new google.maps.LatLng(point2[0], point2[1]);
-
-        //ZOOM MAP INTO START AND END POINTS BY EXPANDING SMALL MAP BOUNDS:
-        var bounds = new google.maps.LatLngBounds();
-        bounds.extend(startBound);
-        bounds.extend(endBound);
-        modalMap.fitBounds(bounds);
-      }
-
-  //DELAY SMALL POLYLINE DRAW TO RENDER THE MAP FIRST
-  setTimeout(drawSmallLine,300);
 } //CLOSE SMALL MAP FUNCTION
 
 //****** HANDLE CLICK ON MAIN MAP AND ADD NEW POINT TO POLYLINE ************
@@ -328,21 +314,121 @@ function addLatLng(event) {
 
     //IF COUNT == 2, SET POINT PARAMS FOR MODAL MAP AND SHOW MODAL MAP:
     if(count==2){
-        sygn.point2 = marker.position;
+      sygn.point2 = marker.position;
 
-        //MIDPOINT WILL BE USED TO CENTER MODAL MAP LATER:
-        midPoint = [(path["j"][0]['G']+path["j"][1]['G'])/2, (path["j"][0]['K']+path["j"][1]['K'])/2 ];
-        point1 = [path["j"][0]['G'],path["j"][0]['K']];
-        point2 = [path["j"][1]['G'],path["j"][1]['K']];
+      var pathValues = [];
+      pathValues.push(sygn.point1.toUrlValue());
+      pathValues.push(sygn.point2.toUrlValue());
+      originalLat = sygn.point1.G;
+      originalLong = sygn.point1.K;
 
-        //DELAY SHOW MODAL MAP TO DISPLAY NEW POLYLINE TO USER:
-        $('.background').fadeIn('slow');
-        $('.newModal').fadeIn('slow');
-        smallMap();
+      $.get('https://roads.googleapis.com/v1/snapToRoads', {
+        interpolate: true,
+        key: apiKey,
+        path: pathValues.join('|')
+      }, function(data) {
+        console.log(data.snappedPoints);
+
+        console.log(data.snappedPoints[0].location.latitude);
+        console.log(data.snappedPoints[0].location.longitude);
+
+        originalLatDiff = originalLat - data.snappedPoints[0].location.latitude;
+        originalLongDiff = originalLong - data.snappedPoints[0].location.longitude;
+
+        if(Math.abs(originalLatDiff) < 0.000031762222037248193){
+          latOffset = Math.abs(originalLatDiff);
+        } else{
+          latOffset = 0.000031762222037248193;
+        }
+
+        if(Math.abs(originalLongDiff) < 0.000040375616825963334){
+          longOffset = Math.abs(originalLongDiff);
+        } else{
+          longOffset = 0.000040375616825963334;
+        }
+
+        console.log(originalLatDiff);
+        console.log(originalLongDiff);
+        processSnapToRoadResponse(data);
+      });
+
+      //DELAY SHOW MODAL MAP TO DISPLAY NEW POLYLINE TO USER:
+      $('.background').fadeIn('slow');
+      $('.newModal').fadeIn('slow');
+
+      setTimeout(smallMap,500);
 
     }//END 2ND MAP CLICK CONDITIONAL (IF)
 
 }//END LATLNG FUNCTION
+
+function processSnapToRoadResponse(data) {
+  snappedCoordinates = [];
+
+  if(Math.abs(originalLatDiff) < 0.00002 && originalLong > data.snappedPoints[0].location.longitude){
+    console.log("VE");
+    for (var i = 0; i < data.snappedPoints.length; i++) {
+      var latlng = new google.maps.LatLng(
+          data.snappedPoints[i].location.latitude,
+          data.snappedPoints[i].location.longitude + 0.000033353687265293956);
+      snappedCoordinates.push(latlng);
+    }
+  } else if(Math.abs(originalLatDiff) < 0.00002 && originalLong < data.snappedPoints[0].location.longitude){
+      console.log("VW");
+      for (var i = 0; i < data.snappedPoints.length; i++) {
+        var latlng = new google.maps.LatLng(
+            data.snappedPoints[i].location.latitude,
+            data.snappedPoints[i].location.longitude - 0.000033353687265293956);
+        snappedCoordinates.push(latlng);
+      }
+  } else if(Math.abs(originalLongDiff) < 0.00002 && originalLat < data.snappedPoints[0].location.latitude){
+      console.log("HS");
+      for (var i = 0; i < data.snappedPoints.length; i++) {
+        var latlng = new google.maps.LatLng(
+            data.snappedPoints[i].location.latitude - 0.00003802641072697952,
+            data.snappedPoints[i].location.longitude);
+        snappedCoordinates.push(latlng);
+      }
+  } else if(Math.abs(originalLongDiff) < 0.00002 && originalLat > data.snappedPoints[0].location.latitude){
+      console.log("HN");
+      for (var i = 0; i < data.snappedPoints.length; i++) {
+        var latlng = new google.maps.LatLng(
+            data.snappedPoints[i].location.latitude + 0.00003802641072697952,
+            data.snappedPoints[i].location.longitude);
+        snappedCoordinates.push(latlng);
+      }
+  } else if(originalLat < data.snappedPoints[0].location.latitude && originalLong > data.snappedPoints[0].location.longitude){
+    for (var i = 0; i < data.snappedPoints.length; i++) {
+      var latlng = new google.maps.LatLng(
+          data.snappedPoints[i].location.latitude - latOffset,
+          data.snappedPoints[i].location.longitude + 0.000033353687265293956);
+      snappedCoordinates.push(latlng);
+    }
+  } else if(originalLat > data.snappedPoints[0].location.latitude && originalLong < data.snappedPoints[0].location.longitude){
+    for (var i = 0; i < data.snappedPoints.length; i++) {
+      var latlng = new google.maps.LatLng(
+          data.snappedPoints[i].location.latitude + latOffset,
+          data.snappedPoints[i].location.longitude - 0.000033353687265293956);
+      snappedCoordinates.push(latlng);
+    }
+  } else if(originalLat < data.snappedPoints[0].location.latitude && originalLong < data.snappedPoints[0].location.longitude){
+    for (var i = 0; i < data.snappedPoints.length; i++) {
+      var latlng = new google.maps.LatLng(
+          data.snappedPoints[i].location.latitude - 0.00003802641072697952,
+          data.snappedPoints[i].location.longitude - longOffset);
+      snappedCoordinates.push(latlng);
+    }
+  } else if(originalLat > data.snappedPoints[0].location.latitude && originalLong > data.snappedPoints[0].location.longitude){
+    for (var i = 0; i < data.snappedPoints.length; i++) {
+      var latlng = new google.maps.LatLng(
+          data.snappedPoints[i].location.latitude + 0.00003802641072697952,
+          data.snappedPoints[i].location.longitude + longOffset);
+      snappedCoordinates.push(latlng);
+    }
+  }
+  console.log(snappedCoordinates);
+} // END PROCESSSNAPTOROAD FUNCTION
+
 
 //****** JQUERY FUNCTIONS AND FUNCTION CALL AT PAGE LOAD ********
 $(document).ready(function() {
@@ -548,7 +634,7 @@ $(document).ready(function() {
     });
 
     //REFRESH MAIN MAP IF USER CLOSES MODAL WINDOW:
-    var exitModal = $('.exitModal');
+    var exitModal = $('.exitMap');
 
     exitModal.on('click', function(){
       $('.background').fadeOut('fast');
@@ -557,7 +643,13 @@ $(document).ready(function() {
 
       //FIND CURRENT USER LOCATION AND INVOKE INITMAP:
       navigator.geolocation.getCurrentPosition(initMap);
+    });
 
+    //CLOSE SYGN INFO MODAL WINDOW:
+    var exitSygn = $('.exitSygn');
+    exitSygn.on('click', function(){
+      $('.background').fadeOut('slow');
+      $('.sygnModal').fadeOut('slow');
     });
 
 }); //CLOSE JQUERY ON PAGE LOAD FUNCTION

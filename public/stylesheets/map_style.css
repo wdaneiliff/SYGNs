@@ -119,6 +119,21 @@ a{
   display: none;
 }
 
+.sygnModal{
+  position: absolute;
+  height: 350px;
+  width: 380px;
+  border: 1px solid grey;
+  border-radius: 6px;
+  margin: 0 auto;
+  background-color: rgba(255,255,255,0.9);
+  top:180px;
+  left:50%;
+  margin-left: -190px;
+  z-index: 3;
+  display: none;
+}
+
 .newModal{
   position: absolute;
   height: 490px;
@@ -134,7 +149,16 @@ a{
   display: none;
 }
 
-.newModal h6 {
+.exitModal{
+  position:absolute;
+  top:15px;
+  right:15px;
+  font-size:22px;
+  margin:0;
+  display: inline-block;
+}
+
+.newModal h6, .sygnModal h6 {
     cursor: pointer;
 }
 
@@ -199,6 +223,19 @@ a{
   margin-top: 15px;
   font-size: 16px;
   border-width: 0;
+}
+
+#currentUser{
+  width:200px;
+  height:190px;
+  font-size: 15px;
+  text-align: left;
+}
+
+#currentUser h5{
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
 }
 
 /* ------------loading icon animation------------------ */
