@@ -19,7 +19,7 @@ $( document ).ready(function() {
     loginSpan.children(".loginButton").remove();
 
     //ADD LOGOUT BUTTON FOR LOGGED IN USERS:
-    loginSpan.append('<li> <a href="/login" class="logout"> Logout </a> <li>');
+    loginSpan.append('<a href="/login" class="logout"> <li> Logout <li> </a>');
 
     //CREATE LOG OUT LISTENER FOR APPENDED LOGOUT TAB IN NAVBAR:
     $('.logout').on('click', function(){
