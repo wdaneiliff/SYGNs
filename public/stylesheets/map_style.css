@@ -149,6 +149,10 @@ a{
   display: none;
 }
 
+.newModal h4{
+    margin: 17px auto;
+}
+
 .exitModal{
   position:absolute;
   top:15px;
@@ -198,9 +202,11 @@ a{
 .daysUL > li{
   display: inline-block;
   width:12.5%;
+  height: 29px;
+  line-height: 29px;
   font-size: 20px;
   margin: 0;
-  border: 2px solid grey;
+  /*border: 2px solid grey;*/
   background-color: rgba(0, 0, 139, 0.38);
   color:white;
   border-radius: 3px;

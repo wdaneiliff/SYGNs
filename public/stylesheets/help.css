@@ -157,3 +157,62 @@ input{
   bottom: 15%;
   font-size: 20px;
 }
+
+/********** HELP PAGE SPECIFIC CSS  ***********/
+.contactContainer{
+  background-color: rgba(42,42,42,1);
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.contactBox{
+  width: 470px;
+  /*border: 1px solid grey;*/
+  border-radius: 5px;
+  padding-top:11px;
+  min-height: 300px;
+  text-align: left;
+  margin: 50px auto 0 auto;
+  background-color: rgba(34,36,40,1.0);
+  display: inline-block;
+}
+
+.contactBox h3{
+  text-align: center;
+  color: white;
+}
+
+.contactBox hr{
+  width: 80%;
+}
+
+.contactBox div{
+  margin-top: 10px;
+}
+
+.contactBox .messageInput, .contactBox label{
+  width: 65%;
+  height: 30px;
+  margin: 10px 0 20px 17%;
+  border: none;
+  color: white;
+}
+
+.messageBox{
+  width: 65%;
+  height: 150px;
+  margin: 10px 0 20px 17%;
+  border: none;
+  border-radius: 5px;
+}
+
+.contactBox button{
+  color: grey;
+  background-color: yellow;
+  width: 100px;
+  height: 39px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  margin: 10px 10px 30px 17%;
+}
