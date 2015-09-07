@@ -65,6 +65,90 @@ $(document).ready(function() {
     });
   });
 
+  //SLIDE VARIABLES:
+  var slide = 1;
+  var slider = $('.sliderUL');
+  var pause = 7500;
+  var helpText = $('.helpText');
 
+  var helpButton1 = $('.slideControl1');
+  var helpButton2 = $('.slideControl2');
+  var helpButton3 = $('.slideControl3');
+
+  var help1 = 'Log in and press "Map" to view parking sygns in areas of interest.';
+  var help2 = 'Tap the map to start a new sygn, tap again to end it and open the new Sygn form.';
+  var help3 = 'Submit the form so other users can use the info when parking their cars.';
+
+  //SLIDER FUNCTION
+  function slideTutorial(){
+    slider.animate({'margin-left': '-=800'}, 2000, function(){
+      slide++;
+      if(slide === 4){
+        slide = 1;
+        slider.css('margin-left',0);
+      }
+      if(slide === 1){
+        helpText.text(help1);
+        helpButton2.css('background-color','rgba(45,62,80,0.3)');
+        helpButton3.css('background-color','rgba(45,62,80,0.3)');
+        helpButton1.css('background-color','rgba(45,62,80,0.8)');
+      } else if(slide === 2){
+        console.log('slide 2');
+        helpText.text(help2);
+        helpButton1.css('background-color','rgba(45,62,80,0.3)');
+        helpButton3.css('background-color','rgba(45,62,80,0.3)');
+        helpButton2.css('background-color','rgba(45,62,80,0.8)');
+      } else if(slide === 3){
+        helpText.text(help3);
+        helpButton1.css('background-color','rgba(45,62,80,0.3)');
+        helpButton2.css('background-color','rgba(45,62,80,0.3)');
+        helpButton3.css('background-color','rgba(45,62,80,0.8)');
+      }
+    }); //END CALLBACK FUNCTION TO CHANGE SLIDER DEPENDANCIES
+  } //END SLIDER FUNCTION
+
+  //SET SLIDER SPEED AND INVOKE:
+  var startSlide;
+
+  function startSlider(){
+    startSlide = setInterval(slideTutorial, pause);
+  }
+  startSlider();
+
+  //CHANGE TO FIRST SLIDE BUTTON LISTENER AND FUNCTIONS:
+  helpButton1.on('click',function(){
+    clearInterval(startSlide);
+    slider.animate({'margin-left': '0'}, 2000);
+    helpText.text(help1);
+    helpButton2.css('background-color','rgba(45,62,80,0.3)');
+    helpButton3.css('background-color','rgba(45,62,80,0.3)');
+    helpButton1.css('background-color','rgba(45,62,80,0.8)');
+    slide = 1;
+    startSlider();
+  });
+
+  //CHANGE TO SECOND SLIDE BUTTON LISTENER AND FUNCTIONS:
+  helpButton2.on('click',function(){
+    clearInterval(startSlide);
+    slider.animate({'margin-left': '-800'}, 2000);
+    helpText.text(help2);
+    helpButton1.css('background-color','rgba(45,62,80,0.3)');
+    helpButton3.css('background-color','rgba(45,62,80,0.3)');
+    helpButton2.css('background-color','rgba(45,62,80,0.8)');
+    slide = 2;
+    startSlider();
+  });
+
+  //CHANGE TO THRID SLIDE BUTTON LISTENER AND FUNCTIONS:
+  helpButton3.on('click',function(){
+    clearInterval(startSlide);
+    slider.animate({'margin-left': '-1600'}, 2000);
+    helpText.text(help3);
+    helpButton1.css('background-color','rgba(45,62,80,0.3)');
+    helpButton2.css('background-color','rgba(45,62,80,0.3)');
+    helpButton3.css('background-color','rgba(45,62,80,0.8)');
+    slide = 3;
+    startSlider();
+  });
 
 }); //CLOSE JQUERY ON PAGE LOAD FUNCTION
