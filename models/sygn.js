@@ -4,8 +4,7 @@ var Schema      = mongoose.Schema;
 
 //****** CREATE SYGN SCHEMA ***********
 var SygnSchema = new Schema({
-    point1 : [],
-    point2 : [],
+    points : [],
     type: String,
     monday:[],
     tuesday:[],

@@ -6,8 +6,7 @@ function createSygn(req,res){
     var sygn = new Sygn();
 
     //SET SYGN INFO FROM REQUEST:
-    sygn.point1 = req.body.point1;
-    sygn.point2 = req.body.point2;
+    sygn.points = req.body.points;
     sygn.type = req.body.type;
     sygn.monday = req.body.monday;
     sygn.tuesday = req.body.tuesday;

@@ -101,6 +101,7 @@ function initMap(location) {
     var mapOptions = {
         center: currentLocation,
         zoom: 18,
+        maxZoom: 18,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
@@ -179,12 +180,9 @@ function initMap(location) {
         var dataArray = data;
         var polyArray = [];
 
+
         //UPON SUCCESSFUL "GET", LOOP THROUGH ALL SYGNS AND DRAW THEM:
         for(var i = 0; i < data.length; i+=1){
-
-          startPoint = [data[i].point1[0]['G'],data[i].point1[0]['K']];
-          endPoint = [data[i].point2[0]['G'],data[i].point2[0]['K']];
-
           var color; //VARIABLE TO PASS TO OUR POLYLINE CONFIG LATER
 
           //SET COLOR OF OUR POLYLINE (GREEN IF NO RESTRICTION TODAY):
@@ -201,21 +199,17 @@ function initMap(location) {
           dataPoly = new google.maps.Polyline({
               strokeColor: color,
               strokeOpacity: 1.0,
-              strokeWeight: 4
+              strokeWeight: 4,
           });
 
           //SET THE MAP AND PATHING FOR THE POLYLINE:
           dataPoly.setMap(myMap);
           dataPath = dataPoly.getPath();
 
-          //PARSE DATA[i] POINTS INTO GOOGLE LAT/LNG OBJECTS:
-          var googleStartPoint = new google.maps.LatLng(parseFloat(startPoint[0]).toFixed(14), parseFloat(startPoint[1]).toFixed(14));
-
-          var googleEndPoint = new google.maps.LatLng(parseFloat(endPoint[0]).toFixed(14), parseFloat(endPoint[1]).toFixed(14));
-
-          //PUSH START AND END POINTS FOR CURRENT POLYLINE PATH:
-          dataPath.push(googleStartPoint);
-          dataPath.push(googleEndPoint);
+          for(var k=0; k < data[i].points.length; k++){
+            var currentPoint = new google.maps.LatLng(data[i].points[k].G, data[i].points[k].K);
+            dataPath.push(currentPoint);
+          }
 
           //PUSH NEW POLY LINE INTO ARRAY OF ALL POLY LINES AND ADD ID FOR MODAL INFO:
           polyArray.push(dataPoly); //STORE AN ARRAY OF ALL POLYLINE OBJECTS
@@ -282,6 +276,7 @@ function smallMap() {
     bounds.extend(snappedCoordinates[0]);
     bounds.extend(snappedCoordinates[snappedCoordinates.length-1]);
     modalMap.fitBounds(bounds);
+
 
 } //CLOSE SMALL MAP FUNCTION
 
@@ -452,6 +447,8 @@ $(document).ready(function() {
 
     //GRAB FORM INFORMATION AND SUBMIT SYGN BUTTON LISTENER AND FUNCTION:
     submitSygn.on('click',function(evt){
+      sygn.points = snappedCoordinates;
+      console.log(sygn.points);
 
       sygn.type = sygnType.val();
 
