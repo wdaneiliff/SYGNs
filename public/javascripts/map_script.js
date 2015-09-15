@@ -102,7 +102,25 @@ function initMap(location) {
         center: currentLocation,
         zoom: 18,
         maxZoom: 18,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        //-------------------------------------
+        // Snazzy Maps...
+        styles: [{
+                    "featureType": "all",
+                    "elementType": "all",
+                    "stylers": [
+                        { "saturation": -100 },
+                        { "gamma": 0.5 }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "all",
+                    "stylers": [
+                        { "color": "#46bcec" },
+                        { "visibility": "on" }
+                    ]
+                }]
     };
 
     //SET GOOGLE MAP AND RENDER IN DOM ELEMENT:
