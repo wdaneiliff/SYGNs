@@ -25,7 +25,16 @@ function createUser(req,res){
         res.send(err);
       }
     }
-    res.json({message:"successful", redirect:"/"});
+    var token = jwt.sign({
+      email: user.email,
+      firstName: user.firstName },
+      superSecret,
+      { expiresInMinutes: 1440 }
+    );
+
+    //RETURN RESPONSE WITH TOKEN COOKIE AND REDIRECT:
+    res.cookie("token",token);
+    res.json({message:"successful", redirect:"/map"});
   });
 
 } //CLOSE CREATE NEW USER FUNCTION

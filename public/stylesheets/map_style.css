@@ -1,55 +1,178 @@
 html{
   height: 100%;
+  font-family: 'Abel', sans-serif;
 }
 
-body {
-    background-size: cover;
-    background: -webkit-linear-gradient(#CCFFFF, #E0E0FF); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#CCFFFF, #E0E0FF); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#CCFFFF, #E0E0FF); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#CCFFFF, #E0E0FF); /* Standard syntax (must be last) */
-    background-repeat: no-repeat;
+body{
+  text-align: center;
 }
-@font-face {
-    font-family: wazeFont;
-    src:url(../fonts/proxima-nova-soft-bold.ttf);
-}
-#map-title h1 {
-    font-family: wazeFont;
+
+h1 {
+    font-family: 'Abel', sans-serif;
     color: #00008B;
     font-size: 40px;
     text-align: center;
     font-weight: bold;
     padding-bottom: 1px;
+    margin-top: 10px;
 }
 
-.container{
+.navBar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  height: 43px;
+  padding-left: 40px;
+  background-color: #2D3E50;
+}
+
+.navBar li {
+  display: inline-block;
+  line-height: 43px;
+  min-width: 90px;
+  text-align: center;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  float:left;
+  color:white;
+  background-color: #2D3E50;
+  font-size: 18px;
+}
+
+a{
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+}
+
+.login{
+  position: absolute;
+  right:20px;
+  line-height: 40px;
+}
+
+.login input{
+  width: 150px;
+  height: 20px;
+  border-radius: 3px;
+  margin: 0 0 0 10px;
+  font-size: 13px;
+  text-align: left;
+  padding-left: 5px;
+  border: 1px solid grey;
+}
+
+.loginButton{
+  margin-left: 0;
+  border-radius: 3px;
+  border: 1px solid grey;
+  height:23px;
+  position: relative;
+  background-color: transparent;
+  color:white;
+  font-size: 15px;
+  line-height: 12px;
+  font-family: 'Abel', sans-serif;
+}
+
+.homeButton{
+  height: 35px;
+  width: 15%;
+  min-width: 130px;
+  background-color: yellow;
+  font-size: 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  color:#312F2F;
+  margin-top: 50px;
+  border:none;
+}
+
+.footer{
+  height: 90px;
+  width: 100%;
+  background-color: #1F1F1F;
   text-align: center;
 }
 
-#map-canvas {
-    height: 500px;
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    /* h-shadow v-shadow blur spread color */
-    box-shadow: 3px 3px 10px 2px grey,
-                -3px -3px 10px 2px grey;
-
-    border-radius: 14px 14px 14px 14px;
+.footerBar{
+  background-color: #333333;
+  height:30px;
+  width: 100%;
 }
 
-#map-modal{
-  height: 80%;
-  min-height: 170px;
+.footerContact{
+  color: #B3B3B3;
+  line-height: 90px;
+  font-size: 20px;
+}
+
+/*************** MAP SPECIFIC CSS ***************/
+.background{
+  width:100%;
+  height:100%;
+  /*bottom:0;*/
+  position: fixed;
+  background-color: rgba(0,0,0,0.58);
+  z-index: 2;
+  display: none;
+}
+
+.sygnModal{
+  position: absolute;
+  height: 350px;
+  width: 380px;
+  border: 1px solid grey;
+  border-radius: 6px;
+  margin: 0 auto;
+  background-color: rgba(255,255,255,0.9);
+  top:180px;
+  left:50%;
+  margin-left: -190px;
+  z-index: 3;
+  display: none;
+}
+
+.newModal{
+  position: absolute;
+  height: 490px;
+  width:500px;
+  border: 1px solid grey;
+  border-radius: 6px;
+  margin: 0 auto;
+  background: white;
+  top:120px;
+  left:50%;
+  margin-left: -250px;
+  z-index: 3;
+  display: none;
+}
+
+.newModal h4{
+    margin: 17px auto;
+}
+
+.exitModal{
+  position:absolute;
+  top:15px;
+  right:15px;
+  font-size:22px;
+  margin:0;
+  display: inline-block;
+}
+
+.newModal h6, .sygnModal h6 {
+    cursor: pointer;
+}
+
+#modalMap{
+  height: 30%;
+  min-height: 190px;
   width: 85%;
-  min-width: 180px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#restriction-type {
-
+  border: 1px solid grey;
+  margin: 3px auto;
+  margin-bottom: 25px;
 }
 
 .time{
@@ -72,23 +195,26 @@ body {
     font-weight: bold;
     list-style: none;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     padding: 0;
 }
 
 .daysUL > li{
   display: inline-block;
   width:12.5%;
+  height: 29px;
+  line-height: 29px;
   font-size: 20px;
   margin: 0;
-  border: 2px solid grey;
+  /*border: 2px solid grey;*/
   background-color: rgba(0, 0, 139, 0.38);
   color:white;
   border-radius: 3px;
 }
-
-#sygnForm{
-  text-align: center;
+#myList, #myList2, .am-pm{
+  font-weight: bold;
+  font-size: 15px;
+  height:28px;
 }
 
 #save-sygn{
@@ -96,48 +222,28 @@ body {
   background: #4CAE4C;
   height: 30px;
   width: 20%;
+  max-width: 150px;
   min-width: 80px;
   padding: 0 10px;
   border-radius: 5px;
-  margin-top: 8px;
+  margin-top: 15px;
   font-size: 16px;
   border-width: 0;
 }
 
-#myList, #myList2, .am-pm{
-  font-weight: bold;
+#currentUser{
+  width:200px;
+  height:190px;
   font-size: 15px;
-  height:28px;
+  text-align: left;
 }
 
-.modal-header > h4 {
-  color:#333;
-  font-family: wazeFont;
-  font-weight: bold;
-  font-size: 25px;
-  text-decoration: none;
-  list-style: none;
-  display: block;
-
-  width: 100%;
+#currentUser h5{
   text-align: center;
+  font-weight: bold;
+  font-size: 18px;
 }
 
-.modal-body > p {
-    width: 100%;
-    text-align: center;
-}
-
-#image-preview {
-    width: 220px;
-    height: 110px;
-    display: block;
-    margin: 0 auto;
-}
-
-#no-parking{
-  color: red;
-}
 /* ------------loading icon animation------------------ */
 .spinner {
     position: fixed;
@@ -159,17 +265,8 @@ body {
   #map-canvas {
       height: 60%;
       min-height: 500px;
-      width: 80%;
+      width: 100%;
       min-width: 450px;
-  }
-
-  #map-modal{
-    height: 80%;
-    min-height: 200px;
-    width: 85%;
-    min-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   #myList, #myList2, .am-pm{
@@ -179,13 +276,10 @@ body {
 
   }
 
-  #save-sygn{
-    margin-top: 20px;
-  }
-
-  .firstTime{
+  .time{
     margin-left: -10px;
-    margin-right: 20px;
+    margin-right: 10px;
+    margin-bottom: 10px;
   }
 
   .timeText{
@@ -201,6 +295,12 @@ body {
 
 @media (max-width: 450px) {
 
+  #map-canvas {
+      height: 680%;
+      min-height: 500px;
+      width: 100%;
+  }
+
   .timeText{
     width:90px;
     font-size: 11px;
@@ -210,12 +310,6 @@ body {
     font-weight: bold;
     font-size: 12px;
     height:23px;
-  }
-
-  #map-modal{
-     height: 80%;
-     min-height: 120px;
-     width: 85%;
   }
 
   .daysUL > li{

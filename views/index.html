@@ -1,95 +1,256 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>SYGNs</title>
-        <!-- Bootstrap -->
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <head>
+    <meta charset="utf-8">
+    <title>Sygns</title>
+    <link rel="stylesheet" href="stylesheets/reset.css">
+    <link rel="stylesheet" href="stylesheets/normalize.css">
+    <link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Inconsolata:700' rel='stylesheet' type='text/css'>
 
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
+    <style>
+    body{
+      text-align: center;
+      font-family: 'Abel', sans-serif;
+    }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      height: 43px;
+      padding-left: 40px;
+      background-color: #2D3E50;
+    }
 
-      <ul class="nav nav-tabs" style="background-color:white;font-weight:bold;">
-        <li role="presentation"><a href="/">Home</a></li>
-        <li role="presentation"><a href="/edit">Account</a></li>
-        <li role="presentation"><a href="/help">Help</a></li>
-      </ul>
+    li {
+      display: inline-block;
+      line-height: 43px;
+      min-width: 90px;
+      text-align: center;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+      float:left;
+      color:white;
+      background-color: #2D3E50;
+      font-size: 18px;
+    }
 
-      <div class="flash" style="display:none; height: 30px; background-color: orange; color: white; text-align: center; font-size: 18px; line-height: 30px;">Please log in to continue</div>
+    a{
+      color: inherit;
+      text-decoration: none;
+      outline: none;
+    }
 
-        <section id="login">
-            <div class="container">
-            	<div class="row">
-            	    <div class="col-xs-12">
-                	    <div class="form-wrap">
-                        <h1><img src="/images/sygn_34px.png" alt="mascot" style="padding-bottom: 25px;">SYGNs</h1>
-                        <h2>Instantly Fluent in Sign Language</h2>
-                            <form role="form" action="/second" method="post" id="login-form" autocomplete="off">
-                                <div class="form-group">
-                                    <label for="email" class="sr-only">Email</label>
-                                    <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com">
-                                </div>
-                                <div class="form-group">
-                                    <label for="key" class="sr-only">Password</label>
-                                    <input type="password" name="key" id="key" class="form-control" placeholder="Password">
-                                </div>
-                                <div class="checkbox">
-                                    <span class="character-checkbox" onclick="showPassword()"></span>
-                                    <span class="label">Show password</span>
-                                </div>
-                                <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Log in">
-                            </form>
-                            <a href="javascript:;" class="forget" data-toggle="modal" data-target=".forget-modal">Forgot your password?</a>
-                            <a href="/signup">Create an Account</a>
-                            <hr>
-                	    </div>
-            		</div> <!-- /.col-xs-12 -->
-            	</div> <!-- /.row -->
-              <img src="/images/map.png" class="img-rounded" alt="Cinque Terre" style="width:284px; height:244px; margin: 0 auto;">
+    .login{
+      position: absolute;
+      right:20px;
+      line-height: 40px;
+    }
 
-            </div> <!-- /.container -->
-        </section>
+    input{
+      width: 150px;
+      height: 20px;
+      border-radius: 3px;
+      margin: 0 0 0 10px;
+      font-size: 13px;
+      text-align: left;
+      padding-left: 5px;
+      border: 1px solid grey;
+    }
 
-        <div class="modal fade forget-modal" tabindex="-1" role="dialog" aria-labelledby="myForgetModalLabel" aria-hidden="true">
-        	<div class="modal-dialog modal-sm">
-        		<div class="modal-content">
-        			<div class="modal-header">
-        				<button type="button" class="close" data-dismiss="modal">
-        					<span aria-hidden="true">×</span>
-        					<span class="sr-only">Close</span>
-        				</button>
-        				<h4 class="modal-title">Recovery password</h4>
-        			</div>
-        			<div class="modal-body">
-        				<p>Type your email account</p>
-        				<input type="email" name="recovery-email" id="recovery-email" class="form-control" autocomplete="off">
-        			</div>
-        			<div class="modal-footer">
-        				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-        				<button type="button" class="btn btn-custom">Recovery</button>
-        			</div>
-        		</div> <!-- /.modal-content -->
-        	</div> <!-- /.modal-dialog -->
-        </div> <!-- /.modal -->
+    .loginButton{
+      margin-left: 0;
+      border-radius: 3px;
+      border: 1px solid grey;
+      height:23px;
+      position: relative;
+      background-color: transparent;
+      color:white;
+      font-size: 15px;
+      line-height: 12px;
+      font-family: 'Abel', sans-serif;
+    }
 
-        <footer id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12"><br>
-                        <p>Page © SYGNs - 2015</p>
-                        <p>Powered by <strong>SYGNs</strong></p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    .banner{
+      width: 100%;
+      height:380px;
+      background-size: cover;
+      background-image: url('images/streetFilt.jpg');
+      text-align: center;
+      /*background: black;
+      background: linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
+      transition: height .5s;*/
+    }
 
-        <script type="text/javascript" src="javascripts/script.js"></script>
-        <script src="../stylesheets/bootstrap-3.3.5-dist/js/bootstrap.js"></script>
-    </body>
+    .banner h2{
+      display:inline-block;
+      color:white;
+      font-size: 40px;
+      margin-top: 120px;
+    }
+
+    .homeButton{
+      height: 35px;
+      width: 15%;
+      min-width: 130px;
+      background-color: yellow;
+      font-size: 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      color:#312F2F;
+      margin-top: 50px;
+      border:none;
+    }
+
+    .footer{
+      height: 90px;
+      width: 100%;
+      background-color: #1F1F1F;
+      text-align: center;
+    }
+
+    .footerBar{
+      background-color: #333333;
+      height:30px;
+      width: 100%;
+    }
+
+    .footerContact{
+      color: #B3B3B3;
+      line-height: 90px;
+      font-size: 20px;
+    }
+
+    .container{
+      text-align: center;
+      position: relative;
+      font-family: 'Abel', sans-serif;
+      margin-bottom: 30px;
+    }
+    .container h3{
+      font-size: 32px;
+      margin: 5px auto;
+      margin-top: 30px;
+    }
+
+    .container h5{
+      font-size: 22px;
+      margin: 5px auto;
+      color: #999999;
+    }
+
+    .container p{
+      width: 50%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .module{
+      width: 250px;
+      height: 250px;
+      /*border: 1px solid grey;*/
+      display: inline-block;
+      margin: 35px;
+      position: relative;
+    }
+
+    .moduleIcons{
+      width: 110px;
+      vertical-align: top;
+      position: absolute;
+      left: 50%;
+      margin-left: -55px;
+    }
+
+    .moduleDetails{
+      position: absolute;
+      bottom: 15%;
+      font-size: 20px;
+    }
+
+
+    </style>
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <ul class="navBar">
+      <a href="#"> <li> Sygns </li> </a>
+      <a href="/map"> <li> Map </li> </a>
+      <a href="/edit"> <li> Account </li> </a>
+      <a href="/help"> <li> Help </li> </a>
+      <span class="login"> <!-- LOG IN INPUTS -->
+        <input type="text" class="userEmail" placeholder="user@email.com">
+        <input type="text" class="userPassword" placeholder="password">
+        <button type="button" class="loginButton">login</button>
+      </span>
+    </ul>
+
+    <!-- BANNER -->
+    <div class="banner">
+      <h2>Park easier</h2>
+      <br>
+      <button class="homeButton"> <a href="/signup"> Sign Up Free </a> </button>
+
+    </div>
+
+    <!-- SLOGAN -->
+    <div class="container">
+      <h3> Can you park there? </h3>
+      <h5> Our maps provide real time parking information with user submited "Sygns"</h5>
+    </div>
+
+    <div class="module">
+      <img class="moduleIcons" src="images/arrow.png" alt="arrow icon" />
+      <p class="moduleDetails">
+        Use our maps to find parking information in your area, or search other areas of interest.
+      </p>
+    </div>
+
+    <div class="module">
+      <img class="moduleIcons" src="images/stop.png" alt="stop icon" />
+      <p class="moduleDetails">
+        Never park in a restricted space again, our maps will mark "No Parking" zones red.
+    </div>
+
+    <div class="module">
+      <img class="moduleIcons" src="images/sign.png" alt="general sign icon" />
+      <!-- <p style="width:100%; position: absolute; color:#2D3E50; height:115px; line-height: 80px; vertical-align: top; display: block; margin: 0; font-size: 115px; font-weight: bold; font-family: 'Inconsolata', arial;"> i </p> -->
+      <p class="moduleDetails">
+        Read and update "Sygn" information remotely using our application!
+      </p>
+    </div>
+
+    <p style="width:600px; margin: 25px auto; font-size:27px;">
+      "Sygns" definition: real life parking signs logged digitally by our users to assist and inform others of public parking restrictions. Our goal is to cover the entire digital map of los angeles in sygns!
+    </p>
+
+    <div style="background-color: #F0F0F0; padding: 20px">
+
+      <p style="width:500px; margin: 0 auto; padding: 15px 0; font-size:21px;">
+        Our layers are color coded to follow general parking guidelines: green markers designate areas that are open for public parking, red for currently restricted, yellow for loading zones, etc. The street parking markers will change dynamically based on the current time and day!
+      </p>
+
+    </div>
+
+    <!-- 'WORK WITH US SECTION' -->
+    <div style="background-color: white; padding: 20px">
+      <h2 style="color: #2D3E50; font-weight:bold; font-size: 35px;">Want to work with us?</h2>
+      <p style="width:500px; margin: 0 auto; font-size: 20px;">
+          We are currently seeking partners to grow & develop our application, please contact us if you are interested in joining the Sygns team!
+      </p>
+      <button class="homeButton" style="margin: 30px 0;">Contact Us</button>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footerBar"></div>
+    <div class="footer">
+      <span class="footerContact"> Sygns&reg; 2437 Corinth Avenue, Los Angeles, CA 90064, United States, info@sygns.com </span>
+    </div>
+
+    <script src="javascripts/script.js"></script>
+  </body>
 </html>
