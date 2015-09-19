@@ -1,8 +1,8 @@
-
-body{
+/*body{
   text-align: center;
   font-family: 'Abel', sans-serif;
 }
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -68,9 +68,6 @@ input{
   background-size: cover;
   background-image: url('../images/sygns_colors.jpg');
   text-align: center;
-  /*background: black;
-  background: linear-gradient(bottom, rgba(0,0,0,1), rgba(0,0,0,.4));
-  transition: height .5s;*/
 }
 
 .banner h2{
@@ -139,7 +136,6 @@ input{
 .module{
   width: 250px;
   height: 250px;
-  /*border: 1px solid grey;*/
   display: inline-block;
   margin: 35px;
   position: relative;
@@ -157,4 +153,4 @@ input{
   position: absolute;
   bottom: 15%;
   font-size: 20px;
-}
+}*/
