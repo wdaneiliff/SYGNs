@@ -161,8 +161,16 @@ input{
 
 /*SIGN UP SPECIFIC CSS*/
 h1{
+  color: #00FFFF;
+  font-size: 40px;
+  text-align: center;
   font-weight: bold;
-  font-size: 36px;
+
+  text-shadow:
+  -1px -1px 0 #00008B,
+  1px -1px 0 #00008B,
+  -1px 1px 0 #00008B,
+  1px 1px  #00008B;
 }
 
 .form-group{
