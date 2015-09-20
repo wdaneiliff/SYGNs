@@ -40,7 +40,7 @@ body{
   position: relative;
   height: 43px;
   padding-left: 40px;
-  background-color: #2D3E50;
+  background-color: #00FFFF;
 }
 
 .navBar li {
@@ -51,8 +51,8 @@ body{
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
   float:left;
-  color:white;
-  background-color: #2D3E50;
+  color:#00008B;
+  background-color: #00FFFF;
   font-size: 18px;
 }
 
