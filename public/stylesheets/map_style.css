@@ -1,3 +1,9 @@
+@font-face {
+    font-family: wazeFont;
+    src:url(../fonts/proxima-nova-soft-bold.ttf);
+}
+
+
 html{
   height: 100%;
   font-family: 'Abel', sans-serif;
@@ -7,14 +13,24 @@ body{
   text-align: center;
 }
 
-h1 {
-    font-family: 'Abel', sans-serif;
-    color: #00008B;
-    font-size: 40px;
-    text-align: center;
-    font-weight: bold;
-    padding-bottom: 1px;
-    margin-top: 10px;
+
+#logo-title{
+  font-family: wazeFont;
+  font-size: 40px;
+  text-align: center;
+
+  padding-bottom: 1px;
+  margin-top: 10px;
+
+  color: #00FFFF;
+  text-align: center;
+  font-weight: bold;
+
+  text-shadow:
+  -1px -1px 0 #00008B,
+  1px -1px 0 #00008B,
+  -1px 1px 0 #00008B,
+  1px 1px  #00008B;
 }
 
 .navBar {
@@ -24,7 +40,7 @@ h1 {
   position: relative;
   height: 43px;
   padding-left: 40px;
-  background-color: #2D3E50;
+  background-color: #00FFFF;
 }
 
 .navBar li {
@@ -35,8 +51,8 @@ h1 {
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
   float:left;
-  color:white;
-  background-color: #2D3E50;
+  color:#00008B;
+  background-color: #00FFFF;
   font-size: 18px;
 }
 
